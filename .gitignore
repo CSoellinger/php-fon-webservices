@@ -1,0 +1,6 @@
+/captainhook.config.json
+/composer.lock
+/node_modules/
+/phpcs.xml
+/phpunit.xml
+/vendor/
