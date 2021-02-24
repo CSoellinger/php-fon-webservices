@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ERKLAERUNGS_UEBERMITTLUNG xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <INFO_DATEN>
+        <ART_IDENTIFIKATIONSBEGRIFF>FASTNR</ART_IDENTIFIKATIONSBEGRIFF>
+        <IDENTIFIKATIONSBEGRIFF>999999999</IDENTIFIKATIONSBEGRIFF>
+        <PAKET_NR>999999998</PAKET_NR>
+        <DATUM_ERSTELLUNG type="datum">2009-03-23</DATUM_ERSTELLUNG>
+        <UHRZEIT_ERSTELLUNG type="uhrzeit">12:12:12</UHRZEIT_ERSTELLUNG>
+        <ANZAHL_ERKLAERUNGEN>1</ANZAHL_ERKLAERUNGEN>
+    </INFO_DATEN>
+    <ERKLAERUNG art="VAT">
+        <SATZNR>10</SATZNR>
+        <ALLGEMEINE_DATEN>
+            <ANBRINGEN>VAT</ANBRINGEN>
+            <ZRVON type="jahrmonat">2013-02</ZRVON>
+            <ZRBIS type="jahrmonat">2013-08</ZRBIS>
+            <FASTNR>999999999</FASTNR>
+            <KUNDENINFO>123456789</KUNDENINFO>
+            <EU_LAND>MC</EU_LAND>
+        </ALLGEMEINE_DATEN>
+        <KAUF>
+            <SEQNR_K>1</SEQNR_K>
+            <BEZNR_K>ZXA-B0001</BEZNR_K>
+            <DATUM_K type="datum">2009-01-21</DATUM_K>
+            <KLEINBETR_K>N</KLEINBETR_K>
+            <UID_K>DE123456789</UID_K>
+            <NAME_K>Muster</NAME_K>
+            <ADR_K>Straße</ADR_K>
+            <PLZ_K>L-1234</PLZ_K>
+            <STADT_K>Luxembourg</STADT_K>
+            <LAND_K>LU</LAND_K>
+            <GEGENSTAND>
+                <CODE_K>1</CODE_K>
+            </GEGENSTAND>
+            <GRUNDLAGEN>
+                <WAEHR_K>EUR</WAEHR_K>
+                <BMG_K>1000.00</BMG_K>
+                <VST_K>1000.00</VST_K>
+                <ABVST_K>1000.00</ABVST_K>
+            </GRUNDLAGEN>
+        </KAUF>
+    </ERKLAERUNG>
+</ERKLAERUNGS_UEBERMITTLUNG>

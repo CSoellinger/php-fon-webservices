@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="https://finanzonline.bmf.gv.at/fon/ws/abfrageDatenuebermittlung"
+    targetNamespace="https://finanzonline.bmf.gv.at/fon/ws/abfrageDatenuebermittlung"
+    name="abfrageDatenuebermittlungService">
+
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="https://finanzonline.bmf.gv.at/fon/ws/abfrageDatenuebermittlung"
+                schemaLocation="abfrageDatenuebermittlungen.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="abfrageDatenuebermittlungRequest">
+        <part element="tns:abfrageDatenuebermittlungRequest"
+            name="parameters"/>
+    </message>
+    <message name="abfrageDatenuebermittlungResponse">
+        <part element="tns:abfrageDatenuebermittlungResponse"
+            name="parameters"/>
+    </message>
+
+    <portType name="abfrageDatenuebermittlungServicePort">
+        <operation name="abfrageDatenuebermittlung">
+            <input message="tns:abfrageDatenuebermittlungRequest"
+                name="abfrageDatenuebermittlungRequest"/>
+            <output message="tns:abfrageDatenuebermittlungResponse"
+                name="abfrageDatenuebermittlungResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="abfrageDatenuebermittlungServiceBinding"
+        type="tns:abfrageDatenuebermittlungServicePort">
+        <soap:binding style="document"
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="abfrageDatenuebermittlung">
+            <soap:operation soapAction="abfrageDatenuebermittlung"/>
+            <input name="abfrageDatenuebermittlungRequest">
+                <soap:body use="literal"/>
+            </input>
+            <output name="abfrageDatenuebermittlungResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="abfrageDatenuebermittlungService">
+        <port binding="tns:abfrageDatenuebermittlungServiceBinding"
+            name="abfrageDatenuebermittlung">
+            <soap:address location="https://finanzonline.bmf.gv.at/fon/ws/abfrageDatenuebermittlung"/>
+        </port>
+    </service>
+
+</definitions>

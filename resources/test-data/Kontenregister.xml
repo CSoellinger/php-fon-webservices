@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Stand: 04.01.2016-->
+<!--Rechenzentrum übermittelt eine Erstübermittlung zur Eröffnung eines Girokontos mit vbPK.-->
+<Kontoregister xmlns="https://finanzonline.bmf.gv.at/fon/ws/uebermittlungKonto"
+    xmlns:iso="at:gv:bmf:fon:isocountrytypes:v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Info_Daten>
+        <Fastnr_Fon_Tn>987654321</Fastnr_Fon_Tn>
+        <Fastnr_Fi>987654321</Fastnr_Fi>
+        <Vers>01.00</Vers>
+    </Info_Daten>
+    <MessageSpec>
+        <SendingCompany>Rechenzentrum</SendingCompany>
+        <MessageRefId>987654321abcdef135</MessageRefId>
+        <Bic>GIBAATWWXXX</Bic>
+        <Timestamp>2015-09-29T11:05:00</Timestamp>
+    </MessageSpec>
+    <KontoregisterBody>
+        <AccountReport>
+            <DocSpec>
+                <DocTypeIndic>E</DocTypeIndic>
+                <DocRefId>2</DocRefId>
+            </DocSpec>
+            <AccountNumber AcctNumberType="IBAN">AT486000000012340002</AccountNumber>
+            <AccountType>G</AccountType>
+            <!-- Girokonto -->
+            <AccountStart>2015-04-04</AccountStart>
+            <AccountHolder>
+                <Individual>
+                    <vbPK>c+pWn+zOuWGNlTQfw7qARSwxRRCeS+3JS4MvTcWbfAvr2oXqO5o5l2KufBTc46mIbUIcxh5ZatySQOsnYjjTbJMKvWoacSHPnkMsK2sGcWDKKWZ9JVA+9BgiDV3LcmBNyTFaZdBGztVuoL8iVrhSPZrzk/MnEtYmLjGfE0I/VR4=</vbPK>
+                </Individual>
+                <Start>2015-04-04</Start>
+            </AccountHolder>
+        </AccountReport>
+    </KontoregisterBody>
+</Kontoregister>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="uidAbfrageService"
+    targetNamespace="https://finanzonline.bmf.gv.at/fon/ws/uidAbfrage"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="https://finanzonline.bmf.gv.at/fon/ws/uidAbfrage"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="https://finanzonline.bmf.gv.at/fon/ws/uidAbfrage"
+                schemaLocation="uidAbfrage.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="uidAbfrageServiceRequest">
+        <part element="tns:uidAbfrageServiceRequest"
+            name="parameters"/>
+    </message>
+    <message name="uidAbfrageServiceResponse">
+        <part element="tns:uidAbfrageServiceResponse"
+            name="parameters"/>
+    </message>
+
+    <portType name="uidAbfragePort">
+        <operation name="uidAbfrage">
+            <input message="tns:uidAbfrageServiceRequest"
+                name="uidAbfrageServiceRequest"/>
+            <output message="tns:uidAbfrageServiceResponse"
+                name="uidAbfrageServiceResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="uidAbfrageServiceBinding"
+        type="tns:uidAbfragePort">
+        <soap:binding style="document"
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="uidAbfrage">
+            <soap:operation soapAction="uidAbfrage"/>
+            <input name="uidAbfrageServiceRequest">
+                <soap:body use="literal"/>
+            </input>
+            <output name="uidAbfrageServiceResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="uidAbfrageService">
+        <port binding="tns:uidAbfrageServiceBinding"
+            name="uidAbfrage">
+            <soap:address location="https://finanzonline.bmf.gv.at:443/fonuid/ws/uidAbfrage/"/>
+        </port>
+    </service>
+</definitions>

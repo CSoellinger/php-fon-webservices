@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="https://finanzonline.bmf.gv.at/fon/ws/ustUebermittlung"
+    targetNamespace="https://finanzonline.bmf.gv.at/fon/ws/ustUebermittlung"
+    name="ustUebermittlungService">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="https://finanzonline.bmf.gv.at/fon/ws/ustUebermittlung"
+                schemaLocation="ustUebermittlung.xsd" />
+        </xsd:schema>
+    </types>
+
+    <message name="UstUebermittlungRequest">
+        <part element="tns:UstUebermittlungRequest"
+            name="parameters" />
+    </message>
+    <message name="UstUebermittlungResponse">
+        <part element="tns:UstUebermittlungResponse"
+            name="parameters" />
+    </message>
+
+    <portType name="UstUebermittlungPort">
+        <operation name="upload">
+            <input message="tns:UstUebermittlungRequest"
+                name="UstUebermittlungRequest" />
+            <output message="tns:UstUebermittlungResponse"
+                name="UstUebermittlungResponse" />
+        </operation>
+    </portType>
+
+    <binding name="UstUebermittlungBinding"
+        type="tns:UstUebermittlungPort">
+        <soap:binding style="document"
+            transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="upload">
+            <soap:operation soapAction="upload" />
+            <input name="UstUebermittlungRequest">
+                <soap:body use="literal" />
+            </input>
+            <output name="UstUebermittlungResponse">
+                <soap:body use="literal" />
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ustUebermittlungService">
+        <port binding="tns:UstUebermittlungBinding"
+            name="ustUebermittlung">
+            <soap:address location="https://finanzonline.bmf.gv.at:443/fonws/ws/ustUebermittlung" />
+        </port>
+    </service>
+</definitions>

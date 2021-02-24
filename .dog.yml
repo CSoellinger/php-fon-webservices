@@ -1,0 +1,26 @@
+# Title of index page
+title: 'PHP Fon Webservices'
+# Relative or absolute paths to source files - plus patterns to include or exclude path pr files
+srcPaths:
+  'src':
+    '/.*\.php$/': true
+# Configure enrichers to add extra data to project or element items
+# enrichers:
+#     phploc:
+#         class: Klitsche\Dog\Enrichers\PHPLOC\PHPLOCEnricher
+#         file: phploc.json
+# FQCN for template printer class
+printerClass: 'CSoellinger\DogHtmlPrinter\HtmlPrinter'
+printerConfig:
+    # templatesPath: 'resources/templates'
+    readme: 'README.md'
+    includeSource: true
+    ignoreInternal: true
+    ignorePrivate: true
+    minifyCssAndJs: true
+    minifyHtml: false
+# Relative or absolute path to output directory
+outputDir: 'docs/html'
+cacheDir: 'build/cache'
+# Enable or disable debug mode - helps when tweaking templates
+debug: false

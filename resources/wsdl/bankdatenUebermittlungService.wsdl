@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="bankdatenUebermittlungService"
+    targetNamespace="https://finanzonline.bmf.gv.at/fon/ws/bankdatenUebermittlung"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="https://finanzonline.bmf.gv.at/fon/ws/bankdatenUebermittlung"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="https://finanzonline.bmf.gv.at/fon/ws/bankdatenUebermittlung"
+                schemaLocation="bankdatenUebermittlung.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="bankdatenUebermittlungRequest">
+        <part element="tns:bankdatenUebermittlungRequest"
+            name="parameters"/>
+    </message>
+    <message name="bankdatenUebermittlungResponse">
+        <part element="tns:bankdatenUebermittlungResponse"
+            name="parameters"/>
+    </message>
+
+    <portType name="bankdatenUebermittlungPort">
+        <operation name="upload">
+            <input message="tns:bankdatenUebermittlungRequest"
+                name="bankdatenUebermittlungRequest"/>
+            <output message="tns:bankdatenUebermittlungResponse"
+                name="bankdatenUebermittlungResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="bankdatenUebermittlungBinding"
+        type="tns:bankdatenUebermittlungPort">
+        <soap:binding style="document"
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="upload">
+            <soap:operation soapAction="upload"/>
+            <input name="bankdatenUebermittlungRequest">
+                <soap:body use="literal"/>
+            </input>
+            <output name="bankdatenUebermittlungResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="bankdatenUebermittlungService">
+        <port binding="tns:bankdatenUebermittlungBinding"
+            name="bankdatenUebermittlung">
+            <soap:address location="https://finanzonline.bmf.gv.at:443/fonws/ws/bankdatenUebermittlung"/>
+        </port>
+    </service>
+</definitions>
