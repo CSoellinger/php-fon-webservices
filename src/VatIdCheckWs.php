@@ -22,6 +22,12 @@ use CSoellinger\FonWebservices\Response\VatIdCheck\LevelOneSuccessResponse;
 use CSoellinger\FonWebservices\Response\VatIdCheck\LevelTwoSuccessResponse;
 use SoapClient;
 
+use function file_exists;
+use function implode;
+use function in_array;
+use function str_replace;
+use function trim;
+
 use const DIRECTORY_SEPARATOR;
 use const PHP_EOL;
 
@@ -33,21 +39,21 @@ use const PHP_EOL;
  * - A user for the web service, which can be created in the user administration of FinanzOnline
  *
  * Return codes
- * -    0 = Die UID des Erwerbers ist gültig.
- * -   -1 = Die Session ID ist ungültig oder abgelaufen.
- * -   -2 = Der Aufruf des Webservices ist derzeit wegen Wartungsarbeiten nicht möglich.
- * -   -3 = Es ist ein technischer Fehler aufgetreten.
- * -   -4 = Dieser Teilnehmer ist für diese Funktion nicht berechtigt.
- * -    1 = Die UID des Erwerbers ist nicht gültig.
- * -    4 = Die UID-Nummer des Erwerbers ist falsch.
- * -    5 = Die UID-Nummer des Antragstellers ist ungültig.
- * -   10 = Der angegebene Mitgliedstaat verbietet diese Abfrage.
- * -  101 = UID beginnt nicht mit ATU.
- * -  103 = Die angefragte UID-Nummer kann im FinanzOnline nur in Stufe 1 bestätigt werden,
+ * - 0 = Die UID des Erwerbers ist gültig.
+ * - -1 = Die Session ID ist ungültig oder abgelaufen.
+ * - -2 = Der Aufruf des Webservices ist derzeit wegen Wartungsarbeiten nicht möglich.
+ * - -3 = Es ist ein technischer Fehler aufgetreten.
+ * - -4 = Dieser Teilnehmer ist für diese Funktion nicht berechtigt.
+ * - 1 = Die UID des Erwerbers ist nicht gültig.
+ * - 4 = Die UID-Nummer des Erwerbers ist falsch.
+ * - 5 = Die UID-Nummer des Antragstellers ist ungültig.
+ * - 10 = Der angegebene Mitgliedstaat verbietet diese Abfrage.
+ * - 101 = UID beginnt nicht mit ATU.
+ * - 103 = Die angefragte UID-Nummer kann im FinanzOnline nur in Stufe 1 bestätigt werden,
  *          da diese UID-Nummer zu einer Unternehmensgruppe (Umsatzsteuergruppe) gehört.
- * -  104 = Die angefragte UID-Nummer kann im FinanzOnline nur in Stufe 1 bestätigt werden,
+ * - 104 = Die angefragte UID-Nummer kann im FinanzOnline nur in Stufe 1 bestätigt werden,
  *          da diese UID-Nummer zu einer Unternehmensgruppe (Umsatzsteuergruppe) gehört.
- * -  105 = Die UID-Nummer ist über FinanzOnline einzeln abzufragen.
+ * - 105 = Die UID-Nummer ist über FinanzOnline einzeln abzufragen.
  * - 1511 = Der angegebene Mitgliedstaat ist derzeit nicht erreichbar.
  *
  * @see https://www.bmf.gv.at/dam/jcr:e6acfe5b-f4a5-44f6-8a57-28256efdb850/BMF_UID_Abfrage_Webservice_2.pdf
@@ -90,7 +96,7 @@ class VatIdCheckWs extends SoapClient
     /**
      * @var SessionWs session web service
      */
-    private $sessionWs;
+    private SessionWs $sessionWs;
 
     /**
      * Constructor.
@@ -138,7 +144,7 @@ class VatIdCheckWs extends SoapClient
         ]);
 
         $result = null;
-        $returnCode = (int) $response->rc;
+        $returnCode = $response->rc;
 
         if (in_array($returnCode, self::VALID_RETURN_CODES, true) === true) {
             // Valid

@@ -20,9 +20,7 @@ class QueryDataTransmissionManagementRight
 {
     use StdToClass;
 
-    /** @var string */
-    public $infrastrukturbetreiber = '';
+    public string $infrastrukturbetreiber = '';
 
-    /** @var float */
-    public $betrag = 0.0;
+    public float $betrag = 0.0;
 }

@@ -19,5 +19,5 @@ class VatIdCheckValidLevelOne
     /**
      * @var bool Valid state
      */
-    public $valid = true;
+    public bool $valid = true;
 }

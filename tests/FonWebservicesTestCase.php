@@ -23,6 +23,8 @@ use ReflectionProperty;
 use RuntimeException;
 use SoapClient;
 
+use function getenv;
+
 /**
  * Test case for tests which need a session id.
  *
@@ -33,12 +35,12 @@ class FonWebservicesTestCase extends TestCase
     /**
      * @var array<string,string> Authentication array
      */
-    protected static $auth = [];
+    protected static array $auth = [];
 
     /**
      * @var SoapClient Session soap client for testing
      */
-    protected static $sessionSc;
+    protected static SoapClient $sessionSc;
 
     /**
      * @var SessionWs&MockObject Session webservice class
@@ -68,11 +70,11 @@ class FonWebservicesTestCase extends TestCase
         parent::setUpBeforeClass();
 
         self::$auth = [
-            'tid' => $_ENV['FON_T_ID'],
-            'benid' => $_ENV['FON_BEN_ID'],
-            'pin' => $_ENV['FON_BEN_PIN'],
-            'herstellerid' => $_ENV['FON_T_UID'],
-            'uid_tn' => $_ENV['FON_T_UID'],
+            'tid' => (string) getenv('FON_T_ID'),
+            'benid' => (string) getenv('FON_BEN_ID'),
+            'pin' => (string) getenv('FON_BEN_PIN'),
+            'herstellerid' => (string) getenv('FON_T_UID'),
+            'uid_tn' => (string) getenv('FON_T_UID'),
         ];
 
         self::$sessionSc = new SoapClient(SessionWs::WSDL_LOCAL);
@@ -124,10 +126,10 @@ class FonWebservicesTestCase extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $fonCredential->benId = (string) $_ENV['FON_TEST_DB_BEN_ID'];
-        $fonCredential->benPin = (string) $_ENV['FON_TEST_DB_BEN_PIN'];
-        $fonCredential->teId = (string) $_ENV['FON_TEST_DB_T_ID'];
-        $fonCredential->teUid = (string) $_ENV['FON_T_UID'];
+        $fonCredential->benId = (string) getenv('FON_TEST_DB_BEN_ID');
+        $fonCredential->benPin = (string) getenv('FON_TEST_DB_BEN_PIN');
+        $fonCredential->teId = (string) getenv('FON_TEST_DB_T_ID');
+        $fonCredential->teUid = (string) getenv('FON_T_UID');
 
         return $fonCredential;
     }
@@ -145,7 +147,6 @@ class FonWebservicesTestCase extends TestCase
             ->getMock();
 
         $this->sessionWs->method('getCredential')->willReturn($this->fonCredential);
-
         $this->sessionWs
             ->method('login')
             ->willReturnCallback(function () use ($reflector): SessionWs {
@@ -179,9 +180,7 @@ class FonWebservicesTestCase extends TestCase
 
         $this->sessionWs
             ->method('getID')
-            ->willReturnCallback(function () use ($reflector) {
-                return $reflector->getValue($this->sessionWs);
-            });
+            ->willReturnCallback(fn () => $reflector->getValue($this->sessionWs));
     }
 
     private function setUpSessionWsDbTest(): void
@@ -231,8 +230,6 @@ class FonWebservicesTestCase extends TestCase
 
         $this->sessionWsDbTest
             ->method('getID')
-            ->willReturnCallback(function () use ($reflector) {
-                return $reflector->getValue($this->sessionWsDbTest);
-            });
+            ->willReturnCallback(fn () => $reflector->getValue($this->sessionWsDbTest));
     }
 }

@@ -18,21 +18,17 @@ use stdClass;
 
 abstract class QueryResultResponse
 {
-    /** @var stdClass|null */
-    public $l16;
+    public ?stdClass $l16 = null;
 
-    /** @var stdClass|null */
-    public $l17;
+    public ?stdClass $l17 = null;
 
-    /** @var stdClass|null */
-    public $meldung;
+    public ?stdClass $meldung = null;
 
-    /** @var stdClass|null */
-    public $mitteilung109a;
+    public ?stdClass $mitteilung109a = null;
 
     /** @var array<stdClass>|null */
-    public $sonderausgaben;
+    public ?array $sonderausgaben = null;
 
     /** @var array<stdClass>|null */
-    public $leitungsrechte;
+    public ?array $leitungsrechte = null;
 }

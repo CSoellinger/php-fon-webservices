@@ -16,11 +16,15 @@ namespace CSoellinger\FonWebservices\Util;
 
 use Jasny\TypeCast;
 use ReflectionClass;
+use ReflectionNamedType;
 use ReflectionObject;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Type;
 use stdClass;
+
+use function gettype;
+use function substr_count;
 
 /**
  * Helper to create a model class from an stdClass.
@@ -37,20 +41,9 @@ use stdClass;
 trait StdToClass
 {
     /**
-     * @var string Undocumented variable2
-     */
-    public static $yx = 'Test';
-
-    /**
      * Undocumented function.
-     *
-     * With extra text.
-     *
-     * @param stdClass $std stdClass to convert into model class
-     *
-     * @return self Retttttturrrrrrn
      */
-    public static function stdToClass(stdClass $std, int &$x, string $y = 'Test', ?array $z, array ...$a): self
+    public static function stdToClass(stdClass $std): self
     {
         $typeCast = new TypeCast();
         $docBlockFactory = DocBlockFactory::createInstance();
@@ -61,30 +54,47 @@ trait StdToClass
         foreach ($stdObj->getProperties() as $property) {
             $name = $property->getName();
 
-            /**
-             * @psalm-suppress MixedAssignment
-             */
-            $value = $std->{$name};
-            $new->{$name} = $value;
-
             if ($newObj->hasProperty($name) === true) {
+                /** @var mixed $value */
+                $value = $std->{$name};
+
                 $newProperty = $newObj->getProperty($name);
                 $doc = $newProperty->getDocComment();
                 $docblock = $docBlockFactory->create($doc ?: '/** */');
                 $tags = $docblock->getTagsByName('var');
+                $valueType = gettype($value);
+
+                if ($valueType === 'boolean') {
+                    $valueType = 'bool';
+                }
+
+                if ($valueType === 'integer') {
+                    $valueType = 'int';
+                }
+
+                if ($newProperty->getType()) {
+                    /** @var ReflectionNamedType $type */
+                    $type = $newProperty->getType();
+                    $varType = $type->getName();
+
+                    if (
+                        $varType &&
+                        substr_count($varType, $valueType) <= 0 &&
+                        $valueType !== 'object' &&
+                         $valueType !== 'array'
+                    ) {
+                        $new->{$name} = $typeCast->to($varType)->cast($value);
+
+                        continue;
+                    }
+
+                    if ($varType === $valueType || $valueType === '') {
+                        $new->{$name} = $value;
+                    }
+                }
 
                 /** @var Var_ $var */
                 foreach ($tags as $var) {
-                    $valueType = gettype($value);
-
-                    if ($valueType === 'boolean') {
-                        $valueType = 'bool';
-                    }
-
-                    if ($valueType === 'integer') {
-                        $valueType = 'int';
-                    }
-
                     $varType = $var->getType();
 
                     if ($varType !== null) {

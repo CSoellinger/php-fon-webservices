@@ -21,6 +21,8 @@ use CSoellinger\FonWebservices\Response\Session\LogoutSuccessResponse;
 use Exception;
 use SoapClient;
 
+use function file_exists;
+
 use const DIRECTORY_SEPARATOR;
 
 /**
@@ -33,7 +35,7 @@ use const DIRECTORY_SEPARATOR;
  * - A user for the web service, which can be created in the user administration of FinanzOnline
  *
  * Error codes
- * -  0 = All fine :)
+ * - 0 = All fine :)
  * - -1 = The session ID is invalid or expired.
  * - -2 = The web service is currently not available due to maintenance work.
  * - -3 = A technical error has occurred.
@@ -66,12 +68,12 @@ class SessionWs extends SoapClient
     /**
      * @var FonCredential Web service credential class
      */
-    private $credential;
+    private FonCredential $credential;
 
     /**
      * @var string Web service session id
      */
-    private $id = '';
+    private string $id = '';
 
     /**
      * Constructor.
@@ -121,11 +123,11 @@ class SessionWs extends SoapClient
         ],
         ]);
 
-        if ((int) $response->rc !== 0) {
+        if ($response->rc !== 0) {
             /** @var ErrorResponse $response */
             $response = $response;
 
-            throw new Exception($response->msg, (int) $response->rc);
+            throw new Exception($response->msg, $response->rc);
         }
 
         /** @var LoginSuccessResponse $response */
@@ -151,11 +153,11 @@ class SessionWs extends SoapClient
         ],
         ]);
 
-        if ((int) $response->rc !== 0) {
+        if ($response->rc !== 0) {
             /** @var ErrorResponse $response */
             $response = $response;
 
-            throw new Exception($response->msg, (int) $response->rc);
+            throw new Exception($response->msg, $response->rc);
         }
 
         $this->id = '';

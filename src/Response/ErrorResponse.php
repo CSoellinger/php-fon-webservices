@@ -19,5 +19,5 @@ abstract class ErrorResponse extends BasicResponse
     /**
      * @var string Error message.
      */
-    public $msg = '';
+    public string $msg = '';
 }

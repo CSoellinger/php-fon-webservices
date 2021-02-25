@@ -17,6 +17,9 @@ namespace CSoellinger\Test\FonWebservices;
 use CSoellinger\FonWebservices\FileUploadWs;
 use Exception;
 use InvalidArgumentException;
+use Throwable;
+
+use function implode;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -49,7 +52,7 @@ class FileUploadWsTest extends FonWebservicesTestCase
      */
     public function testUploadInvalidXml(): void
     {
-        $this->expectException(\Throwable::class);
+        $this->expectException(Throwable::class);
 
         $fileUploadWs = new FileUploadWs($this->sessionWs);
         $this->assertInstanceOf(FileUploadWs::class, $fileUploadWs);

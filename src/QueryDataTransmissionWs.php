@@ -20,6 +20,15 @@ use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
 use Exception;
 use InvalidArgumentException;
 use SoapClient;
+
+use function date;
+use function file_exists;
+use function implode;
+use function in_array;
+use function is_numeric;
+use function is_string;
+use function strtoupper;
+
 use const DIRECTORY_SEPARATOR;
 
 /**
@@ -30,7 +39,7 @@ use const DIRECTORY_SEPARATOR;
  * - A user for the web service, which can be created in the user administration of FinanzOnline
  *
  * Error codes
- * -  0 = All fine :)
+ * - 0 = All fine :)
  * - -1 = The session ID is invalid or expired.
  * - -2 = The web service is currently not available due to maintenance work.
  * - -3 = A technical error has occurred.
@@ -61,7 +70,7 @@ class QueryDataTransmissionWs extends SoapClient
     /**
      * @var SessionWs session web service
      */
-    private $sessionWs;
+    private SessionWs $sessionWs;
 
     /**
      * Constructor.
@@ -83,7 +92,7 @@ class QueryDataTransmissionWs extends SoapClient
      *
      * @param string      $fastNr tbd
      * @param string      $period tbd
-     * @param null|string $type   tbd
+     * @param string|null $type tbd
      */
     public function query(string $fastNr, string $period = '', ?string $type = null): QueryDataTransmission
     {
@@ -106,7 +115,7 @@ class QueryDataTransmissionWs extends SoapClient
 
         /** @var ErrorResponse|QueryResponse $response */
         $response = $this->__soapCall('abfrageDatenuebermittlung', [$soapParams]);
-        $returnCode = (int) $response->rc;
+        $returnCode = $response->rc;
 
         if ($returnCode !== 0) {
             /** @var ErrorResponse $response */

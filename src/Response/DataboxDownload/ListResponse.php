@@ -22,5 +22,5 @@ abstract class ListResponse extends BasicResponse
     /**
      * @var array<stdClass> ...
      */
-    public $result = [];
+    public array $result = [];
 }

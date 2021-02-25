@@ -14,75 +14,76 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
+use CSoellinger\FonWebservices\Util\StdToClass;
 use DateTime;
 
 class DataboxDownloadListItem
 {
-    /**
-     * @var string ...
-     */
-    public $stnr = '';
+    use StdToClass;
 
     /**
      * @var string ...
      */
-    public $name = '';
+    public string $stnr = '';
 
     /**
      * @var string ...
      */
-    public $anbringen = '';
+    public string $name = '';
 
     /**
      * @var string ...
      */
-    public $zrvon = '';
+    public string $anbringen = '';
 
     /**
      * @var string ...
      */
-    public $zrbis = '';
+    public string $zrvon = '';
+
+    /**
+     * @var string ...
+     */
+    public string $zrbis = '';
 
     /**
      * @var DateTime ...
      */
-    public $datbesch;
+    public DateTime $datbesch;
 
     /**
      * @var string ...
      */
-    public $erltyp = '';
+    public string $erltyp = '';
 
     /**
      * @var string ...
      */
-    public $fileart = '';
+    public string $fileart = '';
 
-    // @codingStandardsIgnoreStart
     /**
      * @var DateTime ...
      */
-    public $ts_zust;
-    // @codingStandardsIgnoreEnd
+    public $ts_zust; //phpcs:ignore
 
     /**
      * @var string ...
      */
-    public $applkey = '';
+    public string $applkey = '';
 
     /**
      * @var string ...
      */
-    public $filebez = '';
+    public string $filebez = '';
 
     /**
      * @var string ...
      */
-    public $status = '';
+    public string $status = '';
 
     public function __construct()
     {
         $this->datbesch = new DateTime();
-        $this->ts_zust = new DateTime();
+        $this->ts_zust = new DateTime(); //phpcs:ignore
     }
 }

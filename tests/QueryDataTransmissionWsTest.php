@@ -14,14 +14,11 @@ declare(strict_types=1);
 
 namespace CSoellinger\Test\FonWebservices;
 
-use CSoellinger\FonWebservices\DataboxDownloadWs;
-use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use CSoellinger\FonWebservices\Model\QueryDataTransmission;
 use CSoellinger\FonWebservices\QueryDataTransmissionWs;
-use CSoellinger\FonWebservices\Result\DataboxDownload\ListItem;
-use DateTime;
 use Exception;
 use InvalidArgumentException;
+use Throwable;
 
 /**
  * Testing query data transmission webservice class.
@@ -77,7 +74,7 @@ class QueryDataTransmissionWsTest extends FonWebservicesTestCase
      */
     public function testErrorResponse(): void
     {
-        $this->expectException(\Throwable::class);
+        $this->expectException(Throwable::class);
 
         $queryDataTransmissionWs = new QueryDataTransmissionWs($this->sessionWsDbTest);
         $this->assertInstanceOf(QueryDataTransmissionWs::class, $queryDataTransmissionWs);

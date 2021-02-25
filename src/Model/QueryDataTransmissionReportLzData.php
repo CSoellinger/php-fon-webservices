@@ -20,8 +20,7 @@ class QueryDataTransmissionReportLzData
 {
     use StdToClass;
 
-    /** @var string|null */
-    public $leistungsartwert; // ENUM: ALTERSTEILZEITG., AMFG-BEIHILFE, AMSG-BEIHILFE, ARBEITSLOSENGELD,
+    public ?string $leistungsartwert = null; // ENUM: ALTERSTEILZEITG., AMFG-BEIHILFE, AMSG-BEIHILFE, ARBEITSLOSENGELD,
     //                                 AUSBILDUNGSBEIH., BES. ÜBERBRÜCK., BILDUNGSTEILZEITG, ENTFERNUNGSBEIH.,
     //                                 ERW. ÜBERBRÜCK., FACHKRÄFTESTIPEND, GRÜNDUNGSBEIH., KARENZURLAUBSGELD,
     //                                 KARENZURLAUBSH., KINDERBETREU.BEIH, KOMBILOHN, KURSNEBENKOSTEN, NOTSTANDSHILFE,
@@ -33,12 +32,9 @@ class QueryDataTransmissionReportLzData
     //                                 VORMERK.SOZ.VERS., VORSCH.KÜND.ENT., VORSCHUSS - REHAB, VORSCHUSS SU,
     //                                 VORSTELLUNGSBEIH., WEITERBILDUNGSG.
 
-    /** @var float|null */
-    public $kzTagessatz;
+    public ?float $kzTagessatz = null;
 
-    /** @var int|null */
-    public $kzTage;
+    public ?int $kzTage = null;
 
-    /** @var float|null */
-    public $kzLbetrag;
+    public ?float $kzLbetrag = null;
 }

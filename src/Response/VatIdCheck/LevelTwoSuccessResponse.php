@@ -21,35 +21,35 @@ abstract class LevelTwoSuccessResponse extends BasicResponse
     /**
      * @var string Company name
      */
-    public $name = '';
+    public string $name = '';
 
     /**
      * @var string Address line 1
      */
-    public $adrz1 = '';
+    public string $adrz1 = '';
 
     /**
      * @var string Address line 2
      */
-    public $adrz2 = '';
+    public string $adrz2 = '';
 
     /**
      * @var string Address line 3
      */
-    public $adrz3 = '';
+    public string $adrz3 = '';
 
     /**
      * @var string Address line 4
      */
-    public $adrz4 = '';
+    public string $adrz4 = '';
 
     /**
      * @var string Address line 5
      */
-    public $adrz5 = '';
+    public string $adrz5 = '';
 
     /**
      * @var string Address line 6
      */
-    public $adrz6 = '';
+    public string $adrz6 = '';
 }

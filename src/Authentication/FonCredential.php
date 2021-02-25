@@ -16,6 +16,8 @@ namespace CSoellinger\FonWebservices\Authentication;
 
 use InvalidArgumentException;
 
+use function preg_match;
+
 /**
  * FinanzOnline credential class.
  *
@@ -28,22 +30,22 @@ class FonCredential
     /**
      * @var string Fon participator identification
      */
-    public $teId = '';
+    public string $teId = '';
 
     /**
      * @var string Fon participator vat id
      */
-    public $teUid = '';
+    public string $teUid = '';
 
     /**
      * @var string Fon user identification of the web service user
      */
-    public $benId = '';
+    public string $benId = '';
 
     /**
      * @var string Fon user pin of the web service user
      */
-    public $benPin = '';
+    public string $benPin = '';
 
     /**
      * Constructor.
@@ -59,7 +61,7 @@ class FonCredential
     {
         if (!$fonTeId || !$fonBenId || !$fonBenPin) {
             throw new InvalidArgumentException(
-                'You have to set all necessary informations: fonTeId, fonBenId, fonBenPin'
+                'You have to set all necessary informations: fonTeId, fonBenId, fonBenPin',
             );
         }
 

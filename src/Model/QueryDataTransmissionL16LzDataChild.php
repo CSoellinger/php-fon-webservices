@@ -21,42 +21,29 @@ class QueryDataTransmissionL16LzDataChild
 {
     use StdToClass;
 
-    /** @var string|null */
-    public $nachnameKind;
+    public ?string $nachnameKind = null;
 
-    /** @var string|null */
-    public $vornameKind;
+    public ?string $vornameKind = null;
 
-    /** @var string|null */
-    public $wohnsitzStaatKind;
+    public ?string $wohnsitzStaatKind = null;
 
-    /** @var bool|null */
-    public $wohnsitzStaatwechsel;
+    public ?bool $wohnsitzStaatwechsel = null;
 
-    /** @var string|null */
-    public $svnrKind;
+    public ?string $svnrKind = null;
 
-    /** @var DateTime|null */
-    public $vdatgebKind;
+    public ?DateTime $vdatgebKind = null;
 
-    /** @var bool|null */
-    public $antragstellerFamilienhilfeBezieher;
+    public ?bool $antragstellerFamilienhilfeBezieher = null;
 
-    /** @var bool|null */
-    public $partnerFamilienhilfeBezieher;
+    public ?bool $partnerFamilienhilfeBezieher = null;
 
-    /** @var bool|null */
-    public $unterhaltszahlerFamilienhilfeBezieher;
+    public ?bool $unterhaltszahlerFamilienhilfeBezieher = null;
 
-    /** @var string|null */
-    public $beginnGanzerFabo;
+    public ?string $beginnGanzerFabo = null;
 
-    /** @var string|null */
-    public $endeGanzerFabo;
+    public ?string $endeGanzerFabo = null;
 
-    /** @var string|null */
-    public $beginnHalberFabo;
+    public ?string $beginnHalberFabo = null;
 
-    /** @var string|null */
-    public $endeHalberFabo;
+    public ?string $endeHalberFabo = null;
 }

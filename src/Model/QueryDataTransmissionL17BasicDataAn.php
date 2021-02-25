@@ -21,23 +21,23 @@ class QueryDataTransmissionL17BasicDataAn
     use StdToClass;
 
     /** @var string|null ... */
-    public $vnrArbeitnehmer;
+    public ?string $vnrArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $nameArbeitnehmer;
+    public ?string $nameArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $titelArbeitnehmer;
+    public ?string $titelArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $plzArbeitnehmer;
+    public ?string $plzArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $ortArbeitnehmer;
+    public ?string $ortArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $adresseArbeitnehmer;
+    public ?string $adresseArbeitnehmer = null;
 
     /** @var bool|null ... */
-    public $indAuslPension;
+    public ?bool $indAuslPension = null;
 }

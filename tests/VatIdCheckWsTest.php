@@ -17,8 +17,10 @@ namespace CSoellinger\Test\FonWebservices;
 use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
-use CSoellinger\FonWebservices\Result\VatIdCheck\Invalid;
 use CSoellinger\FonWebservices\VatIdCheckWs;
+
+use function print_r;
+use function usleep;
 
 /**
  * Testing session webservice class.

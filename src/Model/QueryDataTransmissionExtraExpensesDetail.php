@@ -21,11 +21,11 @@ class QueryDataTransmissionExtraExpensesDetail
     use StdToClass;
 
     /** @var string ... */
-    public $organisation = '';
+    public string $organisation = '';
 
     /** @var float ... */
-    public $betrag = 0.0;
+    public float $betrag = 0.0;
 
     /** @var string|null ... */
-    public $status; // ENUM: EFFA, DM
+    public ?string $status = null; // ENUM: EFFA, DM
 }

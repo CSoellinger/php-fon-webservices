@@ -19,10 +19,10 @@ class VatIdCheckValidLevelTwo extends VatIdCheckValidLevelOne
     /**
      * @var string Organisation name
      */
-    public $name = '';
+    public string $name = '';
 
     /**
      * @var string Organisation address
      */
-    public $address = '';
+    public string $address = '';
 }

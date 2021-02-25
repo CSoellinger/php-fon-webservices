@@ -17,25 +17,24 @@ namespace CSoellinger\FonWebservices\Model;
 use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
 use stdClass;
 
+use function array_map;
+use function property_exists;
+
 class QueryDataTransmission
 {
-    /** @var null|QueryDataTransmissionL16 */
-    public $l16;
+    public ?QueryDataTransmissionL16 $l16 = null;
 
-    /** @var null|QueryDataTransmissionL17 */
-    public $l17;
+    public ?QueryDataTransmissionL17 $l17 = null;
 
-    /** @var null|QueryDataTransmissionReport */
-    public $meldung;
+    public ?QueryDataTransmissionReport $meldung = null;
 
-    /** @var null|QueryDataTransmissionMsg109a */
-    public $mitteilung109a;
+    public ?QueryDataTransmissionMsg109a $mitteilung109a = null;
 
-    /** @var null|array<QueryDataTransmissionExtraExpenses> */
-    public $sonderausgaben;
+    /** @var array<QueryDataTransmissionExtraExpenses>|null */
+    public ?array $sonderausgaben = null;
 
-    /** @var null|array<QueryDataTransmissionManagementRight> */
-    public $leitungsrechte;
+    /** @var array<QueryDataTransmissionManagementRight>|null */
+    public ?array $leitungsrechte = null;
 
     /**
      * Undocumented function.
@@ -66,15 +65,17 @@ class QueryDataTransmission
         if (property_exists($result, 'sonderausgaben') === true) {
             // Management right
 
-            $new->sonderausgaben = array_map(function ($val) {
-                return QueryDataTransmissionExtraExpenses::createFromResponse((object) $val);
-            }, (array) $result->sonderausgaben);
+            $new->sonderausgaben = array_map(
+                fn ($val) => QueryDataTransmissionExtraExpenses::createFromResponse((object) $val),
+                (array) $result->sonderausgaben,
+            );
         }
 
         if (property_exists($result, 'leitungsrechte') === true) {
-            $new->leitungsrechte = array_map(function ($val) {
-                return QueryDataTransmissionManagementRight::stdToClass((object) $val);
-            }, (array) $result->leitungsrechte);
+            $new->leitungsrechte = array_map(
+                fn ($val) => QueryDataTransmissionManagementRight::stdToClass((object) $val),
+                (array) $result->leitungsrechte,
+            );
         }
 
         return $new;
