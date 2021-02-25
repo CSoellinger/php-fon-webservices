@@ -8,7 +8,7 @@ $databoxDownloadWs = new DataboxDownloadWs($sessionWsTest);
 
 // Get a list of your databox
 $databoxList = $databoxDownloadWs->get();
-dump($databoxList);
+var_dump($databoxList);
 // array
 //   0 =>
 //     CSoellinger\FonWebservices\Result\DataboxDownload\ListItem
@@ -27,5 +27,5 @@ dump($databoxList);
 
 // Get one entry of your databox
 $entry = $databoxDownloadWs->getEntry($databoxList[0]->applkey);
-dump($entry);
+var_dump($entry);
 // (string) 'JVBERi0xLjQNJeLjz9MNCjYgMCBvYmoNPDwvTGluZWFyaXplZCAxL0wgNTk1Ny9PIDgvRSAxNzAzL'...

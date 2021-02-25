@@ -6,5 +6,5 @@ use CSoellinger\FonWebservices\FileUploadWs;
 
 $fileUploadWs = new FileUploadWs($sessionWs);
 
-dump($fileUploadWs->upload($xmlFileUpload, 'RZ', true));
+var_dump($fileUploadWs->upload($xmlFileUpload, 'RZ', true));
 // (bool) true
