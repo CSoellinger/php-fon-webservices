@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use CSoellinger\FonWebservices\DataboxDownloadWs;
 
 $databoxDownloadWs = new DataboxDownloadWs($sessionWsTest);

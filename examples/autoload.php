@@ -8,24 +8,28 @@ use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\SessionWs;
 use Symfony\Component\Dotenv\Dotenv;
 
-if (file_exists(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'.env') === false) {
+if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.env') === false) {
     throw new Exception('.env file is needed for public examples. please make a copy from .env.example, rename and configure it.', 1);
 }
 
 $dotenv = new Dotenv();
-$dotenv->load(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'.env');
+$dotenv->usePutenv(true);
+$dotenv->load(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.env');
 
 /** @var string $tId */
-$tId = isset($_ENV['FON_T_ID']) ? $_ENV['FON_T_ID'] : '';
-$tUid = isset($_ENV['FON_T_UID']) ? $_ENV['FON_T_UID'] : '';
-$benId = isset($_ENV['FON_BEN_ID']) ? $_ENV['FON_BEN_ID'] : '';
-$benPin = isset($_ENV['FON_BEN_PIN']) ? $_ENV['FON_BEN_PIN'] : '';
+$tId = getenv('FON_T_ID') ?: '';
+$tUid = getenv('FON_T_UID') ?: '';
+$benId = getenv('FON_BEN_ID') ?: '';
+$benPin = getenv('FON_BEN_PIN') ?: '';
 
-$credential = new FonCredential((string) $_ENV['FON_TEST_DB_T_ID'], (string) $_ENV['FON_T_UID'], (string) $_ENV['FON_TEST_DB_BEN_ID'], (string) $_ENV['FON_TEST_DB_BEN_PIN']);
+$credential = new FonCredential((string) getenv('FON_T_ID'), (string) getenv('FON_T_UID'), (string) getenv('FON_BEN_ID'), (string) getenv('FON_BEN_PIN'));
+$sessionWs = new SessionWs($credential);
+
+$credential = new FonCredential((string) getenv('FON_TEST_DB_T_ID'), (string) getenv('FON_T_UID'), (string) getenv('FON_TEST_DB_BEN_ID'), (string) getenv('FON_TEST_DB_BEN_PIN'));
 $sessionWsTest = new SessionWs($credential);
 
 $xmlKontoRegPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'Kontenregister.xml']);
-$xmlKontoReg = file_get_contents($xmlKontoRegPath);
+$xmlKontoReg = (string) file_get_contents($xmlKontoRegPath);
 $match = [];
 
 preg_match('/<MessageRefId>(.*)<\/MessageRefId>/', $xmlKontoReg, $match);

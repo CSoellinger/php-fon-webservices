@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use CSoellinger\FonWebservices\VatIdCheckWs;
 
 $checkVatIdWs = new VatIdCheckWs($sessionWs);

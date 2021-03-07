@@ -32,4 +32,4 @@ require 'autoload.php';
 /**
  * Query data transmission.
  */
-include_once 'query-data-transmission-ws.php';
+// include_once 'query-data-transmission-ws.php';

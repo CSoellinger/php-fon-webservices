@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 use CSoellinger\FonWebservices\QueryDataTransmissionWs;
 
 $queryDataTransmissionWs = new QueryDataTransmissionWs($sessionWsTest);
 
-dump($queryDataTransmissionWs->query('382572311'));
+var_dump($queryDataTransmissionWs->query('382572311'));
