@@ -59,11 +59,16 @@ jobs:
           - "lowest"
           - "highest"
     steps:
-      - name: "Create .env file"
-        uses: finnp/create-file-action@1.0.0
+      - name: "Create linux .env file"
         env:
-          FILE_NAME: ".env"
-          FILE_DATA: ${{ secrets.TESTING_ENV_FILE }}
+          ENV_FILE: ${{ secrets.TESTING_ENV_FILE }}
+        if: ${{ matrix.operating-system == 'ubuntu-latest' }}
+        run: echo "$ENV_FILE" > .env
+      - name: "Create windows .env file"
+        env:
+          ENV_FILE: ${{ secrets.TESTING_ENV_FILE }}
+        if: ${{ matrix.operating-system == 'windows-latest' }}
+        run: echo "%ENV_FILE%" > .env
       - name: "Configure Git"
         if: ${{ matrix.operating-system == 'windows-latest' }}
         run: |
