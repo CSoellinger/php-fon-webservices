@@ -17,6 +17,15 @@ namespace CSoellinger\Test\FonWebservices;
 use CSoellinger\FonWebservices\BankDataTransmissionWs;
 use Exception;
 use InvalidArgumentException;
+use Throwable;
+
+use function file_get_contents;
+use function file_put_contents;
+use function implode;
+use function preg_match;
+use function str_pad;
+use function str_replace;
+use function substr;
 
 use const DIRECTORY_SEPARATOR;
 use const STR_PAD_LEFT;
@@ -57,7 +66,7 @@ class BankDataTransmissionWsTest extends FonWebservicesTestCase
      */
     public function testUploadInvalidXml(): void
     {
-        $this->expectException(\Throwable::class);
+        $this->expectException(Throwable::class);
 
         $bankDataTransmissionWs = new BankDataTransmissionWs($this->sessionWs);
         $this->assertInstanceOf(BankDataTransmissionWs::class, $bankDataTransmissionWs);

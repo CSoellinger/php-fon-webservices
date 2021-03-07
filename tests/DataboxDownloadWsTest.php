@@ -16,10 +16,12 @@ namespace CSoellinger\Test\FonWebservices;
 
 use CSoellinger\FonWebservices\DataboxDownloadWs;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
-use CSoellinger\FonWebservices\Result\DataboxDownload\ListItem;
 use DateTime;
 use Exception;
 use InvalidArgumentException;
+use Throwable;
+
+use function count;
 
 /**
  * Testing databox download webservice class.
@@ -99,7 +101,7 @@ class DataboxDownloadWsTest extends FonWebservicesTestCase
      */
     public function testErrorResponse(string $type, ?string $from, ?string $to): void
     {
-        $this->expectException(\Throwable::class);
+        $this->expectException(Throwable::class);
 
         /** @var DateTime|null $from */
         $from = $from ? new DateTime($from) : $from;

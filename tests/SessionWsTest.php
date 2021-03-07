@@ -20,6 +20,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionProperty;
 use Throwable;
 
+use function rename;
+
 /**
  * Testing session webservice class.
  *
