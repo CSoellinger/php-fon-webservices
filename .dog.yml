@@ -14,13 +14,13 @@ printerClass: 'CSoellinger\DogHtmlPrinter\HtmlPrinter'
 printerConfig:
     # templatesPath: 'resources/templates'
     readme: 'README.md'
-    includeSource: true
+    includeSource: false
     ignoreInternal: true
     ignorePrivate: true
     minifyCssAndJs: true
     minifyHtml: false
 # Relative or absolute path to output directory
-outputDir: 'docs/html'
+outputDir: 'docs/api'
 cacheDir: 'build/cache'
 # Enable or disable debug mode - helps when tweaking templates
 debug: false
