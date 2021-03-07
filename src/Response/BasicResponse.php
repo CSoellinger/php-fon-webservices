@@ -19,5 +19,5 @@ abstract class BasicResponse
     /**
      * @var int Return code.
      */
-    public $rc = 0;
+    public int $rc = 0;
 }

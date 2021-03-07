@@ -19,15 +19,15 @@ class VatIdCheckInvalid
     /**
      * @var int Error code
      */
-    public $code = 0;
+    public int $code = 0;
 
     /**
      * @var bool Invalid state
      */
-    public $valid = false;
+    public bool $valid = false;
 
     /**
      * @var string Error message
      */
-    public $msg = '';
+    public string $msg = '';
 }

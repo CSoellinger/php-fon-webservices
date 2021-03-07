@@ -19,6 +19,12 @@ use Exception;
 use InvalidArgumentException;
 use SoapClient;
 
+use function file_exists;
+use function file_get_contents;
+use function implode;
+use function in_array;
+use function strtoupper;
+
 use const DIRECTORY_SEPARATOR;
 
 /**
@@ -29,7 +35,7 @@ use const DIRECTORY_SEPARATOR;
  * - A user for the web service, which can be created in the user administration of FinanzOnline
  *
  * Error codes
- * -  0 = All fine :)
+ * - 0 = All fine :)
  * - -1 = The session ID is invalid or expired.
  * - -2 = The web service is currently not available due to maintenance work.
  * - -3 = A technical error has occurred.
@@ -65,7 +71,7 @@ class FileUploadWs extends SoapClient
     /**
      * @var SessionWs session web service
      */
-    private $sessionWs;
+    private SessionWs $sessionWs;
 
     /**
      * Constructor.
@@ -114,7 +120,7 @@ class FileUploadWs extends SoapClient
 
         /** @var ErrorResponse $response */
         $response = $this->__soapCall('upload', [$soapParams]);
-        $returnCode = (int) $response->rc;
+        $returnCode = $response->rc;
 
         if ($returnCode !== 0) {
             throw new Exception($response->msg, $returnCode);

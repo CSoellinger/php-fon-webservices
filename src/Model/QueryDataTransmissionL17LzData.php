@@ -20,69 +20,47 @@ class QueryDataTransmissionL17LzData
 {
     use StdToClass;
 
-    /** @var float|null */
-    public $kz350;
+    public ?float $kz350 = null;
 
-    /** @var float|null */
-    public $kz354;
+    public ?float $kz354 = null;
 
-    /** @var float|null */
-    public $kz394;
+    public ?float $kz394 = null;
 
-    /** @var float|null */
-    public $kz351;
+    public ?float $kz351 = null;
 
-    /** @var float|null */
-    public $kz352;
+    public ?float $kz352 = null;
 
-    /** @var float|null */
-    public $kzErfinderverg;
+    public ?float $kzErfinderverg = null;
 
-    /** @var float|null */
-    public $kz356;
+    public ?float $kz356 = null;
 
-    /** @var float|null */
-    public $kz738;
+    public ?float $kz738 = null;
 
-    /** @var float|null */
-    public $kz357;
+    public ?float $kz357 = null;
 
-    /** @var float|null */
-    public $kz347;
+    public ?float $kz347 = null;
 
-    /** @var float|null */
-    public $kz736;
+    public ?float $kz736 = null;
 
-    /** @var float|null */
-    public $kz737;
+    public ?float $kz737 = null;
 
-    /** @var float|null */
-    public $kz739;
+    public ?float $kz739 = null;
 
-    /** @var float|null */
-    public $kzUebrigeBezuege;
+    public ?float $kzUebrigeBezuege = null;
 
-    /** @var float|null */
-    public $kz358;
+    public ?float $kz358 = null;
 
-    /** @var float|null */
-    public $kzSpesen;
+    public ?float $kzSpesen = null;
 
-    /** @var float|null */
-    public $kzPensionAg;
+    public ?float $kzPensionAg = null;
 
-    /** @var float|null */
-    public $kzKurzarbeit;
+    public ?float $kzKurzarbeit = null;
 
-    /** @var float|null */
-    public $kzAltersteilzeit;
+    public ?float $kzAltersteilzeit = null;
 
-    /** @var float|null */
-    public $kzSozZahlung;
+    public ?float $kzSozZahlung = null;
 
-    /** @var float|null */
-    public $kzAusBezuege;
+    public ?float $kzAusBezuege = null;
 
-    /** @var int|null */
-    public $werkverkehrMonate;
+    public ?int $werkverkehrMonate = null;
 }

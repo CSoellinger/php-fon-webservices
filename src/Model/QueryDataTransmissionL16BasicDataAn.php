@@ -21,42 +21,43 @@ class QueryDataTransmissionL16BasicDataAn
     use StdToClass;
 
     /** @var string|null ... */
-    public $vnrArbeitnehmer;
+    public ?string $vnrArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $geschlechtArbeitnehmer; // ENUM: MAENNLICH, WEIBLICH
+    public ?string $geschlechtArbeitnehmer = null; // ENUM: MAENNLICH, WEIBLICH
 
     /** @var string|null ... */
-    public $nameArbeitnehmer;
+    public ?string $nameArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $titelArbeitnehmer;
+    public ?string $titelArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $plzArbeitnehmer;
+    public ?string $plzArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $ortArbeitnehmer;
+    public ?string $ortArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $adresseArbeitnehmer;
+    public ?string $adresseArbeitnehmer = null;
 
     /** @var string|null ... */
-    public $sozialestellungwert; // ENUM: KEINE ANGABE, LEHRLINGE, ARBEITER, ANGESTELLTE, BEAMTE, VERTRAGSBEDIENSTETE,
-                                 //       ASVG-PENSIONISTEN, BEAMTE I.R., SONSTIGE PENSIONISTEN
+    public ?string $sozialestellungwert = null;
+    // ENUM: KEINE ANGABE, LEHRLINGE, ARBEITER, ANGESTELLTE, BEAMTE, VERTRAGSBEDIENSTETE,
+    //       ASVG-PENSIONISTEN, BEAMTE I.R., SONSTIGE PENSIONISTEN
 
     /** @var string|null ... */
-    public $beschaeftigung; // ENUM: VOLLBESCHAEFTIGUNG, TEILZEITBESCHAEFTIGUNG
+    public ?string $beschaeftigung = null; // ENUM: VOLLBESCHAEFTIGUNG, TEILZEITBESCHAEFTIGUNG
 
     /** @var bool|null ... */
-    public $indAvabberuecksichtigt;
+    public ?bool $indAvabberuecksichtigt = null;
 
     /** @var string|null ... */
-    public $vnrEhepartner;
+    public ?string $vnrEhepartner = null;
 
     /** @var bool|null ... */
-    public $indAeabberuecksichtigt;
+    public ?bool $indAeabberuecksichtigt = null;
 
     /** @var int|null ... */
-    public $kzAnzahlKinder;
+    public ?int $kzAnzahlKinder = null;
 }

@@ -21,5 +21,5 @@ abstract class QueryResponse extends BasicResponse
     /**
      * @var QueryResultResponse ...
      */
-    public $result;
+    public QueryResultResponse $result;
 }

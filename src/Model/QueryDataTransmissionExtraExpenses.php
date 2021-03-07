@@ -17,30 +17,34 @@ namespace CSoellinger\FonWebservices\Model;
 use CSoellinger\FonWebservices\Util\StdToClass;
 use stdClass;
 
+use function array_map;
+use function property_exists;
+
 class QueryDataTransmissionExtraExpenses
 {
     use StdToClass;
 
     /** @var string ... */
-    public $kategorie = '';
+    public string $kategorie = '';
 
     /** @var string ... */
-    public $kategorieText = '';
+    public string $kategorieText = '';
 
     /** @var float ... */
-    public $betrag = 0.0;
+    public float $betrag = 0.0;
 
     /** @var array<QueryDataTransmissionExtraExpensesDetail>|null ... */
-    public $sonderausgabenDetail;
+    public ?array $sonderausgabenDetail = null;
 
     public static function createFromResponse(stdClass $response): self
     {
         $new = self::stdToClass($response);
 
         if (property_exists($response, 'sonderausgabenDetail')) {
-            $new->sonderausgabenDetail = array_map(function ($val) {
-                return QueryDataTransmissionExtraExpensesDetail::stdToClass((object) $val);
-            }, (array) $response->sonderausgabenDetail);
+            $new->sonderausgabenDetail = array_map(
+                fn ($val) => QueryDataTransmissionExtraExpensesDetail::stdToClass((object) $val),
+                (array) $response->sonderausgabenDetail,
+            );
         }
 
         return $new;

@@ -17,142 +17,103 @@ namespace CSoellinger\FonWebservices\Model;
 use CSoellinger\FonWebservices\Util\StdToClass;
 use stdClass;
 
+use function property_exists;
+
 class QueryDataTransmissionL16LzData
 {
     use StdToClass;
 
-    /** @var float|null */
-    public $kz210;
+    public ?float $kz210 = null;
 
-    /** @var float|null */
-    public $kz215;
+    public ?float $kz215 = null;
 
-    /** @var float|null */
-    public $kz220;
+    public ?float $kz220 = null;
 
-    /** @var float|null */
-    public $kz225;
+    public ?float $kz225 = null;
 
-    /** @var float|null */
-    public $kz226;
+    public ?float $kz226 = null;
 
-    /** @var float|null */
-    public $kz230;
+    public ?float $kz230 = null;
 
-    /** @var float|null */
-    public $kz240;
+    public ?float $kz240 = null;
 
-    /** @var float|null */
-    public $kz243;
+    public ?float $kz243 = null;
 
-    /** @var float|null */
-    public $kz245;
+    public ?float $kz245 = null;
 
-    /** @var float|null */
-    public $kz260;
+    public ?float $kz260 = null;
 
-    /** @var float|null */
-    public $kzEinbehalteneSv;
+    public ?float $kzEinbehalteneSv = null;
 
-    /** @var float|null */
-    public $kzBezuegeAusland;
+    public ?float $kzBezuegeAusland = null;
 
-    /** @var float|null */
-    public $kzPendlerPauschale;
+    public ?float $kzPendlerPauschale = null;
 
-    /** @var float|null */
-    public $kzGewerkschaftsBeitraege;
+    public ?float $kzGewerkschaftsBeitraege = null;
 
-    /** @var float|null */
-    public $kzFestsatz;
+    public ?float $kzFestsatz = null;
 
-    /** @var float|null */
-    public $kzSonstigebezuege;
+    public ?float $kzSonstigebezuege = null;
 
-    /** @var float|null */
-    public $kzEinbehaltenelst;
+    public ?float $kzEinbehaltenelst = null;
 
-    /** @var float|null */
-    public $kzLfestSatz;
+    public ?float $kzLfestSatz = null;
 
-    /** @var float|null */
-    public $kzSonstigebezuege67;
+    public ?float $kzSonstigebezuege67 = null;
 
-    /** @var float|null */
-    public $kzFreibetrag105;
+    public ?float $kzFreibetrag105 = null;
 
-    /** @var float|null */
-    public $kzFreibetrag63;
+    public ?float $kzFreibetrag63 = null;
 
-    /** @var float|null */
-    public $kzKircheOegb;
+    public ?float $kzKircheOegb = null;
 
-    /** @var float|null */
-    public $kzFreibetrag35;
+    public ?float $kzFreibetrag35 = null;
 
     // @codingStandardsIgnoreStart
     /** @var float|null */
     public $KzNiErfBezuege25;
     // @codingStandardsIgnoreEnd
 
-    /** @var int|null */
-    public $kzPflegeVonMonat;
+    public ?int $kzPflegeVonMonat = null;
 
-    /** @var int|null */
-    public $kzPflegeBisMonat;
+    public ?int $kzPflegeBisMonat = null;
 
-    /** @var float|null */
-    public $kzPflegegeld;
+    public ?float $kzPflegegeld = null;
 
-    /** @var float|null */
-    public $kzSteuerfreiBezuege26;
+    public ?float $kzSteuerfreiBezuege26 = null;
 
-    /** @var float|null */
-    public $kzEntwicklungsHelferin;
+    public ?float $kzEntwicklungsHelferin = null;
 
-    /** @var float|null */
-    public $kzSteuerfrei31;
+    public ?float $kzSteuerfrei31 = null;
 
-    /** @var int|null */
-    public $kzWerkverkehrMonate;
+    public ?int $kzWerkverkehrMonate = null;
 
-    /** @var float|null */
-    public $kzBapBeitrag;
+    public ?float $kzBapBeitrag = null;
 
-    /** @var float|null */
-    public $kzBmvBeitrag;
+    public ?float $kzBmvBeitrag = null;
 
-    /** @var float|null */
-    public $pendlereuro;
+    public ?float $pendlereuro = null;
 
-    /** @var float|null */
-    public $sonderausgaben;
+    public ?float $sonderausgaben = null;
 
-    /** @var float|null */
-    public $ueberlassung;
+    public ?float $ueberlassung = null;
 
-    /** @var string|null */
-    public $landAuslArbeitsstaette;
+    public ?string $landAuslArbeitsstaette = null;
 
     // @codingStandardsIgnoreStart
     /** @var float|null */
     public $wkp_expatriates;
     // @codingStandardsIgnoreEnd
 
-    /** @var bool|null */
-    public $erhoehterVAB;
+    public ?bool $erhoehterVAB = null;
 
-    /** @var bool|null */
-    public $faboPlus;
+    public ?bool $faboPlus = null;
 
-    /** @var int|null */
-    public $faboPlusAnzKinder;
+    public ?int $faboPlusAnzKinder = null;
 
-    /** @var float|null */
-    public $faboPlusBetrag;
+    public ?float $faboPlusBetrag = null;
 
-    /** @var QueryDataTransmissionL16LzDataChild|null */
-    public $faboL16Kind;
+    public ?QueryDataTransmissionL16LzDataChild $faboL16Kind = null;
 
     public static function createFromResponse(stdClass $response): self
     {

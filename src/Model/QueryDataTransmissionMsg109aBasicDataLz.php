@@ -20,9 +20,7 @@ class QueryDataTransmissionMsg109aBasicDataLz
 {
     use StdToClass;
 
-    /** @var string */
-    public $jahr = '';
+    public string $jahr = '';
 
-    /** @var string */
-    public $artLohnzettel = '';
+    public string $artLohnzettel = '';
 }

@@ -20,15 +20,11 @@ class QueryDataTransmissionBasicDataAg
 {
     use StdToClass;
 
-    /** @var string|null */
-    public $nameArbeitgeber;
+    public ?string $nameArbeitgeber = null;
 
-    /** @var string|null */
-    public $plzArbeitgeber;
+    public ?string $plzArbeitgeber = null;
 
-    /** @var string|null */
-    public $ortArbeitgeber;
+    public ?string $ortArbeitgeber = null;
 
-    /** @var string|null */
-    public $adresseArbeitgeber;
+    public ?string $adresseArbeitgeber = null;
 }

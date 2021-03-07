@@ -16,19 +16,17 @@ namespace CSoellinger\FonWebservices\Model;
 
 use stdClass;
 
+use function property_exists;
+
 class QueryDataTransmissionL17
 {
-    /** @var QueryDataTransmissionL17BasicDataLz */
-    public $grunddatenLz;
+    public QueryDataTransmissionL17BasicDataLz $grunddatenLz;
 
-    /** @var QueryDataTransmissionL17BasicDataAn */
-    public $grunddatenArbeitnehmer;
+    public QueryDataTransmissionL17BasicDataAn $grunddatenArbeitnehmer;
 
-    /** @var QueryDataTransmissionBasicDataAg|null */
-    public $grunddatenArbeitgeber;
+    public ?QueryDataTransmissionBasicDataAg $grunddatenArbeitgeber = null;
 
-    /** @var QueryDataTransmissionL17LzData|null */
-    public $lzDaten;
+    public ?QueryDataTransmissionL17LzData $lzDaten = null;
 
     public function __construct()
     {

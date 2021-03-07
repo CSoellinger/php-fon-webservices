@@ -21,5 +21,5 @@ abstract class EntryResponse extends BasicResponse
     /**
      * @var string ...
      */
-    public $result = '';
+    public string $result = '';
 }

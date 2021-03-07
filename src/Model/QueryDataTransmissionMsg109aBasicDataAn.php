@@ -21,20 +21,20 @@ class QueryDataTransmissionMsg109aBasicDataAn
     use StdToClass;
 
     /** @var string|null ... */
-    public $vnrAuftragnehmer;
+    public ?string $vnrAuftragnehmer = null;
 
     /** @var string|null ... */
-    public $nameAuftragnehmer;
+    public ?string $nameAuftragnehmer = null;
 
     /** @var string|null ... */
-    public $titelAuftragnehmer;
+    public ?string $titelAuftragnehmer = null;
 
     /** @var string|null ... */
-    public $plzAuftragnehmer;
+    public ?string $plzAuftragnehmer = null;
 
     /** @var string|null ... */
-    public $ortAuftragnehmer;
+    public ?string $ortAuftragnehmer = null;
 
     /** @var string|null ... */
-    public $adresseAuftragnehmer;
+    public ?string $adresseAuftragnehmer = null;
 }

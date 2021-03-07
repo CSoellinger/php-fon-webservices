@@ -22,9 +22,17 @@ use DateInterval;
 use DateTime;
 use Exception;
 use InvalidArgumentException;
-use ReflectionObject;
 use SoapClient;
 use stdClass;
+
+use function array_map;
+use function array_merge;
+use function file_exists;
+use function implode;
+use function in_array;
+use function property_exists;
+use function strlen;
+use function strtoupper;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -36,7 +44,7 @@ use const DIRECTORY_SEPARATOR;
  * - A user for the web service, which can be created in the user administration of FinanzOnline
  *
  * Error codes
- * -  0 = All fine :)
+ * - 0 = All fine :)
  * - -1 = The session ID is invalid or expired.
  * - -2 = The web service is currently not available due to maintenance work.
  * - -3 = A technical error has occurred.
@@ -69,7 +77,7 @@ class DataboxDownloadWs extends SoapClient
     /**
      * @var SessionWs session web service
      */
-    private $sessionWs;
+    private SessionWs $sessionWs;
 
     /**
      * Constructor.
@@ -130,21 +138,7 @@ class DataboxDownloadWs extends SoapClient
             $response->result = [];
         }
 
-        return array_map(function (stdClass $entry) {
-            $new = new DataboxDownloadListItem();
-            $obj = new ReflectionObject($entry);
-            $properties = $obj->getProperties();
-
-            foreach ($properties as $property) {
-                $name = $property->getName();
-                /** @var string $value */
-                $value = $entry->{$name};
-
-                $new->{$name} = $value;
-            }
-
-            return $new;
-        }, $response->result);
+        return array_map(fn (stdClass $entry) => DataboxDownloadListItem::stdToClass($entry), $response->result);
     }
 
     /**
@@ -241,7 +235,7 @@ class DataboxDownloadWs extends SoapClient
      */
     private function handleResponse($response): void
     {
-        $returnCode = (int) $response->rc;
+        $returnCode = $response->rc;
 
         if ($returnCode !== 0) {
             /** @var ErrorResponse $response */

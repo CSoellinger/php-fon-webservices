@@ -20,15 +20,11 @@ class QueryDataTransmissionReportBasicDataLz
 {
     use StdToClass;
 
-    /** @var string */
-    public $jahr = '';
+    public string $jahr = '';
 
-    /** @var string */
-    public $zeitraumVon = '';
+    public string $zeitraumVon = '';
 
-    /** @var string */
-    public $zeitraumBis = '';
+    public string $zeitraumBis = '';
 
-    /** @var string */
-    public $artLohnzettel = '';
+    public string $artLohnzettel = '';
 }

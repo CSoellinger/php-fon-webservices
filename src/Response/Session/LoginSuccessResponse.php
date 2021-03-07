@@ -21,5 +21,5 @@ abstract class LoginSuccessResponse extends BasicResponse
     /**
      * @var string Session id
      */
-    public $id = '';
+    public string $id = '';
 }
