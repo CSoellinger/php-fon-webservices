@@ -9,8 +9,9 @@
     <projectFiles>
         <directory name="./src"/>
         <ignoreFiles>
+            <directory name="./examples"/>
             <directory name="./tests"/>
-            <directory name="./vendor/klitsche/dog"/>
+            <directory name="./vendor/symfony/dotenv"/>
         </ignoreFiles>
     </projectFiles>
 
