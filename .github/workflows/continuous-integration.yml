@@ -59,16 +59,12 @@ jobs:
           - "lowest"
           - "highest"
     steps:
-      - name: "Create linux .env file"
-        env:
-          ENV_FILE: ${{ secrets.TESTING_ENV_FILE }}
-        if: ${{ matrix.operating-system == 'ubuntu-latest' }}
-        run: echo "$ENV_FILE" > .env
-      - name: "Create windows .env file"
-        env:
-          ENV_FILE: ${{ secrets.TESTING_ENV_FILE }}
-        if: ${{ matrix.operating-system == 'windows-latest' }}
-        run: echo "%ENV_FILE%" > .env
+      - name: "Create .env file"
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '.'
+          file: '.env'
+          content: ${{ secrets.TESTING_ENV_FILE }}
       - name: "Configure Git"
         if: ${{ matrix.operating-system == 'windows-latest' }}
         run: |
