@@ -9,7 +9,7 @@
 [![Package downloads on Packagist][downloads-badge]][downloads]
 [![Build status][build-badge]][build]
 [![Psalm Type Coverage][psalm-badge]][psalm]
-<!-- [![Codecov Code Coverage][codecov-badge]][codecov] -->
+[![Codecov Code Coverage][codecov-badge]][codecov]
 <!-- [![Chat with the maintainers][chat-badge]][chat] -->
 
 [source]: https://github.com/csoellinger/php-fon-webservices
