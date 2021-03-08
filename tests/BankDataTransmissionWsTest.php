@@ -23,9 +23,11 @@ use function file_get_contents;
 use function file_put_contents;
 use function implode;
 use function preg_match;
+use function random_int;
 use function str_pad;
 use function str_replace;
 use function substr;
+use function unlink;
 
 use const DIRECTORY_SEPARATOR;
 use const STR_PAD_LEFT;
@@ -51,12 +53,16 @@ class BankDataTransmissionWsTest extends FonWebservicesTestCase
 
         preg_match('/<MessageRefId>(.*)<\/MessageRefId>/', (string) $xmlKontoReg, $match);
         $messageRefId = $match[1];
-        $count = ((int) substr($messageRefId, -3)) + 1;
+        $count = ((int) substr($messageRefId, -3)) + random_int(1, 500);
         $newMessageRefId = substr($messageRefId, 0, -3) . str_pad((string) $count, 3, '0', STR_PAD_LEFT);
+
+        $xmlPath .= '.tmp.xml';
 
         file_put_contents($xmlPath, str_replace($messageRefId, $newMessageRefId, (string) $xmlKontoReg));
 
         $this->assertTrue($bankDataTransmissionWs->upload((string) $xmlPath, 'KTOREG', true));
+
+        unlink($xmlPath);
     }
 
     /**
