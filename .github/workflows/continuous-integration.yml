@@ -59,12 +59,6 @@ jobs:
           - "lowest"
           - "highest"
     steps:
-      - name: "Create .env file"
-        uses: 1arp/create-a-file-action@0.2
-        with:
-          path: '.'
-          file: '.env'
-          content: ${{ secrets.TESTING_ENV_FILE }}
       - name: "Configure Git"
         if: ${{ matrix.operating-system == 'windows-latest' }}
         run: |
@@ -79,6 +73,12 @@ jobs:
       - uses: "ramsey/composer-install@v1"
         with:
           dependency-versions: "${{ matrix.dependencies }}"
+      - name: "Create .env file"
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '.'
+          file: '.env'
+          content: ${{ secrets.TESTING_ENV_FILE }}
       - name: "Run unit tests"
         run: "composer dev:test:coverage:ci -- --coverage-text"
       - name: "Publish coverage report to Codecov"
