@@ -68,6 +68,7 @@ jobs:
       - uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php-version }}"
+          extensions: soap
           coverage: "pcov"
           ini-values: "memory_limit=-1"
       - uses: "ramsey/composer-install@v1"
