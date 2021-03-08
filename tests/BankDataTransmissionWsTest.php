@@ -22,15 +22,15 @@ use Throwable;
 use function file_get_contents;
 use function file_put_contents;
 use function implode;
-use function preg_match;
 use function random_int;
-use function str_pad;
+use function str_repeat;
 use function str_replace;
+use function str_shuffle;
+use function strlen;
 use function substr;
 use function unlink;
 
 use const DIRECTORY_SEPARATOR;
-use const STR_PAD_LEFT;
 
 /**
  * Testing bank data transmission webservice class.
@@ -48,17 +48,23 @@ class BankDataTransmissionWsTest extends FonWebservicesTestCase
         $this->assertInstanceOf(BankDataTransmissionWs::class, $bankDataTransmissionWs);
 
         $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'Kontenregister.xml']);
-        $xmlKontoReg = file_get_contents($xmlPath);
-        $match = (array) [];
-
-        preg_match('/<MessageRefId>(.*)<\/MessageRefId>/', (string) $xmlKontoReg, $match);
-        $messageRefId = $match[1];
-        $count = ((int) substr($messageRefId, -3)) + random_int(1, 500);
-        $newMessageRefId = substr($messageRefId, 0, -3) . str_pad((string) $count, 3, '0', STR_PAD_LEFT);
-
+        $xmlContent = (string) file_get_contents($xmlPath);
         $xmlPath .= '.tmp.xml';
 
-        file_put_contents($xmlPath, str_replace($messageRefId, $newMessageRefId, (string) $xmlKontoReg));
+        $newFastNr = '';
+        while (strlen($newFastNr) < 9) {
+            $newFastNr .= random_int(1, 9);
+        }
+
+        $newMessageRefId = $newFastNr . substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', 5)), 0, 5);
+        while (strlen($newMessageRefId) < 25) {
+            $newMessageRefId .= random_int(1, 9);
+        }
+
+        $xmlContent = str_replace('987654321abcde000', $newMessageRefId, $xmlContent);
+        $xmlContent = str_replace('987654321', $newFastNr, $xmlContent);
+
+        file_put_contents($xmlPath, $xmlContent);
 
         $this->assertTrue($bankDataTransmissionWs->upload((string) $xmlPath, 'KTOREG', true));
 
