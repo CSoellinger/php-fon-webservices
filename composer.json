@@ -1,7 +1,8 @@
 {
     "name": "csoellinger/php-fon-webservices",
-    "type": "library",
     "description": "PHP library to handle FinanzOnline webservices.",
+    "license": "Unlicense",
+    "type": "library",
     "keywords": [
         "Bmf",
         "Fon",
@@ -22,7 +23,6 @@
         "Upload",
         "Finanzamt"
     ],
-    "license": "Unlicense",
     "authors": [
         {
             "name": "Christopher Söllinger",
@@ -31,20 +31,41 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8",
+        "php": "^7.4",
         "ext-soap": "*",
         "jasny/typecast": "dev-master"
     },
     "require-dev": {
         "csoellinger/dog-html-printer": "^0.3",
         "klitsche/dog": "^0.4",
-        "phpstan/phpstan": "^0.12.78",
-        "ramsey/devtools": "^1.5",
-        "symfony/dotenv": "^5.1",
-        "symfony/var-dumper": "^5.1",
-        "vimeo/psalm": "^4.4"
+        "phpstan/phpstan": "^1.4",
+        "ramsey/devtools": "^1.7",
+        "symfony/dotenv": "^5.4",
+        "symfony/process": "^5.4",
+        "symfony/var-dumper": "^5.4",
+        "vimeo/psalm": "^4.22"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "CSoellinger\\FonWebservices\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CSoellinger\\Test\\FonWebservices\\": "tests/"
+        }
     },
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ramsey/composer-repl": true,
+            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true,
+            "captainhook/plugin-composer": true,
+            "ramsey/devtools": true
+        },
         "sort-packages": true
     },
     "extra": {
@@ -61,18 +82,6 @@
             }
         }
     },
-    "autoload": {
-        "psr-4": {
-            "CSoellinger\\FonWebservices\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "CSoellinger\\Test\\FonWebservices\\": "tests/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "dev:analyze:phploc": "php ./bin/phploc.phar --count-tests src tests",
         "dev:report:phploc": "php ./bin/phploc.phar --count-tests --log-json phploc.json src tests"

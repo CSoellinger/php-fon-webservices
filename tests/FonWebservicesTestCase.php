@@ -22,6 +22,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use RuntimeException;
 use SoapClient;
+use stdClass;
 
 use function getenv;
 
@@ -29,6 +30,8 @@ use function getenv;
  * Test case for tests which need a session id.
  *
  * @internal
+ *
+ * @coversNothing
  */
 class FonWebservicesTestCase extends TestCase
 {
@@ -43,12 +46,12 @@ class FonWebservicesTestCase extends TestCase
     protected static SoapClient $sessionSc;
 
     /**
-     * @var SessionWs&MockObject Session webservice class
+     * @var MockObject&SessionWs Session webservice class
      */
     protected $sessionWs;
 
     /**
-     * @var SessionWs&MockObject Session webservice class
+     * @var MockObject&SessionWs Session webservice class
      */
     protected $sessionWsDbTest;
 
@@ -95,7 +98,7 @@ class FonWebservicesTestCase extends TestCase
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return FonCredential&MockObject
      */
@@ -115,7 +118,7 @@ class FonWebservicesTestCase extends TestCase
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @return FonCredential&MockObject
      */
@@ -150,6 +153,7 @@ class FonWebservicesTestCase extends TestCase
         $this->sessionWs
             ->method('login')
             ->willReturnCallback(function () use ($reflector): SessionWs {
+                /** @var stdClass $response */
                 $response = self::$sessionSc->__soapCall('login', [[
                     'tid' => $this->fonCredential->teId,
                     'benid' => $this->fonCredential->benId,
@@ -200,6 +204,7 @@ class FonWebservicesTestCase extends TestCase
         $this->sessionWsDbTest
             ->method('login')
             ->willReturnCallback(function () use ($reflector): SessionWs {
+                /** @var stdClass $response */
                 $response = self::$sessionSc->__soapCall('login', [[
                     'tid' => $this->fonCredentialDbTest->teId,
                     'benid' => $this->fonCredentialDbTest->benId,

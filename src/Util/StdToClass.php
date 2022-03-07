@@ -20,7 +20,6 @@ use ReflectionNamedType;
 use ReflectionObject;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use phpDocumentor\Reflection\DocBlockFactory;
-use phpDocumentor\Reflection\Type;
 use stdClass;
 
 use function gettype;
@@ -78,10 +77,10 @@ trait StdToClass
                     $varType = $type->getName();
 
                     if (
-                        $varType &&
-                        substr_count($varType, $valueType) <= 0 &&
-                        $valueType !== 'object' &&
-                         $valueType !== 'array'
+                        $varType
+                        && substr_count($varType, $valueType) <= 0
+                        && $valueType !== 'object'
+                         && $valueType !== 'array'
                     ) {
                         $new->{$name} = $typeCast->to($varType)->cast($value);
 
@@ -98,16 +97,15 @@ trait StdToClass
                     $varType = $var->getType();
 
                     if ($varType !== null) {
-                        /** @var Type $varType */
-                        $varType = $varType;
+                        // $varType = $varType;
                         $varType = $varType->__toString();
                     }
 
                     if (
-                        $varType &&
-                        substr_count($varType, $valueType) <= 0 &&
-                        $valueType !== 'object' &&
-                         $valueType !== 'array'
+                        $varType
+                        && substr_count($varType, $valueType) <= 0
+                        && $valueType !== 'object'
+                         && $valueType !== 'array'
                     ) {
                         $new->{$name} = $typeCast->to($varType)->cast($value);
                     }
