@@ -2,12 +2,15 @@
 
 Contributions are welcome. This project accepts pull requests on [GitHub][].
 
+This project adheres to a [code of conduct](CODE_OF_CONDUCT.md). By
+participating in this project and its community, you are expected to uphold this
+code.
 
 ## Communication Channels
 
 You can find help and discussion in the following places:
 
-* GitHub Issues: <https://github.com/csoellinger/php-fon-webservices/issues>
+-   GitHub Issues: <https://github.com/csoellinger/php-fon-webservices/issues>
 
 ## Reporting Bugs
 
@@ -19,32 +22,32 @@ your bug report._
 When submitting a bug report, please include enough information to reproduce the
 bug. A good bug report includes the following sections:
 
-* **Description**
+-   **Description**
 
-  Provide a short and clear description of the bug.
+    Provide a short and clear description of the bug.
 
-* **Steps to reproduce**
+-   **Steps to reproduce**
 
-  Provide steps to reproduce the behavior you are experiencing. Please try to
-  keep this as short as possible. If able, create a reproducible script outside
-  of any framework you are using. This will help us to quickly debug the issue.
+    Provide steps to reproduce the behavior you are experiencing. Please try to
+    keep this as short as possible. If able, create a reproducible script outside
+    of any framework you are using. This will help us to quickly debug the issue.
 
-* **Expected behavior**
+-   **Expected behavior**
 
-  Provide a short and clear description of what you expect to happen.
+    Provide a short and clear description of what you expect to happen.
 
-* **Screenshots or output**
+-   **Screenshots or output**
 
-  If applicable, add screenshots or program output to help explain your problem.
+    If applicable, add screenshots or program output to help explain your problem.
 
-* **Environment details**
+-   **Environment details**
 
-  Provide details about the system where you're using this package, such as PHP
-  version and operating system.
+    Provide details about the system where you're using this package, such as PHP
+    version and operating system.
 
-* **Additional context**
+-   **Additional context**
 
-  Provide any additional context that may help us debug the problem.
+    Provide any additional context that may help us debug the problem.
 
 ## Fixing Bugs
 
@@ -65,25 +68,25 @@ your hard work, but some features don't fit with the goals of the project.
 
 When you do begin working on your feature, here are some guidelines to consider:
 
-* Your pull request description should clearly detail the changes you have made.
-  We will use this description to update the CHANGELOG. If there is no
-  description, or it does not adequately describe your feature, we may ask you
-  to update the description.
-* csoellinger/php-fon-webservices follows a superset of **[PSR-12 coding standard][psr-12]**.
-  Please ensure your code does, too. _Hint: run `composer dev:lint` to check._
-* Please **write tests** for any new features you add.
-* Please **ensure that tests pass** before submitting your pull request.
-  csoellinger/php-fon-webservices automatically runs tests for pull requests. However,
-  running the tests locally will help save time. _Hint: run `composer test`._
-* **Use topic/feature branches.** Please do not ask to pull from your main branch.
-  * For more information, see "[Understanding the GitHub flow][gh-flow]."
-* **Submit one feature per pull request.** If you have multiple features you
-  wish to submit, please break them into separate pull requests.
-* **Write good commit messages.** This project follows the
-  [Conventional Commits][] specification and uses Git hooks to ensure all
-  commits follow this standard. Running `composer install` will set up the Git
-  hooks, so when you run `git commit`, you'll be prompted to create a commit
-  using the Conventional Commits rules.
+-   Your pull request description should clearly detail the changes you have made.
+    We will use this description to update the CHANGELOG. If there is no
+    description, or it does not adequately describe your feature, we may ask you
+    to update the description.
+-   csoellinger/php-fon-webservices follows a superset of **[PSR-12 coding standard][psr-12]**.
+    Please ensure your code does, too. _Hint: run `composer dev:lint` to check._
+-   Please **write tests** for any new features you add.
+-   Please **ensure that tests pass** before submitting your pull request.
+    csoellinger/php-fon-webservices automatically runs tests for pull requests. However,
+    running the tests locally will help save time. _Hint: run `composer test`._
+-   **Use topic/feature branches.** Please do not ask to pull from your main branch.
+    -   For more information, see "[Understanding the GitHub flow][gh-flow]."
+-   **Submit one feature per pull request.** If you have multiple features you
+    wish to submit, please break them into separate pull requests.
+-   **Write good commit messages.** This project follows the
+    [Conventional Commits][] specification and uses Git hooks to ensure all
+    commits follow this standard. Running `composer install` will set up the Git
+    hooks, so when you run `git commit`, you'll be prompted to create a commit
+    using the Conventional Commits rules.
 
 ## Developing
 
@@ -92,7 +95,7 @@ and [Composer](https://getcomposer.org).
 
 After cloning this repository locally, execute the following commands:
 
-``` bash
+```bash
 cd /path/to/repository
 composer install
 ```
@@ -108,7 +111,7 @@ to validate all staged changes prior to commit.
 
 To see all the commands available for contributing to this project:
 
-``` bash
+```bash
 composer list dev
 ```
 
@@ -117,18 +120,15 @@ composer list dev
 This project follows a superset of [PSR-12](https://www.php-fig.org/psr/psr-12/)
 coding standards, enforced by [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
 
-CaptainHook will run PHP_CodeSniffer before committing. It will attempt to fix
-any errors it can, and it will reject the commit if there are any un-fixable
-issues. Many issues can be fixed automatically and will be done so pre-commit.
+CaptainHook will run coding standards checks before committing.
 
-You may lint the entire codebase using PHP_CodeSniffer with the following
-commands:
+You may lint the codebase manually using the following commands:
 
-``` bash
+```bash
 # Lint
 composer dev:lint
 
-# Lint and autofix
+# Attempt to auto-fix coding standards issues
 composer dev:lint:fix
 ```
 
@@ -138,14 +138,12 @@ This project uses a combination of [PHPStan](https://github.com/phpstan/phpstan)
 and [Psalm](https://github.com/vimeo/psalm) to provide static analysis of PHP
 code.
 
-CaptainHook will run PHPStan and Psalm before committing. The pre-commit hook
-does not attempt to fix any static analysis errors. Instead, the commit will
-fail, and you must fix the errors manually.
+CaptainHook will run static analysis checks before committing.
 
 You may run static analysis manually across the whole codebase with the
 following command:
 
-``` bash
+```bash
 # Static analysis
 composer dev:analyze
 ```
@@ -167,6 +165,9 @@ command line, while in the project root directory:
 ```
 composer test
 ```
+
+CaptainHook will automatically run all tests before pushing to the remote
+repository.
 
 [github]: https://github.com/csoellinger/php-fon-webservices
 [issues]: https://github.com/csoellinger/php-fon-webservices/issues

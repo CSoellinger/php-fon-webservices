@@ -3,7 +3,6 @@
     "types": [
         "chore",
         "ci",
-        "deps",
         "docs",
         "feat",
         "fix",
@@ -15,7 +14,7 @@
     "scopeCase": "kebab",
     "scopeRequired": false,
     "scopes": [],
-    "descriptionCase": "lower",
+    "descriptionCase": null,
     "descriptionEndMark": "",
     "bodyRequired": false,
     "bodyWrapWidth": 72,
