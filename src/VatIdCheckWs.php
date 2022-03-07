@@ -101,14 +101,15 @@ class VatIdCheckWs extends SoapClient
     /**
      * Constructor.
      *
-     * @param SessionWs           $sessionWs   Session webservice
+     * @param SessionWs           $sessionWs   Session web service
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(SessionWs $sessionWs, array $soapOptions = [])
     {
         $this->sessionWs = $sessionWs;
 
-        $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
+        /** @var string $wsdl */
+        $wsdl = file_exists((string) self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
 
         parent::__construct($wsdl, $soapOptions);
     }
@@ -143,7 +144,6 @@ class VatIdCheckWs extends SoapClient
         ],
         ]);
 
-        $result = null;
         $returnCode = $response->rc;
 
         if (in_array($returnCode, self::VALID_RETURN_CODES, true) === true) {
@@ -168,6 +168,7 @@ class VatIdCheckWs extends SoapClient
 
             return $result;
         }
+
         if (in_array($returnCode, [103, 104], true) === true) {
             // Special error should happen only at full check level...
             // re-check at level 1 and return the result

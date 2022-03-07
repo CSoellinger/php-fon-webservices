@@ -79,7 +79,8 @@ class BankDataTransmissionWs extends SoapClient
     {
         $this->sessionWs = $sessionWs;
 
-        $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
+        /** @var string $wsdl */
+        $wsdl = file_exists((string) self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
 
         parent::__construct($wsdl, $soapOptions);
     }
@@ -87,7 +88,7 @@ class BankDataTransmissionWs extends SoapClient
     /**
      * Upload bank data to the FinanzOnline webservice.
      *
-     * @param string $xml XML content or path to file
+     * @param string $xml    XML content or path to file
      * @param string $type   Choose KTOREG, KTOZUF, KTOABF, GMSG
      * @param bool   $isTest True if you want to send the data only for test purposes
      *

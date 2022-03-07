@@ -83,7 +83,8 @@ class FileUploadWs extends SoapClient
     {
         $this->sessionWs = $sessionWs;
 
-        $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
+        /** @var string $wsdl */
+        $wsdl = file_exists((string) self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
 
         parent::__construct($wsdl, $soapOptions);
     }
