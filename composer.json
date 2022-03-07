@@ -31,7 +31,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0 || ^8.1",
         "ext-soap": "*",
         "jasny/typecast": "dev-master"
     },
@@ -40,7 +40,11 @@
         "klitsche/dog": "^0.4",
         "phpstan/phpstan": "^1.4",
         "ramsey/devtools": "^1.7",
+        "spatie/phpunit-snapshot-assertions": "^4.2",
+        "symfony/console": "^5.4",
         "symfony/dotenv": "^5.4",
+        "symfony/filesystem": "^5.4",
+        "symfony/finder": "^5.4",
         "symfony/process": "^5.4",
         "symfony/var-dumper": "^5.4",
         "vimeo/psalm": "^4.22"
@@ -59,16 +63,19 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "ramsey/composer-repl": true,
-            "phpstan/extension-installer": true,
-            "ergebnis/composer-normalize": true,
             "captainhook/plugin-composer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true,
+            "ramsey/composer-repl": true,
             "ramsey/devtools": true
         },
         "sort-packages": true
     },
     "extra": {
+        "captainhook": {
+            "force-install": true
+        },
         "ramsey/conventional-commits": {
             "configFile": "conventional-commits.json"
         },
