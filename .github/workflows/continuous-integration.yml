@@ -34,6 +34,7 @@ jobs:
         with:
           # php-version: 'latest'
           php-version: '7.4'
+          extensions: soap
           coverage: 'none'
 
       - name: 'Install dependencies (Composer)'
@@ -58,6 +59,7 @@ jobs:
         uses: 'shivammathur/setup-php@v2'
         with:
           php-version: 'latest'
+          extensions: soap
           coverage: 'none'
 
       - name: 'Install dependencies (Composer)'
@@ -83,6 +85,7 @@ jobs:
         uses: 'shivammathur/setup-php@v2'
         with:
           php-version: 'latest'
+          extensions: soap
           coverage: 'none'
 
       - name: 'Install dependencies (Composer)'
@@ -109,6 +112,7 @@ jobs:
         uses: 'shivammathur/setup-php@v2'
         with:
           php-version: 'latest'
+          extensions: soap
           coverage: 'pcov'
           ini-values: 'memory_limit=-1'
 
@@ -157,6 +161,7 @@ jobs:
         uses: 'shivammathur/setup-php@v2'
         with:
           php-version: '${{ matrix.php-version }}'
+          extensions: soap
           coverage: 'none'
 
       - name: 'Install dependencies (Composer)'
