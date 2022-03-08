@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  COMPOSER_ROOT_VERSION: '1.99.99'
+  COMPOSER_ROOT_VERSION: '2.2.4'
 
 jobs:
   coding-standards:
@@ -32,7 +32,8 @@ jobs:
       - name: 'Install PHP'
         uses: 'shivammathur/setup-php@v2'
         with:
-          php-version: 'latest'
+          # php-version: 'latest'
+          php-version: '7.4'
           coverage: 'none'
 
       - name: 'Install dependencies (Composer)'
