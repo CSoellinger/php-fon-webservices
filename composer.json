@@ -43,7 +43,6 @@
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/phpstan": "^1.12",
         "rector/rector": "^1.2",
-        "spatie/phpunit-snapshot-assertions": "^4.2",
         "symfony/console": "^5.4 || ^6.4",
         "symfony/dotenv": "^5.4 || ^6.4",
         "symfony/filesystem": "^5.4 || ^6.4",
