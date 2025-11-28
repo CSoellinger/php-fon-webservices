@@ -12,8 +12,6 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\Test\FonWebservices;
-
 use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\SessionWs;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,93 +19,56 @@ use ReflectionProperty;
 
 use function rename;
 
-use Throwable;
+test('initialize with online wsdl', function (): void {
+    rename(SessionWs::WSDL_LOCAL, SessionWs::WSDL_LOCAL . '.bak');
 
-/**
- * Testing session webservice class.
- *
- * @internal
- *
- * @covers \CSoellinger\FonWebservices\SessionWs
- */
-class SessionWsTest extends FonWebservicesTestCase
-{
-    /**
-     * Test initializing webservice with online wsdl url
-     */
-    public function testInitializeWithOnlineWsdl(): void
-    {
-        rename(SessionWs::WSDL_LOCAL, SessionWs::WSDL_LOCAL . '.bak');
+    $sessionWebService = new SessionWs($this->fonCredential);
+    expect($sessionWebService)->toBeInstanceOf(SessionWs::class);
 
-        $sessionWebService = new SessionWs($this->fonCredential);
-        $this->assertInstanceOf(SessionWs::class, $sessionWebService);
+    rename(SessionWs::WSDL_LOCAL . '.bak', SessionWs::WSDL_LOCAL);
+});
 
-        rename(SessionWs::WSDL_LOCAL . '.bak', SessionWs::WSDL_LOCAL);
-    }
+test('login and logout', function (): void {
+    $sessionWebService = new SessionWs($this->fonCredential);
 
-    /**
-     * Login and check if session id is not empty (indicates user is logged in)
-     */
-    public function testLoginAndLogout(): void
-    {
-        $sessionWebService = new SessionWs($this->fonCredential);
+    $sessionWebService->login();
+    expect($sessionWebService->getID())->not->toBeEmpty();
+    expect($sessionWebService->isLoggedIn())->toBeTrue();
 
-        $sessionWebService->login();
-        $this->assertNotEmpty($sessionWebService->getID());
-        $this->assertTrue($sessionWebService->isLoggedIn());
+    $sessionWebService->logout();
+    expect($sessionWebService->getID())->toBeEmpty();
+    expect($sessionWebService->isLoggedIn())->toBeFalse();
+});
 
-        $sessionWebService->logout();
-        $this->assertEmpty($sessionWebService->getID());
-        $this->assertFalse($sessionWebService->isLoggedIn());
-    }
+test('login with bad credentials', function (): void {
+    /** @var FonCredential&MockObject $badCredential */
+    $badCredential = $this
+        ->getMockBuilder(FonCredential::class)
+        ->disableOriginalConstructor()
+        ->getMock();
 
-    /**
-     * Login with bad credentials
-     *
-     * @throws Throwable
-     */
-    public function testLoginWithBadCredentials(): void
-    {
-        $this->expectException(Throwable::class);
+    $badCredential->teId = '00000000k000';
+    $badCredential->teUid = 'ATU00000000';
+    $badCredential->benId = 'notexists1';
+    $badCredential->benPin = 'aaAAaaAAaaAAaaAAaaAAaaAAaaAAaaAA';
 
-        /** @var FonCredential&MockObject $badCredential */
-        $badCredential = $this
-            ->getMockBuilder(FonCredential::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+    $sessionWebService = new SessionWs($badCredential);
+    $sessionWebService->Login();
+})->throws(Throwable::class);
 
-        $badCredential->teId = '00000000k000';
-        $badCredential->teUid = 'ATU00000000';
-        $badCredential->benId = 'notexists1';
-        $badCredential->benPin = 'aaAAaaAAaaAAaaAAaaAAaaAAaaAAaaAA';
+test('logout with invalid session id', function (): void {
+    $sessionWebService = new SessionWs($this->fonCredential);
+    $sessionWebService->login();
 
-        $sessionWebService = new SessionWs($badCredential);
-        $sessionWebService->Login();
-    }
+    $reflector = new ReflectionProperty(SessionWs::class, 'id');
+    $reflector->setAccessible(true);
+    $reflector->setValue($sessionWebService, 'invaLidSessiOnId1');
 
-    /**
-     * Logout with invalid session id.
-     *
-     * @throws Throwable
-     */
-    public function testLogoutWithInvalidSessionId(): void
-    {
-        $this->expectException(Throwable::class);
+    $sessionWebService->logout();
+})->throws(Throwable::class);
 
-        $sessionWebService = new SessionWs($this->fonCredential);
-        $sessionWebService->login();
+test('get credential', function (): void {
+    $sessionWebService = new SessionWs($this->fonCredential);
 
-        $reflector = new ReflectionProperty(SessionWs::class, 'id');
-        $reflector->setAccessible(true);
-        $reflector->setValue($sessionWebService, 'invaLidSessiOnId1');
-
-        $sessionWebService->logout();
-    }
-
-    public function testGetCredential(): void
-    {
-        $sessionWebService = new SessionWs($this->fonCredential);
-
-        $this->assertInstanceOf(FonCredential::class, $sessionWebService->getCredential());
-    }
-}
+    expect($sessionWebService->getCredential())->toBeInstanceOf(FonCredential::class);
+});

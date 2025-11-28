@@ -12,8 +12,6 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\Test\FonWebservices;
-
 use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
@@ -22,78 +20,50 @@ use CSoellinger\FonWebservices\VatIdCheckWs;
 use function print_r;
 use function usleep;
 
-/**
- * Testing session webservice class.
- *
- * @internal
- *
- * @covers \CSoellinger\FonWebservices\VatIdCheckWs
- */
-class VatIdCheckWsTest extends FonWebservicesTestCase
-{
-    /**
-     * Check vat id at level one.
-     *
-     * @param string $uid Vat id
-     *
-     * @testWith ["ATU72312179"]
-     */
-    public function testCheckValidVatLevelOne(string $uid): void
-    {
-        $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
-        $this->assertInstanceOf(VatIdCheckWs::class, $vatIdCheckWebservice);
+test('check valid vat at level one', function (string $uid): void {
+    $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
+    expect($vatIdCheckWebservice)->toBeInstanceOf(VatIdCheckWs::class);
 
-        usleep(500);
-        /** @var VatIdCheckInvalid|VatIdCheckValidLevelOne $result */
-        $result = $vatIdCheckWebservice->check($uid);
+    usleep(500);
+    /** @var VatIdCheckInvalid|VatIdCheckValidLevelOne $result */
+    $result = $vatIdCheckWebservice->check($uid);
 
-        if ($result instanceof VatIdCheckInvalid) {
-            print_r($result);
-        }
-
-        $this->assertInstanceOf(VatIdCheckValidLevelOne::class, $result);
-        $this->assertTrue($result->valid);
+    if ($result instanceof VatIdCheckInvalid) {
+        print_r($result);
     }
 
-    /**
-     * Check vat id at level two.
-     *
-     * @param string $uid Vat id
-     *
-     * @testWith ["ATU72312179"]
-     */
-    public function testCheckValidVatLevelTwo(string $uid): void
-    {
-        $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
+    expect($result)->toBeInstanceOf(VatIdCheckValidLevelOne::class);
+    expect($result->valid)->toBeTrue();
+})->with([
+    ['ATU72312179'],
+]);
 
-        usleep(500);
-        /** @var VatIdCheckInvalid|VatIdCheckValidLevelTwo $result */
-        $result = $vatIdCheckWebservice->check($uid, VatIdCheckWs::LEVEL_FULL_CHECK);
+test('check valid vat at level two', function (string $uid): void {
+    $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
 
-        if ($result instanceof VatIdCheckInvalid) {
-            print_r($result);
-        }
+    usleep(500);
+    /** @var VatIdCheckInvalid|VatIdCheckValidLevelTwo $result */
+    $result = $vatIdCheckWebservice->check($uid, VatIdCheckWs::LEVEL_FULL_CHECK);
 
-        $this->assertInstanceOf(VatIdCheckValidLevelTwo::class, $result);
-        $this->assertTrue($result->valid);
-        $this->assertNotEmpty($result->name);
+    if ($result instanceof VatIdCheckInvalid) {
+        print_r($result);
     }
 
-    /**
-     * Testing invalid vat id.
-     *
-     * @param string $uid Vat id
-     *
-     * @testWith ["ATU7231217X"]
-     */
-    public function testCheckInvalidVat(string $uid): void
-    {
-        $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
-        $this->assertInstanceOf(VatIdCheckWs::class, $vatIdCheckWebservice);
+    expect($result)->toBeInstanceOf(VatIdCheckValidLevelTwo::class);
+    expect($result->valid)->toBeTrue();
+    expect($result->name)->not->toBeEmpty();
+})->with([
+    ['ATU72312179'],
+]);
 
-        /** @var VatIdCheckInvalid $result */
-        $result = $vatIdCheckWebservice->check($uid);
-        $this->assertInstanceOf(VatIdCheckInvalid::class, $result);
-        $this->assertFalse($result->valid);
-    }
-}
+test('check invalid vat', function (string $uid): void {
+    $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
+    expect($vatIdCheckWebservice)->toBeInstanceOf(VatIdCheckWs::class);
+
+    /** @var VatIdCheckInvalid $result */
+    $result = $vatIdCheckWebservice->check($uid);
+    expect($result)->toBeInstanceOf(VatIdCheckInvalid::class);
+    expect($result->valid)->toBeFalse();
+})->with([
+    ['ATU7231217X'],
+]);

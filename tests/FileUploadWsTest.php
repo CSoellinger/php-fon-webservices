@@ -12,68 +12,31 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\Test\FonWebservices;
-
 use CSoellinger\FonWebservices\FileUploadWs;
 
 use const DIRECTORY_SEPARATOR;
 
-use Exception;
-
 use function implode;
 
-use InvalidArgumentException;
-use Throwable;
+test('upload simple test xml', function (): void {
+    $fileUploadWs = new FileUploadWs($this->sessionWs);
+    expect($fileUploadWs)->toBeInstanceOf(FileUploadWs::class);
 
-/**
- * Testing file upload webservice class.
- *
- * @internal
- *
- * @covers \CSoellinger\FonWebservices\FileUploadWs
- */
-class FileUploadWsTest extends FonWebservicesTestCase
-{
-    /**
-     * Upload simple test xml.
-     */
-    public function testUpload(): void
-    {
-        $fileUploadWs = new FileUploadWs($this->sessionWs);
-        $this->assertInstanceOf(FileUploadWs::class, $fileUploadWs);
+    $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 
-        $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
+    expect($fileUploadWs->upload((string) $xmlPath, 'RZ', true))->toBeTrue();
+});
 
-        $this->assertTrue($fileUploadWs->upload((string) $xmlPath, 'RZ', true));
-    }
+test('upload invalid xml', function (): void {
+    $fileUploadWs = new FileUploadWs($this->sessionWs);
+    expect($fileUploadWs)->toBeInstanceOf(FileUploadWs::class);
 
-    /**
-     * Upload invalid xml.
-     *
-     * @throws Exception
-     */
-    public function testUploadInvalidXml(): void
-    {
-        $this->expectException(Throwable::class);
+    $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 
-        $fileUploadWs = new FileUploadWs($this->sessionWs);
-        $this->assertInstanceOf(FileUploadWs::class, $fileUploadWs);
+    expect($fileUploadWs->upload((string) $xmlPath, 'NOVA', true))->toBeTrue();
+})->throws(Throwable::class);
 
-        $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
-
-        $this->assertTrue($fileUploadWs->upload((string) $xmlPath, 'NOVA', true));
-    }
-
-    /**
-     * Upload invalid type.
-     *
-     * @throws InvalidArgumentException
-     */
-    public function testInvalidType(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $fileUploadWs = new FileUploadWs($this->sessionWs);
-        $fileUploadWs->upload('', 'XY', true);
-    }
-}
+test('upload invalid type', function (): void {
+    $fileUploadWs = new FileUploadWs($this->sessionWs);
+    $fileUploadWs->upload('', 'XY', true);
+})->throws(InvalidArgumentException::class);

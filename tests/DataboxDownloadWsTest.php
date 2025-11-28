@@ -12,105 +12,69 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\Test\FonWebservices;
-
-use function count;
-
 use CSoellinger\FonWebservices\DataboxDownloadWs;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use DateTime;
-use Exception;
-use InvalidArgumentException;
-use Throwable;
 
-/**
- * Testing databox download webservice class.
- *
- * @internal
- *
- * @covers \CSoellinger\FonWebservices\DataboxDownloadWs
- * @covers \CSoellinger\FonWebservices\Model\DataboxDownloadListItem
- */
-class DataboxDownloadWsTest extends FonWebservicesTestCase
-{
-    /**
-     * Login and check if session id is not empty (indicates user is logged in).
-     *
-     * @testWith ["", null, null]
-     *           ["", "NOW-30days", null]
-     *           ["", null, "NOW"]
-     */
-    public function testDatabox(string $type, ?string $from, ?string $to): void
-    {
-        $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
-        $this->assertInstanceOf(DataboxDownloadWs::class, $databoxDownloadWs);
+use function count;
 
-        /** @var DateTime|null $from */
-        $from = $from ? new DateTime($from) : $from;
-        /** @var DateTime|null $to */
-        $to = $to ? new DateTime($to) : $to;
+test('databox download', function (string $type, ?string $from, ?string $to): void {
+    $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
+    expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
 
-        /** @var array<DataboxDownloadListItem> $result */
-        $result = $databoxDownloadWs->get($type, $from, $to);
+    /** @var DateTime|null $from */
+    $from = $from ? new DateTime($from) : $from;
+    /** @var DateTime|null $to */
+    $to = $to ? new DateTime($to) : $to;
 
-        $this->assertIsArray($result);
+    /** @var array<DataboxDownloadListItem> $result */
+    $result = $databoxDownloadWs->get($type, $from, $to);
 
-        if (count($result) > 0) {
-            /** @var DataboxDownloadListItem $entry */
-            $entry = $result[0];
+    expect($result)->toBeArray();
 
-            $this->assertInstanceOf(DataboxDownloadListItem::class, $entry);
+    if (count($result) > 0) {
+        /** @var DataboxDownloadListItem $entry */
+        $entry = $result[0];
 
-            $resultEntry = $databoxDownloadWs->getEntry($entry->applkey);
+        expect($entry)->toBeInstanceOf(DataboxDownloadListItem::class);
 
-            $this->assertIsString($resultEntry);
-            $this->assertNotEmpty($resultEntry);
-        }
+        $resultEntry = $databoxDownloadWs->getEntry($entry->applkey);
+
+        expect($resultEntry)->toBeString();
+        expect($resultEntry)->not->toBeEmpty();
     }
+})->with([
+    ['', null, null],
+    ['', 'NOW-30days', null],
+    ['', null, 'NOW'],
+]);
 
-    /**
-     * Test invalid params
-     *
-     * @throws InvalidArgumentException
-     *
-     * @testWith ["WRONG_TYPE", null, null]
-     *           ["WT", null, null]
-     */
-    public function testInvalidParams(string $type, ?string $from, ?string $to): void
-    {
-        $this->expectException(InvalidArgumentException::class);
+test('invalid params', function (string $type, ?string $from, ?string $to): void {
+    /** @var DateTime|null $from */
+    $from = $from ? new DateTime($from) : $from;
+    /** @var DateTime|null $to */
+    $to = $to ? new DateTime($to) : $to;
 
-        /** @var DateTime|null $from */
-        $from = $from ? new DateTime($from) : $from;
-        /** @var DateTime|null $to */
-        $to = $to ? new DateTime($to) : $to;
+    $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
+    expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
 
-        $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
-        $this->assertInstanceOf(DataboxDownloadWs::class, $databoxDownloadWs);
+    $databoxDownloadWs->get($type, $from, $to);
+})->with([
+    ['WRONG_TYPE', null, null],
+    ['WT', null, null],
+])->throws(InvalidArgumentException::class);
 
-        $databoxDownloadWs->get($type, $from, $to);
-    }
+test('error response', function (string $type, ?string $from, ?string $to): void {
+    /** @var DateTime|null $from */
+    $from = $from ? new DateTime($from) : $from;
+    /** @var DateTime|null $to */
+    $to = $to ? new DateTime($to) : $to;
 
-    /**
-     * Test error response.
-     *
-     * @throws Exception
-     *
-     * @testWith ["", "NOW-40days", null]
-     *           ["", "NOW-30days", "NOW-10days"]
-     */
-    public function testErrorResponse(string $type, ?string $from, ?string $to): void
-    {
-        $this->expectException(Throwable::class);
+    $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
+    expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
 
-        /** @var DateTime|null $from */
-        $from = $from ? new DateTime($from) : $from;
-        /** @var DateTime|null $to */
-        $to = $to ? new DateTime($to) : $to;
-
-        $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
-        $this->assertInstanceOf(DataboxDownloadWs::class, $databoxDownloadWs);
-
-        $databoxDownloadWs->get($type, $from, $to);
-    }
-}
+    $databoxDownloadWs->get($type, $from, $to);
+})->with([
+    ['', 'NOW-40days', null],
+    ['', 'NOW-30days', 'NOW-10days'],
+])->throws(Throwable::class);

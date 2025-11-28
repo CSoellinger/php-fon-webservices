@@ -12,49 +12,25 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\Test\FonWebservices\Authentication;
-
 use CSoellinger\FonWebservices\Authentication\FonCredential;
-use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
 
-/**
- * Testing finanzonline credential class
- *
- * @internal
- *
- * @covers \CSoellinger\FonWebservices\Authentication\FonCredential
- */
-class FonCredentialTest extends TestCase
-{
-    /**
-     * @testWith ["11111111k111", "ATU11111111", "testuserid1", "aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE"]
-     */
-    public function testInitialize(string $tId, string $tUid, string $benId, string $benPin): void
-    {
-        $fonCredential = new FonCredential($tId, $tUid, $benId, $benPin);
+test('initialize with valid credentials', function (string $tId, string $tUid, string $benId, string $benPin): void {
+    $fonCredential = new FonCredential($tId, $tUid, $benId, $benPin);
 
-        $this->assertNotEmpty($fonCredential->teId);
-        $this->assertNotEmpty($fonCredential->teUid);
-        $this->assertNotEmpty($fonCredential->benId);
-        $this->assertNotEmpty($fonCredential->benPin);
-    }
+    expect($fonCredential->teId)->not->toBeEmpty();
+    expect($fonCredential->teUid)->not->toBeEmpty();
+    expect($fonCredential->benId)->not->toBeEmpty();
+    expect($fonCredential->benPin)->not->toBeEmpty();
+})->with([
+    ['11111111k111', 'ATU11111111', 'testuserid1', 'aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE'],
+]);
 
-    /**
-     * Test will throw an exception at every data set
-     *
-     * @throws InvalidArgumentException
-     *
-     * @testWith ["", "ATU11111111", "testuserid1", "aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE"]
-     *           ["X", "ATU11111111", "testuserid1", "aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE"]
-     *           ["11111111k111", "X", "testuserid1", "aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE"]
-     *           ["11111111k111", "ATU11111111", "X", "aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE"]
-     *           ["11111111k111", "ATU11111111", "testuserid1", "X"]
-     */
-    public function testInvalidArguments(string $tId, string $tUid, string $benId, string $benPin): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new FonCredential($tId, $tUid, $benId, $benPin);
-    }
-}
+test('invalid arguments throw exception', function (string $tId, string $tUid, string $benId, string $benPin): void {
+    new FonCredential($tId, $tUid, $benId, $benPin);
+})->with([
+    ['', 'ATU11111111', 'testuserid1', 'aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE'],
+    ['X', 'ATU11111111', 'testuserid1', 'aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE'],
+    ['11111111k111', 'X', 'testuserid1', 'aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE'],
+    ['11111111k111', 'ATU11111111', 'X', 'aaAAaaaAAAaaaaAaA7Aaa6aAaa6AaaaE'],
+    ['11111111k111', 'ATU11111111', 'testuserid1', 'X'],
+])->throws(InvalidArgumentException::class);
