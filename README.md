@@ -185,7 +185,7 @@ Now open your browser and go to http://localhost:8005
 ## Contributing
 
 Contributions are welcome! To contribute, please familiarize yourself with
-[CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 If you found a bug or have an idea feel free to post it here on github.
 

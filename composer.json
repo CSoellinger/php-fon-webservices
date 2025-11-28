@@ -75,10 +75,11 @@
     },
     "extra": {
         "captainhook": {
-            "force-install": true
+            "force-install": true,
+            "config": ".github/captainhook.json"
         },
         "ramsey/conventional-commits": {
-            "configFile": "conventional-commits.json"
+            "configFile": ".github/conventional-commits.json"
         },
         "ramsey/devtools": {
             "analyze:phploc": {
