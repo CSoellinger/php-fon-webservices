@@ -8,3 +8,4 @@
 /build/
 .php-cs-fixer.cache
 .docker/.env
+CLAUDE.md
