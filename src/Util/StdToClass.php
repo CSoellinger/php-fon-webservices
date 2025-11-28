@@ -14,15 +14,16 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Util;
 
+use function gettype;
+
 use Jasny\TypeCast;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+use phpDocumentor\Reflection\DocBlockFactory;
 use ReflectionClass;
 use ReflectionNamedType;
 use ReflectionObject;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
-use phpDocumentor\Reflection\DocBlockFactory;
 use stdClass;
 
-use function gettype;
 use function substr_count;
 
 /**

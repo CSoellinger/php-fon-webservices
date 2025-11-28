@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 namespace CSoellinger\Test\FonWebservices;
 
+use function count;
+
 use CSoellinger\FonWebservices\DataboxDownloadWs;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use DateTime;
 use Exception;
 use InvalidArgumentException;
 use Throwable;
-
-use function count;
 
 /**
  * Testing databox download webservice class.

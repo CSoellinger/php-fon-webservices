@@ -20,16 +20,19 @@ use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 use CSoellinger\FonWebservices\Response\VatIdCheck\LevelOneSuccessResponse;
 use CSoellinger\FonWebservices\Response\VatIdCheck\LevelTwoSuccessResponse;
-use SoapClient;
+
+use const DIRECTORY_SEPARATOR;
 
 use function file_exists;
 use function implode;
 use function in_array;
+
+use const PHP_EOL;
+
+use SoapClient;
+
 use function str_replace;
 use function trim;
-
-use const DIRECTORY_SEPARATOR;
-use const PHP_EOL;
 
 /**
  * Check a vat id by the finanzonline UidAbfrage webservice.
@@ -69,9 +72,9 @@ class VatIdCheckWs extends SoapClient
      * Local WSDL file.
      */
     public const WSDL_LOCAL = __DIR__ . DIRECTORY_SEPARATOR .
-                       '..' . DIRECTORY_SEPARATOR .
-                       'resources' . DIRECTORY_SEPARATOR .
-                       'wsdl' . DIRECTORY_SEPARATOR . 'uidAbfrageService.wsdl';
+        '..' . DIRECTORY_SEPARATOR .
+        'resources' . DIRECTORY_SEPARATOR .
+        'wsdl' . DIRECTORY_SEPARATOR . 'uidAbfrageService.wsdl';
 
     /**
      * Check at level one.
@@ -101,7 +104,7 @@ class VatIdCheckWs extends SoapClient
     /**
      * Constructor.
      *
-     * @param SessionWs           $sessionWs   Session web service
+     * @param SessionWs $sessionWs Session web service
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(SessionWs $sessionWs, array $soapOptions = [])
@@ -117,8 +120,8 @@ class VatIdCheckWs extends SoapClient
     /**
      * Check an uid (vat id).
      *
-     * @param string $uid   Vat id to check
-     * @param int    $level Choose level 1 or 2. With 2 you will also get some company name and address.
+     * @param string $uid Vat id to check
+     * @param int $level Choose level 1 or 2. With 2 you will also get some company name and address.
      *
      * @return VatIdCheckInvalid|VatIdCheckValidLevelOne|VatIdCheckValidLevelTwo
      */

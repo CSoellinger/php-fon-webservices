@@ -18,12 +18,14 @@ use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 use CSoellinger\FonWebservices\Response\Session\LoginSuccessResponse;
 use CSoellinger\FonWebservices\Response\Session\LogoutSuccessResponse;
+
+use const DIRECTORY_SEPARATOR;
+
 use Exception;
-use SoapClient;
 
 use function file_exists;
 
-use const DIRECTORY_SEPARATOR;
+use SoapClient;
 
 /**
  * FinanzOnline session webservice.
@@ -61,9 +63,9 @@ class SessionWs extends SoapClient
      * Local WSDL file
      */
     public const WSDL_LOCAL = __DIR__ . DIRECTORY_SEPARATOR .
-                       '..' . DIRECTORY_SEPARATOR .
-                       'resources' . DIRECTORY_SEPARATOR .
-                       'wsdl' . DIRECTORY_SEPARATOR . 'sessionService.wsdl';
+        '..' . DIRECTORY_SEPARATOR .
+        'resources' . DIRECTORY_SEPARATOR .
+        'wsdl' . DIRECTORY_SEPARATOR . 'sessionService.wsdl';
 
     /**
      * @var FonCredential Web service credential class
@@ -81,11 +83,11 @@ class SessionWs extends SoapClient
      * Initialize soap client with local wsdl if available.
      * Otherwise we will take the online wsdl.
      *
-     * @param FonCredential       $credential  credential class used to set some soap params for login/logout
+     * @param FonCredential $credential credential class used to set some soap params for login/logout
      * @param array<string,mixed> $soapOptions {@link https://www.php.net/manual/en/soapclient.soapclient.php} options
      *
      * @return void
-     *                                         array
+     *              array
      */
     public function __construct(FonCredential $credential, array $soapOptions = [])
     {

@@ -17,19 +17,25 @@ namespace CSoellinger\FonWebservices;
 use CSoellinger\FonWebservices\Model\QueryDataTransmission;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
-use Exception;
-use InvalidArgumentException;
-use SoapClient;
 
 use function date;
+
+use const DIRECTORY_SEPARATOR;
+
+use Exception;
+
 use function file_exists;
 use function implode;
 use function in_array;
+
+use InvalidArgumentException;
+
 use function is_numeric;
 use function is_string;
-use function strtoupper;
 
-use const DIRECTORY_SEPARATOR;
+use SoapClient;
+
+use function strtoupper;
 
 /**
  * FinanzOnline query data transmission webservice.
@@ -61,9 +67,9 @@ class QueryDataTransmissionWs extends SoapClient
      * Local WSDL file.
      */
     public const WSDL_LOCAL = __DIR__ . DIRECTORY_SEPARATOR .
-                       '..' . DIRECTORY_SEPARATOR .
-                       'resources' . DIRECTORY_SEPARATOR .
-                       'wsdl' . DIRECTORY_SEPARATOR . 'abfrageDatenuebermittlungen.wsdl';
+        '..' . DIRECTORY_SEPARATOR .
+        'resources' . DIRECTORY_SEPARATOR .
+        'wsdl' . DIRECTORY_SEPARATOR . 'abfrageDatenuebermittlungen.wsdl';
 
     public const TYPES = ['LOHNZETTEL', 'SONDERAUSGABEN', 'LEITUNGSRECHTE'];
 
@@ -75,7 +81,7 @@ class QueryDataTransmissionWs extends SoapClient
     /**
      * Constructor.
      *
-     * @param SessionWs           $sessionWs   Session webservice
+     * @param SessionWs $sessionWs Session webservice
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(SessionWs $sessionWs, array $soapOptions = [])
@@ -91,8 +97,8 @@ class QueryDataTransmissionWs extends SoapClient
     /**
      * tbd.
      *
-     * @param string      $fastNr tbd
-     * @param string      $period tbd
+     * @param string $fastNr tbd
+     * @param string $period tbd
      * @param string|null $type tbd
      */
     public function query(string $fastNr, string $period = '', ?string $type = null): QueryDataTransmission

@@ -14,11 +14,13 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
-use stdClass;
-
 use function array_map;
+
+use CSoellinger\FonWebservices\Util\StdToClass;
+
 use function property_exists;
+
+use stdClass;
 
 class QueryDataTransmissionExtraExpenses
 {

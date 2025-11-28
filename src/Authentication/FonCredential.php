@@ -50,9 +50,9 @@ class FonCredential
     /**
      * Constructor.
      *
-     * @param string $fonTeId   Fon participator identification
-     * @param string $fonTeUid  Fon participator vat id
-     * @param string $fonBenId  Fon user identification of the web service user
+     * @param string $fonTeId Fon participator identification
+     * @param string $fonTeUid Fon participator vat id
+     * @param string $fonBenId Fon user identification of the web service user
      * @param string $fonBenPin Fon user pin of the web service user
      *
      * @throws InvalidArgumentException If required params are not valid

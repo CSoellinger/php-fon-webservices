@@ -15,13 +15,15 @@ declare(strict_types=1);
 namespace CSoellinger\Test\FonWebservices;
 
 use CSoellinger\FonWebservices\FileUploadWs;
+
+use const DIRECTORY_SEPARATOR;
+
 use Exception;
-use InvalidArgumentException;
-use Throwable;
 
 use function implode;
 
-use const DIRECTORY_SEPARATOR;
+use InvalidArgumentException;
+use Throwable;
 
 /**
  * Testing file upload webservice class.

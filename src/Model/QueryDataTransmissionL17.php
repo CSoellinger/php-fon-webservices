@@ -14,9 +14,9 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use stdClass;
-
 use function property_exists;
+
+use stdClass;
 
 class QueryDataTransmissionL17
 {

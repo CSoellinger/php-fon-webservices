@@ -15,17 +15,20 @@ declare(strict_types=1);
 namespace CSoellinger\FonWebservices;
 
 use CSoellinger\FonWebservices\Response\ErrorResponse;
+
+use const DIRECTORY_SEPARATOR;
+
 use Exception;
-use InvalidArgumentException;
-use SoapClient;
 
 use function file_exists;
 use function file_get_contents;
 use function implode;
 use function in_array;
-use function strtoupper;
 
-use const DIRECTORY_SEPARATOR;
+use InvalidArgumentException;
+use SoapClient;
+
+use function strtoupper;
 
 /**
  * FinanzOnline file upload webservice.
@@ -55,9 +58,9 @@ class FileUploadWs extends SoapClient
      * Local WSDL file.
      */
     public const WSDL_LOCAL = __DIR__ . DIRECTORY_SEPARATOR .
-                       '..' . DIRECTORY_SEPARATOR .
-                       'resources' . DIRECTORY_SEPARATOR .
-                       'wsdl' . DIRECTORY_SEPARATOR . 'fileuploadService.wsdl';
+        '..' . DIRECTORY_SEPARATOR .
+        'resources' . DIRECTORY_SEPARATOR .
+        'wsdl' . DIRECTORY_SEPARATOR . 'fileuploadService.wsdl';
 
     /**
      * All supported fileupload types.
@@ -76,7 +79,7 @@ class FileUploadWs extends SoapClient
     /**
      * Constructor.
      *
-     * @param SessionWs           $sessionWs   Session webservice
+     * @param SessionWs $sessionWs Session webservice
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(SessionWs $sessionWs, array $soapOptions = [])
@@ -92,11 +95,11 @@ class FileUploadWs extends SoapClient
     /**
      * Upload bank data to the FinanzOnline webservice.
      *
-     * @param string $xml    XML content or path to file
-     * @param string $type   Choose BET, BIL, DUE, EUST, FPH, FVAN, IVF, JAHR_ERKL, JAB, KA1, KOM, KOMU, LFH, L1,
-     *                       NOVA, RZ, SB, SBS, SBZ, STAB, TVW, UEB, UEB_SA, U13, U30, VAT, VATAB, VPDGD, ZEAN, 107,
-     *                       107AB, 108, 108AB, SOER, DIGI
-     * @param bool   $isTest True if you want to send the data only for test purposes
+     * @param string $xml XML content or path to file
+     * @param string $type Choose BET, BIL, DUE, EUST, FPH, FVAN, IVF, JAHR_ERKL, JAB, KA1, KOM, KOMU, LFH, L1,
+     *                     NOVA, RZ, SB, SBS, SBZ, STAB, TVW, UEB, UEB_SA, U13, U30, VAT, VATAB, VPDGD, ZEAN, 107,
+     *                     107AB, 108, 108AB, SOER, DIGI
+     * @param bool $isTest True if you want to send the data only for test purposes
      *
      * @throws Exception
      */

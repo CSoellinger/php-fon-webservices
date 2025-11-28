@@ -18,9 +18,10 @@ use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\SessionWs;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionProperty;
-use Throwable;
 
 use function rename;
+
+use Throwable;
 
 /**
  * Testing session webservice class.

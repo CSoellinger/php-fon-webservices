@@ -15,17 +15,20 @@ declare(strict_types=1);
 namespace CSoellinger\FonWebservices;
 
 use CSoellinger\FonWebservices\Response\ErrorResponse;
+
+use const DIRECTORY_SEPARATOR;
+
 use Exception;
-use InvalidArgumentException;
-use SoapClient;
 
 use function file_exists;
 use function file_get_contents;
 use function implode;
 use function in_array;
-use function strtoupper;
 
-use const DIRECTORY_SEPARATOR;
+use InvalidArgumentException;
+use SoapClient;
+
+use function strtoupper;
 
 /**
  * FinanzOnline bank data transmission webservice.
@@ -55,9 +58,9 @@ class BankDataTransmissionWs extends SoapClient
      * Local WSDL file.
      */
     public const WSDL_LOCAL = __DIR__ . DIRECTORY_SEPARATOR .
-                       '..' . DIRECTORY_SEPARATOR .
-                       'resources' . DIRECTORY_SEPARATOR .
-                       'wsdl' . DIRECTORY_SEPARATOR . 'bankdatenUebermittlungService.wsdl';
+        '..' . DIRECTORY_SEPARATOR .
+        'resources' . DIRECTORY_SEPARATOR .
+        'wsdl' . DIRECTORY_SEPARATOR . 'bankdatenUebermittlungService.wsdl';
 
     /**
      * All supported bank data types.
@@ -72,7 +75,7 @@ class BankDataTransmissionWs extends SoapClient
     /**
      * Constructor.
      *
-     * @param SessionWs           $sessionWs   Session webservice
+     * @param SessionWs $sessionWs Session webservice
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(SessionWs $sessionWs, array $soapOptions = [])
@@ -88,9 +91,9 @@ class BankDataTransmissionWs extends SoapClient
     /**
      * Upload bank data to the FinanzOnline webservice.
      *
-     * @param string $xml    XML content or path to file
-     * @param string $type   Choose KTOREG, KTOZUF, KTOABF, GMSG
-     * @param bool   $isTest True if you want to send the data only for test purposes
+     * @param string $xml XML content or path to file
+     * @param string $type Choose KTOREG, KTOZUF, KTOABF, GMSG
+     * @param bool $isTest True if you want to send the data only for test purposes
      *
      * @throws Exception
      */

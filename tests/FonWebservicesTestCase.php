@@ -17,14 +17,15 @@ namespace CSoellinger\Test\FonWebservices;
 use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\SessionWs;
 use Exception;
+
+use function getenv;
+
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use RuntimeException;
 use SoapClient;
 use stdClass;
-
-use function getenv;
 
 /**
  * Test case for tests which need a session id.

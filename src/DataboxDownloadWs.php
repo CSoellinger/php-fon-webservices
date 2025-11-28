@@ -14,27 +14,33 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices;
 
+use function array_map;
+use function array_merge;
+
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use CSoellinger\FonWebservices\Response\DataboxDownload\EntryResponse;
 use CSoellinger\FonWebservices\Response\DataboxDownload\ListResponse;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 use DateInterval;
 use DateTime;
-use Exception;
-use InvalidArgumentException;
-use SoapClient;
-use stdClass;
 
-use function array_map;
-use function array_merge;
+use const DIRECTORY_SEPARATOR;
+
+use Exception;
+
 use function file_exists;
 use function implode;
 use function in_array;
+
+use InvalidArgumentException;
+
 use function property_exists;
+
+use SoapClient;
+use stdClass;
+
 use function strlen;
 use function strtoupper;
-
-use const DIRECTORY_SEPARATOR;
 
 /**
  * FinanzOnline databox download webservice.
@@ -65,9 +71,9 @@ class DataboxDownloadWs extends SoapClient
      * Local WSDL file.
      */
     public const WSDL_LOCAL = __DIR__ . DIRECTORY_SEPARATOR .
-                       '..' . DIRECTORY_SEPARATOR .
-                       'resources' . DIRECTORY_SEPARATOR .
-                       'wsdl' . DIRECTORY_SEPARATOR . 'databoxService.wsdl';
+        '..' . DIRECTORY_SEPARATOR .
+        'resources' . DIRECTORY_SEPARATOR .
+        'wsdl' . DIRECTORY_SEPARATOR . 'databoxService.wsdl';
 
     /**
      * All supported databox types.
@@ -82,7 +88,7 @@ class DataboxDownloadWs extends SoapClient
     /**
      * Constructor.
      *
-     * @param SessionWs           $sessionWs   Session webservice
+     * @param SessionWs $sessionWs Session webservice
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(SessionWs $sessionWs, array $soapOptions = [])
@@ -98,8 +104,8 @@ class DataboxDownloadWs extends SoapClient
     /**
      * Get a list for your databox.
      *
-     * @param string        $type Filter for type. If empty all types are returned. Otherwise choose one of this:
-     *                            AE, AF, AK, AZ, B, DL, E, EU, FB, GM, I, KG, M, P, QL, SS
+     * @param string $type Filter for type. If empty all types are returned. Otherwise choose one of this:
+     *                     AE, AF, AK, AZ, B, DL, E, EU, FB, GM, I, KG, M, P, QL, SS
      * @param DateTime|null $from filter from
      * @param DateTime|null $to filter to
      *

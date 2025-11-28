@@ -15,22 +15,27 @@ declare(strict_types=1);
 namespace CSoellinger\Test\FonWebservices;
 
 use CSoellinger\FonWebservices\BankDataTransmissionWs;
+
+use const DIRECTORY_SEPARATOR;
+
 use Exception;
-use InvalidArgumentException;
-use Throwable;
 
 use function file_get_contents;
 use function file_put_contents;
 use function implode;
+
+use InvalidArgumentException;
+
 use function random_int;
 use function str_repeat;
 use function str_replace;
 use function str_shuffle;
 use function strlen;
 use function substr;
-use function unlink;
 
-use const DIRECTORY_SEPARATOR;
+use Throwable;
+
+use function unlink;
 
 /**
  * Testing bank data transmission webservice class.
