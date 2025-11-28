@@ -1,2 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.9.5@0cfe565d0afbcd31eadcc281b9017b5692911661"/>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="src/BankDataTransmissionWs.php">
+    <RedundantCast>
+      <code><![CDATA[(string) self::WSDL_LOCAL]]></code>
+    </RedundantCast>
+  </file>
+  <file src="src/DataboxDownloadWs.php">
+    <RedundantCast>
+      <code><![CDATA[(string) self::WSDL_LOCAL]]></code>
+    </RedundantCast>
+  </file>
+  <file src="src/FileUploadWs.php">
+    <RedundantCast>
+      <code><![CDATA[(string) self::WSDL_LOCAL]]></code>
+    </RedundantCast>
+  </file>
+  <file src="src/Model/QueryDataTransmission.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $result->l16]]></code>
+      <code><![CDATA[(object) $result->l17]]></code>
+      <code><![CDATA[(object) $result->meldung]]></code>
+      <code><![CDATA[(object) $result->mitteilung109a]]></code>
+      <code><![CDATA[(object) $val]]></code>
+      <code><![CDATA[(object) $val]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Model/QueryDataTransmissionExtraExpenses.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $val]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Model/QueryDataTransmissionL16.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $response->grunddatenArbeitgeber]]></code>
+      <code><![CDATA[(object) $response->grunddatenArbeitnehmer]]></code>
+      <code><![CDATA[(object) $response->grunddatenLz]]></code>
+      <code><![CDATA[(object) $response->lzDaten]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Model/QueryDataTransmissionL16LzData.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $response->faboL16Kind]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Model/QueryDataTransmissionL17.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $response->grunddatenArbeitgeber]]></code>
+      <code><![CDATA[(object) $response->grunddatenArbeitnehmer]]></code>
+      <code><![CDATA[(object) $response->grunddatenLz]]></code>
+      <code><![CDATA[(object) $response->lzDaten]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Model/QueryDataTransmissionMsg109a.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $response->grunddatenArbeitgeber]]></code>
+      <code><![CDATA[(object) $response->grunddatenAuftragnehmer]]></code>
+      <code><![CDATA[(object) $response->grunddatenLz]]></code>
+      <code><![CDATA[(object) $response->lzDaten]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Model/QueryDataTransmissionReport.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[(object) $response->grunddatenArbeitgeber]]></code>
+      <code><![CDATA[(object) $response->grunddatenArbeitnehmer]]></code>
+      <code><![CDATA[(object) $response->grunddatenLz]]></code>
+      <code><![CDATA[(object) $response->lzDaten]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/QueryDataTransmissionWs.php">
+    <RedundantCast>
+      <code><![CDATA[(string) self::WSDL_LOCAL]]></code>
+    </RedundantCast>
+  </file>
+  <file src="src/SessionWs.php">
+    <RedundantCast>
+      <code><![CDATA[(string) self::WSDL_LOCAL]]></code>
+    </RedundantCast>
+  </file>
+  <file src="src/Util/StdToClass.php">
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$doc]]></code>
+      <code><![CDATA[$varType]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/VatIdCheckWs.php">
+    <RedundantCast>
+      <code><![CDATA[(string) self::WSDL_LOCAL]]></code>
+    </RedundantCast>
+  </file>
+</files>
