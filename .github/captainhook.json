@@ -2,24 +2,11 @@
     "config": {
         "ansi-colors": true,
         "fail-on-first-error": false,
-        "plugins": [],
         "verbosity": "normal"
     },
     "commit-msg": {
-        "enabled": true,
-        "actions": [
-            {
-                "action": "\\Ramsey\\CaptainHook\\ValidateConventionalCommit"
-            }
-        ]
-    },
-    "pre-push": {
-        "enabled": true,
-        "actions": [
-            {
-                "action": "composer test"
-            }
-        ]
+        "enabled": false,
+        "actions": []
     },
     "pre-commit": {
         "enabled": true,
@@ -38,20 +25,7 @@
                 ]
             },
             {
-                "action": "composer normalize --dry-run",
-                "conditions": [
-                    {
-                        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\Any",
-                        "args": [
-                            [
-                                "composer.json"
-                            ]
-                        ]
-                    }
-                ]
-            },
-            {
-                "action": "composer dev:lint:syntax -- {$STAGED_FILES|of-type:php}",
+                "action": "composer lint -- {$STAGED_FILES|of-type:php}",
                 "conditions": [
                     {
                         "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
@@ -62,7 +36,7 @@
                 ]
             },
             {
-                "action": "composer dev:lint:style -- {$STAGED_FILES|of-type:php}",
+                "action": "composer format:check -- {$STAGED_FILES|of-type:php}",
                 "conditions": [
                     {
                         "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
@@ -75,10 +49,14 @@
         ]
     },
     "prepare-commit-msg": {
+        "enabled": false,
+        "actions": []
+    },
+    "pre-push": {
         "enabled": true,
         "actions": [
             {
-                "action": "\\Ramsey\\CaptainHook\\PrepareConventionalCommit"
+                "action": "composer check && composer test"
             }
         ]
     },

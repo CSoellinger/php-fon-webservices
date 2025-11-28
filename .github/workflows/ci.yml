@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['*']
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: soap
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Check syntax
+        run: composer lint
+
+      - name: Check code formatting
+        run: composer format:check
+
+      - name: Run PHPStan
+        run: composer analyse:phpstan
+
+      - name: Run Psalm
+        run: composer analyse:psalm
+
+      - name: Security analysis
+        run: vendor/bin/psalm --taint-analysis --report=build/logs/psalm.sarif
+
+      - name: Upload security results
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: build/logs/psalm.sarif
+
+  test:
+    name: Test PHP ${{ matrix.php }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: quality
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        dependencies: [lowest, highest]
+        include:
+          - php: '8.2'
+            os: ubuntu-latest
+            dependencies: highest
+            coverage: pcov
+
+    steps:
+      - name: Configure Git (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          git config --system core.autocrlf false
+          git config --system core.eol lf
+
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: soap
+          coverage: ${{ matrix.coverage || 'none' }}
+          tools: composer:v2
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+
+      - name: Run tests
+        if: matrix.coverage != 'pcov'
+        run: composer test
+
+      - name: Run tests with coverage
+        if: matrix.coverage == 'pcov'
+        run: composer test:coverage
+
+      - name: Upload coverage to GitHub
+        if: matrix.coverage == 'pcov'
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./build/coverage/clover.xml
+          flags: php-${{ matrix.php }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
