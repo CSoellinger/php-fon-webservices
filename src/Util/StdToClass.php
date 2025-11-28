@@ -88,7 +88,7 @@ trait StdToClass
                         continue;
                     }
 
-                    if ($varType === $valueType || $valueType === '') {
+                    if ($varType === $valueType) {
                         $new->{$name} = $value;
                     }
                 }
