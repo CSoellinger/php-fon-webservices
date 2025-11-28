@@ -178,6 +178,58 @@ php -S localhost:8005 --docroot ./public
 
 Now open your browser and go to http://localhost:8005
 
+## Development
+
+### Requirements
+
+- PHP 7.4+ with SOAP extension
+- Composer 2.x
+- Optional: Podman & Podman Compose for multi-version testing
+
+### Setup
+
+```bash
+composer install
+vendor/bin/captainhook install -f
+```
+
+### Quality Tools
+
+This project uses modern PHP tooling for code quality:
+
+```bash
+composer lint              # Check PHP syntax
+composer format            # Auto-fix code style with PHP-CS-Fixer
+composer format:check      # Check code style (for CI)
+composer analyse           # Run PHPStan + Psalm static analysis
+composer analyse:phpstan   # Run PHPStan only
+composer analyse:psalm     # Run Psalm only
+composer test              # Run Pest tests
+composer test:coverage     # Run tests with coverage report
+composer rector            # Check for refactoring opportunities
+composer rector:fix        # Apply automated refactorings
+composer check             # Run all quality checks (lint + format + analyse)
+```
+
+### Multi-Version Testing with Podman
+
+Test across all supported PHP versions using Podman Compose:
+
+```bash
+# Build all containers
+podman-compose build
+
+# Test a specific PHP version
+podman-compose run --rm php74
+podman-compose run --rm php80
+podman-compose run --rm php82
+
+# Test all versions at once
+bash bin/test-all-versions.sh
+```
+
+Supported PHP versions: 7.4, 8.0, 8.1, 8.2, 8.3, 8.4
+
 ## Documentation
 
 [Markdown](docs/markdown/README.md)

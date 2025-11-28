@@ -1,5 +1,64 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+**Major Modernization Update** - This release modernizes the development tooling while maintaining backward compatibility for library users.
+
+#### Development Tooling
+- **Replaced** ramsey/devtools with standalone modern tools
+- **Migrated** from PHPUnit to Pest for testing
+- **Replaced** PHP_CodeSniffer with PHP-CS-Fixer for code formatting
+- **Added** Rector for automated refactoring
+- **Updated** PHPStan from ^1.4 to ^1.12
+- **Updated** Psalm from ^4.22 to ^5.26
+
+#### Testing Infrastructure
+- **Added** Podman Compose setup for multi-version testing (PHP 7.4-8.4)
+- **Added** `bin/test-all-versions.sh` helper script
+- **Added** Pest testing framework with expressive syntax
+
+#### CI/CD
+- **Modernized** GitHub Actions workflows
+  - Consolidated into single `ci.yml` workflow
+  - Added parallel quality checks
+  - Support for PHP 8.2, 8.3, 8.4
+  - Removed Codecov integration (using GitHub native coverage)
+  - Updated actions: checkout@v4, codeql-action@v3
+- **Removed** conventional commits enforcement
+- **Simplified** CaptainHook git hooks
+
+#### Project Structure
+- **Moved** CODE_OF_CONDUCT.md, CONTRIBUTING.md, captainhook.json to `.github/`
+- **Removed** legacy tools: phploc, DOG documentation generator, codecov
+- **Added** `.php-cs-fixer.dist.php` configuration
+- **Added** `rector.php` configuration
+- **Added** `compose.yaml` for Podman Compose
+- **Added** UPGRADE.md migration guide for contributors
+- **Added** docs/LARAVEL_PACKAGE_PLAN.md for future Laravel package
+
+#### Composer Scripts
+New unified commands:
+- `composer lint` - Check PHP syntax
+- `composer format` - Auto-fix code style
+- `composer format:check` - Check code style (CI)
+- `composer analyse` - Run PHPStan + Psalm
+- `composer test` - Run Pest tests
+- `composer rector` - Check for refactorings
+- `composer check` - Run all quality checks
+
+Old `dev:*` commands have been removed.
+
+#### Breaking Changes for Contributors
+- PHPUnit tests migrated to Pest (contributors need to update)
+- Composer script names changed (see UPGRADE.md)
+- Conventional commits no longer enforced
+- Git hooks need reinstalling: `vendor/bin/captainhook install -f`
+
+#### No Breaking Changes for Users
+The public API remains unchanged. This modernization only affects development workflows.
+
 ## [v0.2.0](https://github.com/CSoellinger/php-fon-webservices/tree/v0.2.0) (2022-03-08)
 
 [Full Changelog](https://github.com/CSoellinger/php-fon-webservices/compare/v0.1.0...v0.2.0)
