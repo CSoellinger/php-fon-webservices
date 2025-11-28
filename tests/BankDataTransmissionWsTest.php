@@ -13,19 +13,7 @@
 declare(strict_types=1);
 
 use CSoellinger\FonWebservices\BankDataTransmissionWs;
-
-use const DIRECTORY_SEPARATOR;
-
-use function file_get_contents;
-use function file_put_contents;
-use function implode;
-use function random_int;
-use function str_repeat;
-use function str_replace;
-use function str_shuffle;
-use function strlen;
-use function substr;
-use function unlink;
+use Exception;
 
 test('upload simple test xml', function (): void {
     $bankDataTransmissionWs = new BankDataTransmissionWs($this->sessionWs);
@@ -64,7 +52,7 @@ test('upload invalid xml', function (): void {
 
     $bankDataTransmissionWs->upload((string) $xmlKontoReg, 'KTOREG', true);
     $bankDataTransmissionWs->upload((string) $xmlKontoReg, 'KTOREG', true);
-})->throws(Throwable::class);
+})->throws(Exception::class);
 
 test('upload invalid type', function (): void {
     $bankDataTransmissionWs = new BankDataTransmissionWs($this->sessionWs);

@@ -17,9 +17,6 @@ use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
 use CSoellinger\FonWebservices\VatIdCheckWs;
 
-use function print_r;
-use function usleep;
-
 test('check valid vat at level one', function (string $uid): void {
     $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
     expect($vatIdCheckWebservice)->toBeInstanceOf(VatIdCheckWs::class);

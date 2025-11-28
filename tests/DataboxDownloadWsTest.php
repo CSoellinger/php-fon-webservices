@@ -15,8 +15,7 @@ declare(strict_types=1);
 use CSoellinger\FonWebservices\DataboxDownloadWs;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use DateTime;
-
-use function count;
+use Exception;
 
 test('databox download', function (string $type, ?string $from, ?string $to): void {
     $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
@@ -77,4 +76,4 @@ test('error response', function (string $type, ?string $from, ?string $to): void
 })->with([
     ['', 'NOW-40days', null],
     ['', 'NOW-30days', 'NOW-10days'],
-])->throws(Throwable::class);
+])->throws(Exception::class);
