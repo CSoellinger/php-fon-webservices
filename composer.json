@@ -36,11 +36,13 @@
         "jasny/typecast": "dev-master"
     },
     "require-dev": {
-        "csoellinger/dog-html-printer": "^0.3",
-        "klitsche/dog": "^0.4",
-        "phpstan/phpstan": "^1.4",
-        "ramsey/devtools": "^1.7",
-        "ramsey/devtools-lib": "1.3",
+        "captainhook/captainhook": "^5.23",
+        "captainhook/plugin-composer": "^5.3",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "pestphp/pest": "^2.35",
+        "php-parallel-lint/php-parallel-lint": "^1.4",
+        "phpstan/phpstan": "^1.12",
+        "rector/rector": "^1.2",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "symfony/console": "^5.4",
         "symfony/dotenv": "^5.4",
@@ -48,7 +50,7 @@
         "symfony/finder": "^5.4",
         "symfony/process": "^5.4",
         "symfony/var-dumper": "^5.4",
-        "vimeo/psalm": "^4.22"
+        "vimeo/psalm": "^5.26"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -65,11 +67,9 @@
     "config": {
         "allow-plugins": {
             "captainhook/plugin-composer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "ergebnis/composer-normalize": true,
-            "phpstan/extension-installer": true,
-            "ramsey/composer-repl": true,
-            "ramsey/devtools": true
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },
@@ -77,22 +77,27 @@
         "captainhook": {
             "force-install": true,
             "config": ".github/captainhook.json"
-        },
-        "ramsey/conventional-commits": {
-            "configFile": ".github/conventional-commits.json"
-        },
-        "ramsey/devtools": {
-            "analyze:phploc": {
-                "script": "@dev:analyze:phploc"
-            },
-            "command-prefix": "dev",
-            "report:phploc": {
-                "script": "@dev:report:phploc"
-            }
         }
     },
     "scripts": {
-        "dev:analyze:phploc": "php ./bin/phploc.phar --count-tests src tests",
-        "dev:report:phploc": "php ./bin/phploc.phar --count-tests --log-json phploc.json src tests"
+        "lint": "parallel-lint src tests",
+        "format": "php-cs-fixer fix --diff --verbose",
+        "format:check": "php-cs-fixer fix --dry-run --diff --verbose",
+        "analyse": [
+            "@analyse:phpstan",
+            "@analyse:psalm"
+        ],
+        "analyse:phpstan": "phpstan analyse --memory-limit=512M",
+        "analyse:psalm": "psalm --show-info=true",
+        "test": "pest",
+        "test:coverage": "pest --coverage",
+        "test:coverage:html": "pest --coverage-html build/coverage",
+        "rector": "rector process --dry-run",
+        "rector:fix": "rector process",
+        "check": [
+            "@lint",
+            "@format:check",
+            "@analyse"
+        ]
     }
 }
