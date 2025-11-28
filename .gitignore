@@ -5,3 +5,6 @@
 /phpunit.xml
 /vendor/
 .env
+/build/
+.php-cs-fixer.cache
+.docker/.env

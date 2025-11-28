@@ -1,0 +1,48 @@
+services:
+  php74:
+    build:
+      context: .
+      dockerfile: .docker/php74/Dockerfile
+    volumes:
+      - .:/app
+    command: composer test
+
+  php80:
+    build:
+      context: .
+      dockerfile: .docker/php80/Dockerfile
+    volumes:
+      - .:/app
+    command: composer test
+
+  php81:
+    build:
+      context: .
+      dockerfile: .docker/php81/Dockerfile
+    volumes:
+      - .:/app
+    command: composer test
+
+  php82:
+    build:
+      context: .
+      dockerfile: .docker/php82/Dockerfile
+    volumes:
+      - .:/app
+    command: composer test
+
+  php83:
+    build:
+      context: .
+      dockerfile: .docker/php83/Dockerfile
+    volumes:
+      - .:/app
+    command: composer test
+
+  php84:
+    build:
+      context: .
+      dockerfile: .docker/php84/Dockerfile
+    volumes:
+      - .:/app
+    command: composer test
