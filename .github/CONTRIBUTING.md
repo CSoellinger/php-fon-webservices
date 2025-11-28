@@ -72,9 +72,9 @@ When you do begin working on your feature, here are some guidelines to consider:
     We will use this description to update the CHANGELOG. If there is no
     description, or it does not adequately describe your feature, we may ask you
     to update the description.
--   csoellinger/php-fon-webservices follows a superset of **[PSR-12 coding standard][psr-12]**.
-    Please ensure your code does, too. _Hint: run `composer dev:lint` to check._
--   Please **write tests** for any new features you add.
+-   csoellinger/php-fon-webservices follows **[PSR-12 coding standard][psr-12]**.
+    Please ensure your code does, too. _Hint: run `composer format:check` to check._
+-   Please **write tests** for any new features you add using Pest.
 -   Please **ensure that tests pass** before submitting your pull request.
     csoellinger/php-fon-webservices automatically runs tests for pull requests. However,
     running the tests locally will help save time. _Hint: run `composer test`._
@@ -82,11 +82,8 @@ When you do begin working on your feature, here are some guidelines to consider:
     -   For more information, see "[Understanding the GitHub flow][gh-flow]."
 -   **Submit one feature per pull request.** If you have multiple features you
     wish to submit, please break them into separate pull requests.
--   **Write good commit messages.** This project follows the
-    [Conventional Commits][] specification and uses Git hooks to ensure all
-    commits follow this standard. Running `composer install` will set up the Git
-    hooks, so when you run `git commit`, you'll be prompted to create a commit
-    using the Conventional Commits rules.
+-   **Write clear commit messages.** While we don't enforce a specific format,
+    clear and descriptive commit messages help reviewers understand your changes.
 
 ## Developing
 
@@ -104,48 +101,71 @@ Now, you are ready to develop!
 
 ### Tooling
 
-This project uses [CaptainHook](https://github.com/CaptainHookPhp/captainhook)
-to validate all staged changes prior to commit.
+This project uses modern PHP development tools:
 
-### Commands
+- **[Pest](https://pestphp.com/)** - Modern testing framework
+- **[PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)** - Code formatting
+- **[PHPStan](https://github.com/phpstan/phpstan)** - Static analysis (max level)
+- **[Psalm](https://github.com/vimeo/psalm)** - Static analysis (level 1) + security taint analysis
+- **[Rector](https://github.com/rectorphp/rector)** - Automated refactoring
+- **[CaptainHook](https://github.com/CaptainHookPhp/captainhook)** - Git hooks
 
-To see all the commands available for contributing to this project:
+### Available Commands
 
+Quality checks:
 ```bash
-composer list dev
+composer lint              # Check PHP syntax
+composer format            # Auto-fix code style
+composer format:check      # Check code style (for CI)
+composer analyse           # Run both PHPStan and Psalm
+composer analyse:phpstan   # Run PHPStan only
+composer analyse:psalm     # Run Psalm only
+composer check             # Run all quality checks
+```
+
+Testing:
+```bash
+composer test              # Run Pest tests
+composer test:coverage     # Run tests with coverage report
+```
+
+Refactoring:
+```bash
+composer rector            # Preview refactoring suggestions
+composer rector:fix        # Apply automated refactorings
 ```
 
 ### Coding Standards
 
-This project follows a superset of [PSR-12](https://www.php-fig.org/psr/psr-12/)
-coding standards, enforced by [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
+This project follows [PSR-12](https://www.php-fig.org/psr/psr-12/)
+coding standards, enforced by [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
 
 CaptainHook will run coding standards checks before committing.
 
-You may lint the codebase manually using the following commands:
+Format your code:
 
 ```bash
-# Lint
-composer dev:lint
+# Auto-fix code style
+composer format
 
-# Attempt to auto-fix coding standards issues
-composer dev:lint:fix
+# Check without fixing (used in CI)
+composer format:check
 ```
 
 ### Static Analysis
 
-This project uses a combination of [PHPStan](https://github.com/phpstan/phpstan)
-and [Psalm](https://github.com/vimeo/psalm) to provide static analysis of PHP
-code.
+This project uses both [PHPStan](https://github.com/phpstan/phpstan) (max level)
+and [Psalm](https://github.com/vimeo/psalm) (level 1) to provide comprehensive static analysis.
 
-CaptainHook will run static analysis checks before committing.
-
-You may run static analysis manually across the whole codebase with the
-following command:
+Run static analysis:
 
 ```bash
-# Static analysis
-composer dev:analyze
+# Run both tools
+composer analyse
+
+# Run individually
+composer analyse:phpstan
+composer analyse:psalm
 ```
 
 ### Project Structure
@@ -155,23 +175,58 @@ base folder structure and layout.
 
 ### Running Tests
 
-The following must pass before we will accept a pull request. If this does not
-pass, it will result in a complete build failure. Before you can run this, be
-sure to `composer install`.
+This project uses [Pest](https://pestphp.com/) for testing. All tests must pass
+before we will accept a pull request. Be sure to run `composer install` first.
 
-To run all the tests and coding standards checks, execute the following from the
-command line, while in the project root directory:
+Run tests:
 
-```
+```bash
+# Run all tests
 composer test
+
+# Run with coverage report
+composer test:coverage
+
+# Run all quality checks + tests
+composer check && composer test
 ```
 
-CaptainHook will automatically run all tests before pushing to the remote
-repository.
+CaptainHook will automatically run all quality checks and tests before pushing to
+the remote repository.
+
+### Multi-Version Testing
+
+Test across all supported PHP versions using Podman Compose:
+
+```bash
+# Test specific PHP version
+podman-compose run --rm php74
+podman-compose run --rm php82
+
+# Test all versions (7.4, 8.0, 8.1, 8.2, 8.3, 8.4)
+bash bin/test-all-versions.sh
+```
+
+### Writing Tests
+
+We use Pest's expressive syntax. See the [Pest documentation](https://pestphp.com/docs) for details.
+
+Example test:
+
+```php
+test('session can login and logout', function () {
+    $session = new SessionWs($this->fonCredential);
+
+    $session->login();
+    expect($session->getID())->not->toBeEmpty();
+
+    $session->logout();
+    expect($session->isLoggedIn())->toBeFalse();
+});
+```
 
 [github]: https://github.com/csoellinger/php-fon-webservices
 [issues]: https://github.com/csoellinger/php-fon-webservices/issues
 [pull requests]: https://github.com/csoellinger/php-fon-webservices/pulls
 [psr-12]: https://www.php-fig.org/psr/psr-12/
 [gh-flow]: https://guides.github.com/introduction/flow/
-[conventional commits]: https://www.conventionalcommits.org/
