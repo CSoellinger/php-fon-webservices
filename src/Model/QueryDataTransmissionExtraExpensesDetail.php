@@ -14,12 +14,8 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
-
 class QueryDataTransmissionExtraExpensesDetail
 {
-    use StdToClass;
-
     /** @var string ... */
     public string $organisation = '';
 

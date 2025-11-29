@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
+use CSoellinger\FonWebservices\Util\Serializer;
+
 use function property_exists;
 
 use stdClass;
@@ -38,17 +40,17 @@ class QueryDataTransmissionReport
     {
         $new = new self();
 
-        $new->grunddatenLz = QueryDataTransmissionReportBasicDataLz::stdToClass((object) $response->grunddatenLz);
+        $new->grunddatenLz = Serializer::deserialize((object) $response->grunddatenLz, QueryDataTransmissionReportBasicDataLz::class);
         $new->grunddatenArbeitnehmer =
-            QueryDataTransmissionReportBasicDataAn::stdToClass((object) $response->grunddatenArbeitnehmer);
+            Serializer::deserialize((object) $response->grunddatenArbeitnehmer, QueryDataTransmissionReportBasicDataAn::class);
 
         if (property_exists($response, 'grunddatenArbeitgeber') === true) {
             $new->grunddatenArbeitgeber =
-                QueryDataTransmissionBasicDataAg::stdToClass((object) $response->grunddatenArbeitgeber);
+                Serializer::deserialize((object) $response->grunddatenArbeitgeber, QueryDataTransmissionBasicDataAg::class);
         }
 
         if (property_exists($response, 'lzDaten') === true) {
-            $new->lzDaten = QueryDataTransmissionReportLzData::stdToClass((object) $response->lzDaten);
+            $new->lzDaten = Serializer::deserialize((object) $response->lzDaten, QueryDataTransmissionReportLzData::class);
         }
 
         return $new;

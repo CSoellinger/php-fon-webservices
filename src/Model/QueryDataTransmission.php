@@ -17,6 +17,7 @@ namespace CSoellinger\FonWebservices\Model;
 use function array_map;
 
 use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
+use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
@@ -75,7 +76,7 @@ class QueryDataTransmission
 
         if (property_exists($result, 'leitungsrechte') === true) {
             $new->leitungsrechte = array_map(
-                fn ($val) => QueryDataTransmissionManagementRight::stdToClass((object) $val),
+                fn ($val) => Serializer::deserialize((object) $val, QueryDataTransmissionManagementRight::class),
                 (array) $result->leitungsrechte,
             );
         }

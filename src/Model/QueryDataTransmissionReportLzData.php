@@ -14,12 +14,8 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
-
 class QueryDataTransmissionReportLzData
 {
-    use StdToClass;
-
     public ?string $leistungsartwert = null; // ENUM: ALTERSTEILZEITG., AMFG-BEIHILFE, AMSG-BEIHILFE, ARBEITSLOSENGELD,
     //                                 AUSBILDUNGSBEIH., BES. ÜBERBRÜCK., BILDUNGSTEILZEITG, ENTFERNUNGSBEIH.,
     //                                 ERW. ÜBERBRÜCK., FACHKRÄFTESTIPEND, GRÜNDUNGSBEIH., KARENZURLAUBSGELD,

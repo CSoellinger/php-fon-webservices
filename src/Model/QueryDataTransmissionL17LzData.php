@@ -14,12 +14,8 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
-
 class QueryDataTransmissionL17LzData
 {
-    use StdToClass;
-
     public ?float $kz350 = null;
 
     public ?float $kz354 = null;

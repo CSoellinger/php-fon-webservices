@@ -14,13 +14,10 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
 use DateTime;
 
 class QueryDataTransmissionL16LzDataChild
 {
-    use StdToClass;
-
     public ?string $nachnameKind = null;
 
     public ?string $vornameKind = null;

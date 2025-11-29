@@ -14,12 +14,8 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
-
 class QueryDataTransmissionManagementRight
 {
-    use StdToClass;
-
     public string $infrastrukturbetreiber = '';
 
     public float $betrag = 0.0;

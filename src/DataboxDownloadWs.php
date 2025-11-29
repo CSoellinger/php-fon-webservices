@@ -21,6 +21,7 @@ use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use CSoellinger\FonWebservices\Response\DataboxDownload\EntryResponse;
 use CSoellinger\FonWebservices\Response\DataboxDownload\ListResponse;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
+use CSoellinger\FonWebservices\Util\Serializer;
 use DateInterval;
 use DateTime;
 
@@ -145,7 +146,7 @@ class DataboxDownloadWs extends SoapClient
             $response->result = [];
         }
 
-        return array_map(fn (stdClass $entry) => DataboxDownloadListItem::stdToClass($entry), $response->result);
+        return array_map(fn (stdClass $entry) => Serializer::deserialize($entry, DataboxDownloadListItem::class), $response->result);
     }
 
     /**

@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
+use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
@@ -22,8 +22,6 @@ use stdClass;
 
 class QueryDataTransmissionL16LzData
 {
-    use StdToClass;
-
     public ?float $kz210 = null;
 
     public ?float $kz215 = null;
@@ -118,10 +116,10 @@ class QueryDataTransmissionL16LzData
 
     public static function createFromResponse(stdClass $response): self
     {
-        $new = self::stdToClass($response);
+        $new = Serializer::deserialize($response, self::class);
 
         if (property_exists($response, 'faboL16Kind')) {
-            $new->faboL16Kind = QueryDataTransmissionL16LzDataChild::stdToClass((object) $response->faboL16Kind);
+            $new->faboL16Kind = Serializer::deserialize((object) $response->faboL16Kind, QueryDataTransmissionL16LzDataChild::class);
         }
 
         return $new;

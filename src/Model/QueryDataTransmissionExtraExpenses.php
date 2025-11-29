@@ -16,7 +16,7 @@ namespace CSoellinger\FonWebservices\Model;
 
 use function array_map;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
+use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
@@ -24,8 +24,6 @@ use stdClass;
 
 class QueryDataTransmissionExtraExpenses
 {
-    use StdToClass;
-
     /** @var string ... */
     public string $kategorie = '';
 
@@ -40,11 +38,11 @@ class QueryDataTransmissionExtraExpenses
 
     public static function createFromResponse(stdClass $response): self
     {
-        $new = self::stdToClass($response);
+        $new = Serializer::deserialize($response, self::class);
 
         if (property_exists($response, 'sonderausgabenDetail')) {
             $new->sonderausgabenDetail = array_map(
-                fn ($val) => QueryDataTransmissionExtraExpensesDetail::stdToClass((object) $val),
+                fn ($val) => Serializer::deserialize((object) $val, QueryDataTransmissionExtraExpensesDetail::class),
                 (array) $response->sonderausgabenDetail,
             );
         }

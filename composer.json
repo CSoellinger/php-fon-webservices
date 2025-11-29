@@ -33,8 +33,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0 || ^8.1",
-        "ext-soap": "*",
-        "jasny/typecast": "dev-master"
+        "ext-soap": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",

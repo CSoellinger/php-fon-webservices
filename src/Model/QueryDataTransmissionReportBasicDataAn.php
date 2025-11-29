@@ -14,12 +14,8 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use CSoellinger\FonWebservices\Util\StdToClass;
-
 class QueryDataTransmissionReportBasicDataAn
 {
-    use StdToClass;
-
     /** @var string|null ... */
     public ?string $vnrArbeitnehmer = null;
 
