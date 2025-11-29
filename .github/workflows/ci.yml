@@ -46,7 +46,7 @@ jobs:
 
       - name: Upload security results
         if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: build/logs/psalm.sarif
 
