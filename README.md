@@ -187,7 +187,6 @@ Now open your browser and go to http://localhost:8005
 
 ```bash
 composer install
-vendor/bin/captainhook install -f
 ```
 
 ### Quality Tools
@@ -238,16 +237,21 @@ Test across all supported PHP versions using Podman Compose:
 # Build all containers
 podman-compose build
 
-# Test a specific PHP version
-podman-compose run --rm php74
-podman-compose run --rm php80
-podman-compose run --rm php82
+# Install/update dependencies (run after composer.json changes)
+podman-compose run --rm php82 composer update
+
+# Run tests on a specific PHP version
+podman-compose run --rm php74 composer test
+podman-compose run --rm php80 composer test
+podman-compose run --rm php82 composer test
 
 # Test all versions at once
 bash bin/test-all-versions.sh
 ```
 
-Supported PHP versions: 7.4, 8.0, 8.1, 8.2, 8.3, 8.4
+**Supported PHP versions:** 7.4, 8.0, 8.1, 8.2, 8.3, 8.4
+
+**Note:** After modifying `composer.json`, you need to run `composer update` inside a container to update dependencies before running tests.
 
 ## Documentation
 

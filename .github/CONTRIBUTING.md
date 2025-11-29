@@ -108,7 +108,6 @@ This project uses modern PHP development tools:
 - **[PHPStan](https://github.com/phpstan/phpstan)** - Static analysis (max level)
 - **[Psalm](https://github.com/vimeo/psalm)** - Static analysis (level 1) + security taint analysis
 - **[Rector](https://github.com/rectorphp/rector)** - Automated refactoring
-- **[CaptainHook](https://github.com/CaptainHookPhp/captainhook)** - Git hooks
 
 ### Available Commands
 
@@ -139,8 +138,6 @@ composer rector:fix        # Apply automated refactorings
 
 This project follows [PSR-12](https://www.php-fig.org/psr/psr-12/)
 coding standards, enforced by [PHP-CS-Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
-
-CaptainHook will run coding standards checks before committing.
 
 Format your code:
 
@@ -191,8 +188,8 @@ composer test:coverage
 composer check && composer test
 ```
 
-CaptainHook will automatically run all quality checks and tests before pushing to
-the remote repository.
+**Note:** GitHub Actions CI will automatically run all quality checks and tests
+when you push to the remote repository.
 
 ### Multi-Version Testing
 

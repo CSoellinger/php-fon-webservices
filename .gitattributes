@@ -7,7 +7,6 @@
 /.php-cs-fixer.dist.php export-ignore
 /bin/ export-ignore
 /build/ export-ignore
-/captainhook.json export-ignore
 /CHANGELOG.md export-ignore
 /compose.yaml export-ignore
 /docs/ export-ignore
