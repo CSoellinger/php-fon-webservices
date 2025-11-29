@@ -9,7 +9,6 @@
 [![Package downloads on Packagist][downloads-badge]][downloads]
 [![Build status][build-badge]][build]
 [![Psalm Type Coverage][psalm-badge]][psalm]
-[![Codecov Code Coverage][codecov-badge]][codecov]
 <!-- [![Chat with the maintainers][chat-badge]][chat] -->
 
 [source]: https://github.com/csoellinger/php-fon-webservices
@@ -22,10 +21,8 @@
 [license-badge]: https://img.shields.io/packagist/l/csoellinger/php-fon-webservices.svg?style=flat-square&colorB=darkcyan
 [downloads]: https://packagist.org/packages/csoellinger/php-fon-webservices/stats
 [downloads-badge]: https://img.shields.io/packagist/dt/csoellinger/php-fon-webservices.svg?style=flat-square&colorB=darkmagenta
-[build]: https://github.com/csoellinger/php-fon-webservices/actions?query=workflow%3ACI
-[build-badge]: https://img.shields.io/github/workflow/status/csoellinger/php-fon-webservices/CI?label=CI&logo=github&style=flat-square
-[codecov]: https://codecov.io/gh/csoellinger/php-fon-webservices
-[codecov-badge]: https://img.shields.io/codecov/c/gh/csoellinger/php-fon-webservices?label=codecov&logo=codecov&style=flat-square
+[build]: https://github.com/csoellinger/php-fon-webservices/actions/workflows/ci.yml
+[build-badge]: https://img.shields.io/github/actions/workflow/status/csoellinger/php-fon-webservices/ci.yml?label=CI&logo=github&style=flat-square
 [psalm]: https://shepherd.dev/github/csoellinger/php-fon-webservices
 [psalm-badge]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Fcsoellinger%2Fphp-fon-webservices%2Fcoverage
 [chat]: https://phpc.chat/channel/csoellinger
@@ -46,15 +43,15 @@
 
 ## About
 
-Supported webservices for now:
+Supported webservices:
 - Session
 - VatID check
 - Databox download
 - File upload
 - Bank data transmission
+- Query data transmission
 
 To be done:
-- Query data transmission
 - Record keeping
 - Cash register
 
@@ -197,17 +194,39 @@ vendor/bin/captainhook install -f
 
 This project uses modern PHP tooling for code quality:
 
+#### Testing
+- **[Pest](https://pestphp.com/)** - Modern testing framework with expressive syntax
+  ```bash
+  composer test              # Run Pest tests
+  composer test:coverage     # Run tests with coverage report
+  ```
+
+#### Code Style & Formatting
+- **[PHP-CS-Fixer](https://cs.symfony.com/)** - Automatic code style fixer (PSR-12 + PHP 7.4 migration rules)
+  ```bash
+  composer format            # Auto-fix code style
+  composer format:check      # Check code style (for CI)
+  ```
+
+#### Static Analysis
+- **[PHPStan](https://phpstan.org/)** - Static analysis tool (max level)
+- **[Psalm](https://psalm.dev/)** - Static analysis and type checker (level 1)
+  ```bash
+  composer analyse           # Run PHPStan + Psalm
+  composer analyse:phpstan   # Run PHPStan only
+  composer analyse:psalm     # Run Psalm only
+  ```
+
+#### Automated Refactoring
+- **[Rector](https://getrector.com/)** - Automated code refactoring and upgrades
+  ```bash
+  composer rector            # Check for refactoring opportunities
+  composer rector:fix        # Apply automated refactorings
+  ```
+
+#### Combined Checks
 ```bash
-composer lint              # Check PHP syntax
-composer format            # Auto-fix code style with PHP-CS-Fixer
-composer format:check      # Check code style (for CI)
-composer analyse           # Run PHPStan + Psalm static analysis
-composer analyse:phpstan   # Run PHPStan only
-composer analyse:psalm     # Run Psalm only
-composer test              # Run Pest tests
-composer test:coverage     # Run tests with coverage report
-composer rector            # Check for refactoring opportunities
-composer rector:fix        # Apply automated refactorings
+composer lint              # Check PHP syntax (parallel-lint)
 composer check             # Run all quality checks (lint + format + analyse)
 ```
 
@@ -232,7 +251,7 @@ Supported PHP versions: 7.4, 8.0, 8.1, 8.2, 8.3, 8.4
 
 ## Documentation
 
-[Markdown](docs/markdown/README.md)
+API documentation is available in [docs/api/](docs/api/index.html)
 
 ## Contributing
 
