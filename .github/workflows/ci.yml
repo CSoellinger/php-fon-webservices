@@ -32,8 +32,23 @@ jobs:
       - name: Check code formatting
         run: composer format:check
 
+      - name: Run PHPStan
+        run: composer analyse:phpstan
+
+      - name: Run Psalm
+        run: composer analyse:psalm
+
+      - name: Security analysis
+        run: vendor/bin/psalm --taint-analysis --report=build/logs/psalm.sarif
+
+      - name: Upload security results
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: build/logs/psalm.sarif
+
   test:
-    name: Test PHP ${{ matrix.php }} - ${{ matrix.os }}
+    name: Test PHP ${{ matrix.php }} - ${{ matrix.os }} (${{ matrix.dependencies }} dependencies)
     runs-on: ${{ matrix.os }}
     needs: quality
 
@@ -75,21 +90,6 @@ jobs:
 
       - name: Check syntax
         run: composer lint
-
-      - name: Run PHPStan
-        run: composer analyse:phpstan
-
-      - name: Run Psalm
-        run: composer analyse:psalm
-
-      - name: Security analysis
-        run: vendor/bin/psalm --taint-analysis --report=build/logs/psalm-${{ matrix.php }}-${{ matrix.os }}.sarif
-
-      - name: Upload security results
-        if: always()
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: build/logs/psalm-${{ matrix.php }}-${{ matrix.os }}.sarif
 
       - name: Run tests
         if: matrix.coverage != 'pcov'
