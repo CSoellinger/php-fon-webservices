@@ -13,7 +13,6 @@
 declare(strict_types=1);
 
 use CSoellinger\FonWebservices\BankDataTransmissionWs;
-use Exception;
 
 test('upload simple test xml', function (): void {
     $bankDataTransmissionWs = new BankDataTransmissionWs($this->sessionWs);
@@ -52,7 +51,7 @@ test('upload invalid xml', function (): void {
 
     $bankDataTransmissionWs->upload((string) $xmlKontoReg, 'KTOREG', true);
     $bankDataTransmissionWs->upload((string) $xmlKontoReg, 'KTOREG', true);
-})->throws(Exception::class);
+})->throws(\Exception::class);
 
 test('upload invalid type', function (): void {
     $bankDataTransmissionWs = new BankDataTransmissionWs($this->sessionWs);

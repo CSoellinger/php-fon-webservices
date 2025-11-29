@@ -14,9 +14,7 @@ declare(strict_types=1);
 
 use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\SessionWs;
-use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionProperty;
 
 test('initialize with online wsdl', function (): void {
     rename(SessionWs::WSDL_LOCAL, SessionWs::WSDL_LOCAL . '.bak');
@@ -53,18 +51,18 @@ test('login with bad credentials', function (): void {
 
     $sessionWebService = new SessionWs($badCredential);
     $sessionWebService->Login();
-})->throws(Exception::class);
+})->throws(\Exception::class);
 
 test('logout with invalid session id', function (): void {
     $sessionWebService = new SessionWs($this->fonCredential);
     $sessionWebService->login();
 
-    $reflector = new ReflectionProperty(SessionWs::class, 'id');
+    $reflector = new \ReflectionProperty(SessionWs::class, 'id');
     $reflector->setAccessible(true);
     $reflector->setValue($sessionWebService, 'invaLidSessiOnId1');
 
     $sessionWebService->logout();
-})->throws(Exception::class);
+})->throws(\Exception::class);
 
 test('get credential', function (): void {
     $sessionWebService = new SessionWs($this->fonCredential);

@@ -14,17 +14,15 @@ declare(strict_types=1);
 
 use CSoellinger\FonWebservices\DataboxDownloadWs;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
-use DateTime;
-use Exception;
 
 test('databox download', function (string $type, ?string $from, ?string $to): void {
     $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
     expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
 
-    /** @var DateTime|null $from */
-    $from = $from ? new DateTime($from) : $from;
-    /** @var DateTime|null $to */
-    $to = $to ? new DateTime($to) : $to;
+    /** @var \DateTime|null $from */
+    $from = $from ? new \DateTime($from) : $from;
+    /** @var \DateTime|null $to */
+    $to = $to ? new \DateTime($to) : $to;
 
     /** @var array<DataboxDownloadListItem> $result */
     $result = $databoxDownloadWs->get($type, $from, $to);
@@ -49,10 +47,10 @@ test('databox download', function (string $type, ?string $from, ?string $to): vo
 ]);
 
 test('invalid params', function (string $type, ?string $from, ?string $to): void {
-    /** @var DateTime|null $from */
-    $from = $from ? new DateTime($from) : $from;
-    /** @var DateTime|null $to */
-    $to = $to ? new DateTime($to) : $to;
+    /** @var \DateTime|null $from */
+    $from = $from ? new \DateTime($from) : $from;
+    /** @var \DateTime|null $to */
+    $to = $to ? new \DateTime($to) : $to;
 
     $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
     expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
@@ -64,10 +62,10 @@ test('invalid params', function (string $type, ?string $from, ?string $to): void
 ])->throws(InvalidArgumentException::class);
 
 test('error response', function (string $type, ?string $from, ?string $to): void {
-    /** @var DateTime|null $from */
-    $from = $from ? new DateTime($from) : $from;
-    /** @var DateTime|null $to */
-    $to = $to ? new DateTime($to) : $to;
+    /** @var \DateTime|null $from */
+    $from = $from ? new \DateTime($from) : $from;
+    /** @var \DateTime|null $to */
+    $to = $to ? new \DateTime($to) : $to;
 
     $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
     expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
@@ -76,4 +74,4 @@ test('error response', function (string $type, ?string $from, ?string $to): void
 })->with([
     ['', 'NOW-40days', null],
     ['', 'NOW-30days', 'NOW-10days'],
-])->throws(Exception::class);
+])->throws(\Exception::class);

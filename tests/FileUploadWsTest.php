@@ -13,7 +13,6 @@
 declare(strict_types=1);
 
 use CSoellinger\FonWebservices\FileUploadWs;
-use Exception;
 
 test('upload simple test xml', function (): void {
     $fileUploadWs = new FileUploadWs($this->sessionWs);
@@ -31,7 +30,7 @@ test('upload invalid xml', function (): void {
     $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 
     expect($fileUploadWs->upload((string) $xmlPath, 'NOVA', true))->toBeTrue();
-})->throws(Exception::class);
+})->throws(\Exception::class);
 
 test('upload invalid type', function (): void {
     $fileUploadWs = new FileUploadWs($this->sessionWs);

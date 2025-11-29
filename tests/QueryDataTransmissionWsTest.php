@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 use CSoellinger\FonWebservices\Model\QueryDataTransmission;
 use CSoellinger\FonWebservices\QueryDataTransmissionWs;
-use Exception;
 
 test('query data transmission', function (): void {
     $queryDataTransmissionWs = new QueryDataTransmissionWs($this->sessionWsDbTest);
@@ -39,4 +38,4 @@ test('error response', function (): void {
     expect($queryDataTransmissionWs)->toBeInstanceOf(QueryDataTransmissionWs::class);
 
     $queryDataTransmissionWs->query('123456789');
-})->throws(Exception::class);
+})->throws(\Exception::class);
