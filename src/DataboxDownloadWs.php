@@ -97,7 +97,7 @@ class DataboxDownloadWs extends SoapClient
         $this->sessionWs = $sessionWs;
 
         /** @var string $wsdl */
-        $wsdl = file_exists((string) self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
+        $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
 
         parent::__construct($wsdl, $soapOptions);
     }

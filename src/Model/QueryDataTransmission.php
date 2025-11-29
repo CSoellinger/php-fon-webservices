@@ -14,13 +14,10 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-use function array_map;
-
 use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
 use CSoellinger\FonWebservices\Util\Serializer;
-
+use function array_map;
 use function property_exists;
-
 use stdClass;
 
 class QueryDataTransmission

@@ -15,9 +15,7 @@ declare(strict_types=1);
 namespace CSoellinger\FonWebservices\Model;
 
 use CSoellinger\FonWebservices\Util\Serializer;
-
 use function property_exists;
-
 use stdClass;
 
 class QueryDataTransmissionL16
