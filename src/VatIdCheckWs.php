@@ -123,10 +123,8 @@ class VatIdCheckWs extends SoapClient
      *
      * @param string $uid Vat id to check
      * @param VatIdCheckLevel|int $level Check level (use VatIdCheckLevel enum, int support deprecated)
-     *
-     * @return VatIdCheckInvalid|VatIdCheckValidLevelOne|VatIdCheckValidLevelTwo
      */
-    public function check(string $uid, VatIdCheckLevel|int $level = VatIdCheckLevel::SimpleCheck)
+    public function check(string $uid, VatIdCheckLevel|int $level = VatIdCheckLevel::SimpleCheck): VatIdCheckInvalid|VatIdCheckValidLevelOne|VatIdCheckValidLevelTwo
     {
         // Convert int to enum for backward compatibility
         if (is_int($level)) {

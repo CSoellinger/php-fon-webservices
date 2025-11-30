@@ -108,10 +108,12 @@ class SessionWs extends SoapClient
     /**
      * Login at session web service.
      *
+     * @return $this
+     *
      * @throws Exception if soap call fails
      * @throws Exception if return code from soap call is greater or less than zero
      */
-    public function login(): self
+    public function login(): static
     {
         /** @var ErrorResponse|LoginSuccessResponse $response */
         $response = $this->__soapCall('login', [[
@@ -139,10 +141,12 @@ class SessionWs extends SoapClient
     /**
      * Logout from the session web service.
      *
+     * @return $this
+     *
      * @throws Exception if soap call fails
      * @throws Exception if return code from soap call is greater or less than zero
      */
-    public function logout(): self
+    public function logout(): static
     {
         /** @var ErrorResponse|LogoutSuccessResponse $response */
         $response = $this->__soapCall('logout', [[
