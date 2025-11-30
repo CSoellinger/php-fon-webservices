@@ -83,8 +83,8 @@
         "analyse:phpstan": "phpstan analyse --memory-limit=512M",
         "analyse:psalm": "psalm --show-info=true",
         "test": "pest",
-        "test:coverage": "pest --coverage-text --coverage-clover build/coverage/clover.xml",
-        "test:coverage:html": "pest --coverage-html build/coverage",
+        "test:coverage": "@php -r \"echo 'Note: Coverage generation with Pest v1 is not reliable locally.\\nUse GitHub Actions CI for coverage reports, or upgrade to Pest v2 (requires PHP 8.1+).\\n';\" && mkdir -p build/coverage && pest --coverage-text --coverage-clover build/coverage/clover.xml",
+        "test:coverage:html": "@php -r \"echo 'Note: Coverage generation with Pest v1 is not reliable locally.\\nUse GitHub Actions CI for coverage reports, or upgrade to Pest v2 (requires PHP 8.1+).\\n';\" && pest --coverage-html build/coverage",
         "rector": "rector process --dry-run",
         "rector:fix": "rector process",
         "check": [
