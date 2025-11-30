@@ -182,9 +182,9 @@ class DataboxDownloadWs extends SoapClient
     }
 
     /**
-     * Undocumented function.
+     * Get SOAP parameters from credentials for API calls.
      *
-     * @return array<string,string>
+     * @return array<string,string> Array with tid, benid, and id parameters
      */
     private function getCredentialSoapParams()
     {
@@ -235,11 +235,11 @@ class DataboxDownloadWs extends SoapClient
     }
 
     /**
-     * Undocumented function.
+     * Validate SOAP response and throw exception if return code is non-zero.
      *
-     * @param EntryResponse|ErrorResponse|ListResponse $response
+     * @param EntryResponse|ErrorResponse|ListResponse $response The SOAP response to validate
      *
-     * @throws Exception
+     * @throws Exception If return code indicates an error
      */
     private function handleResponse($response): void
     {

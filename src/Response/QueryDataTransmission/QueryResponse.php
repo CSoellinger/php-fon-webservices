@@ -16,10 +16,13 @@ namespace CSoellinger\FonWebservices\Response\QueryDataTransmission;
 
 use CSoellinger\FonWebservices\Response\BasicResponse;
 
+/**
+ * Response for query data transmission webservice.
+ */
 abstract class QueryResponse extends BasicResponse
 {
     /**
-     * @var QueryResultResponse ...
+     * @var QueryResultResponse Query result containing L16, L17, report, and other transmission data
      */
     public QueryResultResponse $result;
 }

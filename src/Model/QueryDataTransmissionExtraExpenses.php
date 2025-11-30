@@ -20,22 +20,37 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
+/**
+ * Special expenses (Sonderausgaben) data model.
+ */
 class QueryDataTransmissionExtraExpenses
 {
-    /** @var string ... */
+    /**
+     * @var string Category code
+     */
     public string $kategorie = '';
 
-    /** @var string ... */
+    /**
+     * @var string Category text/description
+     */
     public string $kategorieText = '';
 
-    /** @var float ... */
+    /**
+     * @var float Amount/value
+     */
     public float $betrag = 0.0;
 
-    /** @var array<QueryDataTransmissionExtraExpensesDetail>|null ... */
+    /**
+     * @var array<QueryDataTransmissionExtraExpensesDetail>|null Detailed expense items
+     */
     public ?array $sonderausgabenDetail = null;
 
     /**
-     * @param \stdClass $response
+     * Create instance from API response.
+     *
+     * @param \stdClass $response The API response to deserialize
+     *
+     * @return self The deserialized instance
      */
     public static function createFromResponse(object $response): self
     {

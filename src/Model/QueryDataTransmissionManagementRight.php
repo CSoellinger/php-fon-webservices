@@ -14,9 +14,18 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
+/**
+ * Management right (Leitungsrecht) data model.
+ */
 class QueryDataTransmissionManagementRight
 {
+    /**
+     * @var string Infrastructure operator name
+     */
     public string $infrastrukturbetreiber = '';
 
+    /**
+     * @var float Amount/value
+     */
     public float $betrag = 0.0;
 }

@@ -18,16 +18,34 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
+/**
+ * Message 109a (Mitteilung 109a) contractor payment data model.
+ */
 class QueryDataTransmissionMsg109a
 {
+    /**
+     * @var QueryDataTransmissionMsg109aBasicDataLz Message basic data
+     */
     public QueryDataTransmissionMsg109aBasicDataLz $grunddatenLz;
 
+    /**
+     * @var QueryDataTransmissionMsg109aBasicDataAn Contractor basic data
+     */
     public QueryDataTransmissionMsg109aBasicDataAn $grunddatenAuftragnehmer;
 
+    /**
+     * @var QueryDataTransmissionBasicDataAg|null Client/employer basic data
+     */
     public ?QueryDataTransmissionBasicDataAg $grunddatenArbeitgeber = null;
 
+    /**
+     * @var QueryDataTransmissionMsg109aLzData|null Message detailed data
+     */
     public ?QueryDataTransmissionMsg109aLzData $lzDaten = null;
 
+    /**
+     * Constructor - initializes required properties.
+     */
     public function __construct()
     {
         $this->grunddatenLz = new QueryDataTransmissionMsg109aBasicDataLz();
@@ -35,7 +53,11 @@ class QueryDataTransmissionMsg109a
     }
 
     /**
-     * @param \stdClass $response
+     * Create instance from API response.
+     *
+     * @param \stdClass $response The API response to deserialize
+     *
+     * @return self The deserialized instance
      */
     public static function createFromResponse(object $response): self
     {

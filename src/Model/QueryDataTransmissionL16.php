@@ -18,16 +18,34 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
+/**
+ * L16 wage statement (Lohnzettel) data model.
+ */
 class QueryDataTransmissionL16
 {
+    /**
+     * @var QueryDataTransmissionL16BasicDataLz Wage statement basic data
+     */
     public QueryDataTransmissionL16BasicDataLz $grunddatenLz;
 
+    /**
+     * @var QueryDataTransmissionL16BasicDataAn Employee basic data
+     */
     public QueryDataTransmissionL16BasicDataAn $grunddatenArbeitnehmer;
 
+    /**
+     * @var QueryDataTransmissionBasicDataAg|null Employer basic data
+     */
     public ?QueryDataTransmissionBasicDataAg $grunddatenArbeitgeber = null;
 
+    /**
+     * @var QueryDataTransmissionL16LzData|null Wage statement detailed data
+     */
     public ?QueryDataTransmissionL16LzData $lzDaten = null;
 
+    /**
+     * Constructor - initializes required properties.
+     */
     public function __construct()
     {
         $this->grunddatenLz = new QueryDataTransmissionL16BasicDataLz();
@@ -35,7 +53,11 @@ class QueryDataTransmissionL16
     }
 
     /**
-     * @param \stdClass $response
+     * Create instance from API response.
+     *
+     * @param \stdClass $response The API response to deserialize
+     *
+     * @return self The deserialized instance
      */
     public static function createFromResponse(object $response): self
     {

@@ -19,7 +19,7 @@ use CSoellinger\FonWebservices\Response\BasicResponse;
 abstract class EntryResponse extends BasicResponse
 {
     /**
-     * @var string ...
+     * @var string Base64 encoded file content
      */
     public string $result = '';
 }

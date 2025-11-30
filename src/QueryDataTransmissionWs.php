@@ -95,11 +95,15 @@ class QueryDataTransmissionWs extends SoapClient
     }
 
     /**
-     * tbd.
+     * Query data transmissions from FinanzOnline.
      *
-     * @param string $fastNr tbd
-     * @param string $period tbd
-     * @param string|null $type tbd
+     * @param string $fastNr The FASTNR/tax number to query
+     * @param string $period The period (year) to query, format YYYY (defaults to current year)
+     * @param string|null $type The query type (LOHNZETTEL, SONDERAUSGABEN, LEITUNGSRECHTE)
+     *
+     * @return QueryDataTransmission The query result containing transmission data
+     *
+     * @throws Exception If the query fails
      */
     public function query(string $fastNr, string $period = '', ?string $type = null): QueryDataTransmission
     {
@@ -138,11 +142,11 @@ class QueryDataTransmissionWs extends SoapClient
     }
 
     /**
-     * tbd.
+     * Validate and normalize the query type parameter.
      *
-     * @param string $type tbd
+     * @param string|null $type The query type to validate
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException If type is not supported
      */
     private function validateType(?string &$type): void
     {
@@ -156,11 +160,11 @@ class QueryDataTransmissionWs extends SoapClient
     }
 
     /**
-     * tbd.
+     * Validate period parameter and default to current year if empty.
      *
-     * @param string $period tbd
+     * @param string $period The period (year) to validate
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException If period format is invalid
      */
     private function validatePeriod(string &$period): void
     {

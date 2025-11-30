@@ -18,16 +18,34 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
+/**
+ * Report/message (Meldung) data model.
+ */
 class QueryDataTransmissionReport
 {
+    /**
+     * @var QueryDataTransmissionReportBasicDataLz Report basic data
+     */
     public QueryDataTransmissionReportBasicDataLz $grunddatenLz;
 
+    /**
+     * @var QueryDataTransmissionReportBasicDataAn Employee basic data
+     */
     public QueryDataTransmissionReportBasicDataAn $grunddatenArbeitnehmer;
 
+    /**
+     * @var QueryDataTransmissionBasicDataAg|null Employer basic data
+     */
     public ?QueryDataTransmissionBasicDataAg $grunddatenArbeitgeber = null;
 
+    /**
+     * @var QueryDataTransmissionReportLzData|null Report detailed data
+     */
     public ?QueryDataTransmissionReportLzData $lzDaten = null;
 
+    /**
+     * Constructor - initializes required properties.
+     */
     public function __construct()
     {
         $this->grunddatenLz = new QueryDataTransmissionReportBasicDataLz();
@@ -35,7 +53,11 @@ class QueryDataTransmissionReport
     }
 
     /**
-     * @param \stdClass $response
+     * Create instance from API response.
+     *
+     * @param \stdClass $response The API response to deserialize
+     *
+     * @return self The deserialized instance
      */
     public static function createFromResponse(object $response): self
     {

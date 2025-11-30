@@ -20,7 +20,7 @@ use stdClass;
 abstract class ListResponse extends BasicResponse
 {
     /**
-     * @var array<stdClass> ...
+     * @var array<stdClass> Array of databox download list items
      */
     public array $result = [];
 }

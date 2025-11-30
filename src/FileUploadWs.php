@@ -134,11 +134,11 @@ class FileUploadWs extends SoapClient
     }
 
     /**
-     * Undocumented function.
+     * Validate and normalize the file upload type.
      *
-     * @param string $type ...
+     * @param string $type The file upload type
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException If type is not supported
      */
     private function validateType(string &$type): void
     {
@@ -150,9 +150,9 @@ class FileUploadWs extends SoapClient
     }
 
     /**
-     * Undocumented function.
+     * Validate XML parameter and load from file if path is provided.
      *
-     * @param string $xml ...
+     * @param string $xml XML content or path to XML file
      */
     private function validateXml(string &$xml): void
     {

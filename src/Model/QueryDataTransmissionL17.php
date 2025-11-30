@@ -18,16 +18,34 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
+/**
+ * L17 pension statement (Pensionszettel) data model.
+ */
 class QueryDataTransmissionL17
 {
+    /**
+     * @var QueryDataTransmissionL17BasicDataLz Pension statement basic data
+     */
     public QueryDataTransmissionL17BasicDataLz $grunddatenLz;
 
+    /**
+     * @var QueryDataTransmissionL17BasicDataAn Pensioner basic data
+     */
     public QueryDataTransmissionL17BasicDataAn $grunddatenArbeitnehmer;
 
+    /**
+     * @var QueryDataTransmissionBasicDataAg|null Pension payer basic data
+     */
     public ?QueryDataTransmissionBasicDataAg $grunddatenArbeitgeber = null;
 
+    /**
+     * @var QueryDataTransmissionL17LzData|null Pension statement detailed data
+     */
     public ?QueryDataTransmissionL17LzData $lzDaten = null;
 
+    /**
+     * Constructor - initializes required properties.
+     */
     public function __construct()
     {
         $this->grunddatenLz = new QueryDataTransmissionL17BasicDataLz();
@@ -35,7 +53,11 @@ class QueryDataTransmissionL17
     }
 
     /**
-     * @param \stdClass $response
+     * Create instance from API response.
+     *
+     * @param \stdClass $response The API response to deserialize
+     *
+     * @return self The deserialized instance
      */
     public static function createFromResponse(object $response): self
     {

@@ -185,7 +185,9 @@ class SessionWs extends SoapClient
     }
 
     /**
-     * Undocumented function.
+     * Get the credential object used by this session.
+     *
+     * @return FonCredential The credential object
      */
     public function getCredential(): FonCredential
     {

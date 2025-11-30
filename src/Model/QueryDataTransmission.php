@@ -23,26 +23,47 @@ use function property_exists;
 
 use stdClass;
 
+/**
+ * Query data transmission model containing various tax data types.
+ */
 class QueryDataTransmission
 {
+    /**
+     * @var QueryDataTransmissionL16|null L16 wage statement data
+     */
     public ?QueryDataTransmissionL16 $l16 = null;
 
+    /**
+     * @var QueryDataTransmissionL17|null L17 pension statement data
+     */
     public ?QueryDataTransmissionL17 $l17 = null;
 
+    /**
+     * @var QueryDataTransmissionReport|null Report/message data
+     */
     public ?QueryDataTransmissionReport $meldung = null;
 
+    /**
+     * @var QueryDataTransmissionMsg109a|null Message 109a data (contractor payments)
+     */
     public ?QueryDataTransmissionMsg109a $mitteilung109a = null;
 
-    /** @var array<QueryDataTransmissionExtraExpenses>|null */
+    /**
+     * @var array<QueryDataTransmissionExtraExpenses>|null Special expenses data
+     */
     public ?array $sonderausgaben = null;
 
-    /** @var array<QueryDataTransmissionManagementRight>|null */
+    /**
+     * @var array<QueryDataTransmissionManagementRight>|null Management rights data
+     */
     public ?array $leitungsrechte = null;
 
     /**
-     * Undocumented function.
+     * Create instance from API response.
      *
-     * @param QueryResponse|stdClass $response
+     * @param QueryResponse|stdClass $response The API response to deserialize
+     *
+     * @return self The deserialized instance
      */
     public static function createFromResponse($response): self
     {

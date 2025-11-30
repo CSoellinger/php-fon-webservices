@@ -19,65 +19,68 @@ use DateTime;
 class DataboxDownloadListItem
 {
     /**
-     * @var string ...
+     * @var string Tax number (Steuernummer)
      */
     public string $stnr = '';
 
     /**
-     * @var string ...
+     * @var string Name/description
      */
     public string $name = '';
 
     /**
-     * @var string ...
+     * @var string Application/submission reference
      */
     public string $anbringen = '';
 
     /**
-     * @var string ...
+     * @var string Period start date
      */
     public string $zrvon = '';
 
     /**
-     * @var string ...
+     * @var string Period end date
      */
     public string $zrbis = '';
 
     /**
-     * @var DateTime ...
+     * @var DateTime Date of decision/approval
      */
     public DateTime $datbesch;
 
     /**
-     * @var string ...
+     * @var string Document type
      */
     public string $erltyp = '';
 
     /**
-     * @var string ...
+     * @var string File format/type
      */
     public string $fileart = '';
 
     /**
-     * @var DateTime ...
+     * @var DateTime Timestamp of assignment/allocation
      */
     public $ts_zust; //phpcs:ignore
 
     /**
-     * @var string ...
+     * @var string Application key for document retrieval
      */
     public string $applkey = '';
 
     /**
-     * @var string ...
+     * @var string File name/designation
      */
     public string $filebez = '';
 
     /**
-     * @var string ...
+     * @var string Status of document
      */
     public string $status = '';
 
+    /**
+     * Constructor - initializes DateTime properties.
+     */
     public function __construct()
     {
         $this->datbesch = new DateTime();

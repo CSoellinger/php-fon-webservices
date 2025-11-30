@@ -61,8 +61,10 @@ class Serializer
     /**
      * Convert a value to match the property type.
      *
-     * @param mixed $value
-     * @return mixed
+     * @param mixed $value The value to convert
+     * @param ReflectionProperty $property The property to convert the value for
+     *
+     * @return mixed The converted value
      */
     private static function convertValue($value, ReflectionProperty $property)
     {

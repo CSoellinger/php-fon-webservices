@@ -14,13 +14,28 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
+/**
+ * Employer (Arbeitgeber) basic data model.
+ */
 class QueryDataTransmissionBasicDataAg
 {
+    /**
+     * @var string|null Employer name
+     */
     public ?string $nameArbeitgeber = null;
 
+    /**
+     * @var string|null Employer postal code
+     */
     public ?string $plzArbeitgeber = null;
 
+    /**
+     * @var string|null Employer city
+     */
     public ?string $ortArbeitgeber = null;
 
+    /**
+     * @var string|null Employer address
+     */
     public ?string $adresseArbeitgeber = null;
 }
