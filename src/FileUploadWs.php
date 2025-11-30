@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices;
 
+use CSoellinger\FonWebservices\Enum\FileUploadType;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 
 use const DIRECTORY_SEPARATOR;
@@ -92,16 +93,14 @@ class FileUploadWs extends SoapClient
      * Upload bank data to the FinanzOnline webservice.
      *
      * @param string $xml XML content or path to file
-     * @param string $type Choose BET, BIL, DUE, EUST, FPH, FVAN, IVF, JAHR_ERKL, JAB, KA1, KOM, KOMU, LFH, L1,
-     *                     NOVA, RZ, SB, SBS, SBZ, STAB, TVW, UEB, UEB_SA, U13, U30, VAT, VATAB, VPDGD, ZEAN, 107,
-     *                     107AB, 108, 108AB, SOER, DIGI
+     * @param FileUploadType|string $type File upload type (use FileUploadType enum, string support deprecated)
      * @param bool $isTest True if you want to send the data only for test purposes
      *
      * @throws Exception
      */
-    public function upload(string $xml, string $type, bool $isTest = false): bool
+    public function upload(string $xml, FileUploadType|string $type, bool $isTest = false): bool
     {
-        $this->validateType($type);
+        $typeValue = $this->validateType($type);
         $this->validateXml($xml);
 
         // If we are not already logged in we can do it here.
@@ -113,7 +112,7 @@ class FileUploadWs extends SoapClient
             'tid' => $this->sessionWs->getCredential()->teId,
             'benid' => $this->sessionWs->getCredential()->benId,
             'id' => $this->sessionWs->getID(),
-            'art' => $type,
+            'art' => $typeValue,
             'uebermittlung' => $isTest === true ? 'T' : 'P',
             'data' => $xml,
         ];
@@ -132,17 +131,25 @@ class FileUploadWs extends SoapClient
     /**
      * Validate and normalize the file upload type.
      *
-     * @param string $type The file upload type
+     * @param FileUploadType|string $type The file upload type
+     *
+     * @return string The validated type value
      *
      * @throws InvalidArgumentException If type is not supported
      */
-    private function validateType(string &$type): void
+    private function validateType(FileUploadType|string $type): string
     {
+        if ($type instanceof FileUploadType) {
+            return $type->value;
+        }
+
         $type = strtoupper($type);
 
         if (in_array($type, self::TYPES) === false) {
             throw new InvalidArgumentException('Wrong type. Choose one of them: ' . implode(', ', self::TYPES));
         }
+
+        return $type;
     }
 
     /**

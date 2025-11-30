@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices;
 
+use CSoellinger\FonWebservices\Enum\VatIdCheckLevel;
 use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
@@ -78,11 +79,15 @@ class VatIdCheckWs extends SoapClient
 
     /**
      * Check at level one.
+     *
+     * @deprecated Use VatIdCheckLevel::SimpleCheck instead
      */
     public const LEVEL_SIMPLE_CHECK = 1;
 
     /**
      * Check at level two.
+     *
+     * @deprecated Use VatIdCheckLevel::FullCheck instead
      */
     public const LEVEL_FULL_CHECK = 2;
 
@@ -117,14 +122,20 @@ class VatIdCheckWs extends SoapClient
      * Check an uid (vat id).
      *
      * @param string $uid Vat id to check
-     * @param int $level Choose level 1 or 2. With 2 you will also get some company name and address.
+     * @param VatIdCheckLevel|int $level Check level (use VatIdCheckLevel enum, int support deprecated)
      *
      * @return VatIdCheckInvalid|VatIdCheckValidLevelOne|VatIdCheckValidLevelTwo
      */
-    public function check(string $uid, int $level = 1)
+    public function check(string $uid, VatIdCheckLevel|int $level = VatIdCheckLevel::SimpleCheck)
     {
-        // If level is less than one or more than two we reset it to one.
-        $level = $level < 1 || $level > 2 ? 1 : $level;
+        // Convert int to enum for backward compatibility
+        if (is_int($level)) {
+            $level = match ($level) {
+                1 => VatIdCheckLevel::SimpleCheck,
+                2 => VatIdCheckLevel::FullCheck,
+                default => VatIdCheckLevel::SimpleCheck,
+            };
+        }
 
         // If we are not already logged in we can do it here.
         if ($this->sessionWs->isLoggedIn() === false) {
@@ -139,7 +150,7 @@ class VatIdCheckWs extends SoapClient
             'uid_tn' => $this->sessionWs->getCredential()->teUid,
             'id' => $this->sessionWs->getID(),
             'uid' => $uid,
-            'stufe' => $level,
+            'stufe' => $level->value,
         ],
         ]);
 
@@ -147,7 +158,7 @@ class VatIdCheckWs extends SoapClient
 
         if (in_array($returnCode, self::VALID_RETURN_CODES, true) === true) {
             // Valid
-            if ($level === 1) {
+            if ($level === VatIdCheckLevel::SimpleCheck) {
                 return new VatIdCheckValidLevelOne();
             }
 
@@ -172,7 +183,7 @@ class VatIdCheckWs extends SoapClient
             // Special error should happen only at full check level...
             // re-check at level 1 and return the result
             // @codeCoverageIgnoreStart
-            $simpleResult = $this->check($uid, self::LEVEL_SIMPLE_CHECK);
+            $simpleResult = $this->check($uid, VatIdCheckLevel::SimpleCheck);
 
             if ($simpleResult->valid === false) {
                 return $simpleResult;

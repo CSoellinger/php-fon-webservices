@@ -17,6 +17,7 @@ namespace CSoellinger\FonWebservices;
 use function array_map;
 use function array_merge;
 
+use CSoellinger\FonWebservices\Enum\DataboxType;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 use CSoellinger\FonWebservices\Response\DataboxDownload\EntryResponse;
 use CSoellinger\FonWebservices\Response\DataboxDownload\ListResponse;
@@ -101,8 +102,7 @@ class DataboxDownloadWs extends SoapClient
     /**
      * Get a list for your databox.
      *
-     * @param string $type Filter for type. If empty all types are returned. Otherwise choose one of this:
-     *                     AE, AF, AK, AZ, B, DL, E, EU, FB, GM, I, KG, M, P, QL, SS
+     * @param DataboxType|string $type Filter type (use DataboxType enum, empty string for all, string support deprecated)
      * @param DateTime|null $from filter from
      * @param DateTime|null $to filter to
      *
@@ -110,9 +110,9 @@ class DataboxDownloadWs extends SoapClient
      *
      * @throws Exception
      */
-    public function get(string $type = '', ?DateTime $from = null, ?DateTime $to = null)
+    public function get(DataboxType|string $type = '', ?DateTime $from = null, ?DateTime $to = null)
     {
-        $this->validateTypeParam($type);
+        $typeValue = $this->validateTypeParam($type);
         $this->validateDateParam($from, $to);
 
         // If we are not already logged in we can do it here.
@@ -122,7 +122,7 @@ class DataboxDownloadWs extends SoapClient
 
         // Let's make the soap call
         $soapParams = array_merge([
-            'erltyp' => $type,
+            'erltyp' => $typeValue,
         ], $this->getCredentialSoapParams());
 
         if ($from && $to) {
@@ -194,12 +194,18 @@ class DataboxDownloadWs extends SoapClient
     /**
      * Validate type filter.
      *
-     * @param string $type Type
+     * @param DataboxType|string $type Type
+     *
+     * @return string The validated type value
      *
      * @throws InvalidArgumentException
      */
-    private function validateTypeParam(string &$type): void
+    private function validateTypeParam(DataboxType|string $type): string
     {
+        if ($type instanceof DataboxType) {
+            return $type->value;
+        }
+
         if (strlen($type) > 2) {
             throw new InvalidArgumentException('Type has to be a two character string.');
         }
@@ -209,6 +215,8 @@ class DataboxDownloadWs extends SoapClient
         if ($type !== '' && in_array($type, self::TYPES) === false) {
             throw new InvalidArgumentException('Wrong type. Choose: ' . implode(', ', self::TYPES));
         }
+
+        return $type;
     }
 
     /**

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices;
 
+use CSoellinger\FonWebservices\Enum\BankDataType;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 
 use const DIRECTORY_SEPARATOR;
@@ -88,15 +89,15 @@ class BankDataTransmissionWs extends SoapClient
      * Upload bank data to the FinanzOnline webservice.
      *
      * @param string $xml XML content or path to file
-     * @param string $type Choose KTOREG, KTOZUF, KTOABF, GMSG
+     * @param BankDataType|string $type Bank data type (use BankDataType enum, string support deprecated)
      * @param bool $isTest True if you want to send the data only for test purposes
      *
      * @throws Exception
      */
-    public function upload(string $xml, string $type, bool $isTest = false): bool
+    public function upload(string $xml, BankDataType|string $type, bool $isTest = false): bool
     {
         $this->validateXml($xml);
-        $this->validateType($type);
+        $typeValue = $this->validateType($type);
 
         // If we are not already logged in we can do it here.
         if ($this->sessionWs->isLoggedIn() === false) {
@@ -107,7 +108,7 @@ class BankDataTransmissionWs extends SoapClient
             'tid' => $this->sessionWs->getCredential()->teId,
             'benid' => $this->sessionWs->getCredential()->benId,
             'id' => $this->sessionWs->getID(),
-            'art' => $type,
+            'art' => $typeValue,
             'uebermittlung' => $isTest === true ? 'T' : 'P',
             'data' => $xml,
         ];
@@ -126,17 +127,25 @@ class BankDataTransmissionWs extends SoapClient
     /**
      * Validate and normalize the bank data type.
      *
-     * @param string $type The bank data type (KTOREG, KTOZUF, KTOABF, GMSG)
+     * @param BankDataType|string $type The bank data type
+     *
+     * @return string The validated type value
      *
      * @throws InvalidArgumentException If type is not supported
      */
-    private function validateType(string &$type): void
+    private function validateType(BankDataType|string $type): string
     {
+        if ($type instanceof BankDataType) {
+            return $type->value;
+        }
+
         $type = strtoupper($type);
 
         if (in_array($type, self::TYPES) === false) {
             throw new InvalidArgumentException('Wrong type. Choose one of them: ' . implode(', ', self::TYPES));
         }
+
+        return $type;
     }
 
     /**

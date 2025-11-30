@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices;
 
+use CSoellinger\FonWebservices\Enum\QueryDataType;
 use CSoellinger\FonWebservices\Model\QueryDataTransmission;
 use CSoellinger\FonWebservices\Response\ErrorResponse;
 use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
@@ -95,15 +96,15 @@ class QueryDataTransmissionWs extends SoapClient
      *
      * @param string $fastNr The FASTNR/tax number to query
      * @param string $period The period (year) to query, format YYYY (defaults to current year)
-     * @param string|null $type The query type (LOHNZETTEL, SONDERAUSGABEN, LEITUNGSRECHTE)
+     * @param QueryDataType|string|null $type The query type (use QueryDataType enum, string support deprecated)
      *
      * @return QueryDataTransmission The query result containing transmission data
      *
      * @throws Exception If the query fails
      */
-    public function query(string $fastNr, string $period = '', ?string $type = null): QueryDataTransmission
+    public function query(string $fastNr, string $period = '', QueryDataType|string|null $type = null): QueryDataTransmission
     {
-        $this->validateType($type);
+        $typeValue = $this->validateType($type);
         $this->validatePeriod($period);
 
         // If we are not already logged in we can do it here.
@@ -115,7 +116,7 @@ class QueryDataTransmissionWs extends SoapClient
             'tid' => $this->sessionWs->getCredential()->teId,
             'benid' => $this->sessionWs->getCredential()->benId,
             'id' => $this->sessionWs->getID(),
-            'art' => $type,
+            'art' => $typeValue,
             'fastnr' => $fastNr,
             'zeitraum' => $period,
         ];
@@ -140,12 +141,18 @@ class QueryDataTransmissionWs extends SoapClient
     /**
      * Validate and normalize the query type parameter.
      *
-     * @param string|null $type The query type to validate
+     * @param QueryDataType|string|null $type The query type to validate
+     *
+     * @return string|null The validated type value
      *
      * @throws InvalidArgumentException If type is not supported
      */
-    private function validateType(?string &$type): void
+    private function validateType(QueryDataType|string|null $type): ?string
     {
+        if ($type instanceof QueryDataType) {
+            return $type->value;
+        }
+
         if (is_string($type) === true) {
             $type = strtoupper($type);
 
@@ -153,6 +160,8 @@ class QueryDataTransmissionWs extends SoapClient
                 throw new InvalidArgumentException('Wrong type. Choose one of them: ' . implode(', ', self::TYPES));
             }
         }
+
+        return $type;
     }
 
     /**
