@@ -83,7 +83,7 @@
         "analyse:phpstan": "phpstan analyse --memory-limit=512M",
         "analyse:psalm": "psalm --show-info=true",
         "test": "pest",
-        "test:coverage": "pest --coverage",
+        "test:coverage": "pest --coverage-text --coverage-clover build/coverage/clover.xml",
         "test:coverage:html": "pest --coverage-html build/coverage",
         "rector": "rector process --dry-run",
         "rector:fix": "rector process",

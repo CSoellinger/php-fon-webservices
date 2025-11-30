@@ -100,7 +100,9 @@ jobs:
 
       - name: Run tests with coverage
         if: matrix.coverage == 'pcov'
-        run: composer test:coverage
+        run: |
+          mkdir -p build/coverage
+          composer test:coverage
 
       # - name: Upload coverage to GitHub
       #   if: matrix.coverage == 'pcov'
