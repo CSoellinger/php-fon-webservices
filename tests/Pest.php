@@ -13,4 +13,4 @@ declare(strict_types=1);
 |
 */
 
-uses(CSoellinger\Test\FonWebservices\FonWebservicesTestCase::class)->in('.');
+uses(CSoellinger\FonWebservices\Test\FonWebservicesTestCase::class)->in('.');

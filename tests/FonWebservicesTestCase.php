@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\Test\FonWebservices;
+namespace CSoellinger\FonWebservices\Test;
 
 use CSoellinger\FonWebservices\Authentication\FonCredential;
 use CSoellinger\FonWebservices\SessionWs;
