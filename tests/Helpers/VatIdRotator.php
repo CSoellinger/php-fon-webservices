@@ -31,6 +31,20 @@ class VatIdRotator
      * @var array<string>
      */
     private const VAT_ID_POOL = [
+        'ATU43203403',
+        'ATU56518600',
+        'ATU74138836',
+        'ATU48533500',
+        'ATU28802105',
+        'ATU72579907',
+        'ATU68179302',
+        'ATU73782828',
+        'ATU72696816',
+        'ATU69821918',
+        'ATU77944101',
+        'ATU69742834',
+        'ATU68920929',
+        'ATU62247713',
         'ATU19434404',
         'ATU64722615',
         'ATU33803701',
