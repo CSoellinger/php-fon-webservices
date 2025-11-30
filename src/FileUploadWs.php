@@ -78,7 +78,7 @@ class FileUploadWs extends SoapClient
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
     public function __construct(
-        private SessionWs $sessionWs,
+        private readonly SessionWs $sessionWs,
         array $soapOptions = [],
     ) {
 

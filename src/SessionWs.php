@@ -85,7 +85,7 @@ class SessionWs extends SoapClient
      *              array
      */
     public function __construct(
-        private FonCredential $credential,
+        private readonly FonCredential $credential,
         array $soapOptions = [],
     ) {
 
