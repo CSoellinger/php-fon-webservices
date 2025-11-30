@@ -15,8 +15,8 @@ declare(strict_types=1);
 use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
-use CSoellinger\FonWebservices\Tests\Helpers\VatIdRotator;
 use CSoellinger\FonWebservices\VatIdCheckWs;
+use CSoellinger\FonWebservices\Test\Helpers\VatIdRotator;
 
 test('check valid vat at level one', function (): void {
     $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);

@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace CSoellinger\FonWebservices\Tests\Helpers;
+namespace CSoellinger\FonWebservices\Test\Helpers;
 
 use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
 
