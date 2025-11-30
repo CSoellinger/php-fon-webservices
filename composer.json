@@ -36,6 +36,7 @@
         "ext-soap": "*"
     },
     "require-dev": {
+        "code-lts/doctum": "^5.5",
         "friendsofphp/php-cs-fixer": "^3.64",
         "pestphp/pest": "^1.23",
         "php-parallel-lint/php-parallel-lint": "^1.4",
@@ -89,6 +90,8 @@
             "@lint",
             "@format:check",
             "@analyse"
-        ]
+        ],
+        "docs": "vendor/bin/doctum.php update doctum.php",
+        "docs:serve": "php -S localhost:8000 -t docs/api"
     }
 }
