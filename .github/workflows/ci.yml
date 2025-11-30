@@ -55,13 +55,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1']
-        # php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        php: ['8.1', '8.2', '8.3', '8.4']
         os: [ubuntu-latest]
         # os: [ubuntu-latest, macos-latest, windows-latest]
         dependencies: [lowest, highest]
         include:
-          - php: '8.1'
+          - php: '8.2'
             os: ubuntu-latest
             dependencies: highest
             coverage: pcov
@@ -97,3 +96,9 @@ jobs:
       - name: Run tests
         if: matrix.coverage != 'pcov'
         run: composer test
+
+      - name: Run tests with coverage
+        if: matrix.coverage == 'pcov'
+        run: |
+          mkdir -p build/coverage
+          composer test:coverage
