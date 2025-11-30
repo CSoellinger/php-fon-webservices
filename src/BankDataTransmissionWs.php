@@ -68,19 +68,15 @@ class BankDataTransmissionWs extends SoapClient
     private const TYPES = ['KTOREG', 'KTOZUF', 'KTOABF', 'GMSG'];
 
     /**
-     * @var SessionWs session web service
-     */
-    private SessionWs $sessionWs;
-
-    /**
      * Constructor.
      *
      * @param SessionWs $sessionWs Session webservice
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
-    public function __construct(SessionWs $sessionWs, array $soapOptions = [])
-    {
-        $this->sessionWs = $sessionWs;
+    public function __construct(
+        private SessionWs $sessionWs,
+        array $soapOptions = [],
+    ) {
 
         /** @var string $wsdl */
         $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;

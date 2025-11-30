@@ -97,19 +97,15 @@ class VatIdCheckWs extends SoapClient
     public const NOT_VALID_RETURN_CODES = [1, 4];
 
     /**
-     * @var SessionWs session web service
-     */
-    private SessionWs $sessionWs;
-
-    /**
      * Constructor.
      *
      * @param SessionWs $sessionWs Session web service
      * @param array<string,mixed> $soapOptions PHP SOAP client options
      */
-    public function __construct(SessionWs $sessionWs, array $soapOptions = [])
-    {
-        $this->sessionWs = $sessionWs;
+    public function __construct(
+        private SessionWs $sessionWs,
+        array $soapOptions = [],
+    ) {
 
         /** @var string $wsdl */
         $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;

@@ -68,11 +68,6 @@ class SessionWs extends SoapClient
         'wsdl' . DIRECTORY_SEPARATOR . 'sessionService.wsdl';
 
     /**
-     * @var FonCredential Web service credential class
-     */
-    private FonCredential $credential;
-
-    /**
      * @var string Web service session id
      */
     private string $id = '';
@@ -89,9 +84,10 @@ class SessionWs extends SoapClient
      * @return void
      *              array
      */
-    public function __construct(FonCredential $credential, array $soapOptions = [])
-    {
-        $this->credential = $credential;
+    public function __construct(
+        private FonCredential $credential,
+        array $soapOptions = [],
+    ) {
 
         /** @var string $wsdl */
         $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
