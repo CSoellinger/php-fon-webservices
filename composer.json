@@ -1,7 +1,7 @@
 {
     "name": "csoellinger/php-fon-webservices",
     "homepage": "https://github.com/CSoellinger/php-fon-webservices",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "PHP library to handle FinanzOnline web services.",
     "license": "Unlicense",
     "type": "library",
@@ -33,23 +33,22 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0 || ^8.1",
+        "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
         "ext-soap": "*"
     },
     "require-dev": {
         "code-lts/doctum": "^5.5",
         "friendsofphp/php-cs-fixer": "^3.64",
-        "pestphp/pest": "^1.23",
+        "pestphp/pest": "^2.0 || ^3.0",
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/phpstan": "^1.12",
         "rector/rector": "^1.2",
-        "symfony/console": "^5.4 || ^6.4",
-        "symfony/dotenv": "^5.4 || ^6.4",
-        "symfony/filesystem": "^5.4 || ^6.4",
-        "symfony/finder": "^5.4 || ^6.4",
-        "symfony/polyfill-php80": "^1.31",
-        "symfony/process": "^5.4 || ^6.4",
-        "symfony/var-dumper": "^5.4 || ^6.4",
+        "symfony/console": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dotenv": "^5.4 || ^6.4 || ^7.0",
+        "symfony/filesystem": "^5.4 || ^6.4 || ^7.0",
+        "symfony/finder": "^5.4 || ^6.4 || ^7.0",
+        "symfony/process": "^5.4 || ^6.4 || ^7.0",
+        "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0",
         "vimeo/psalm": "^5.26"
     },
     "minimum-stability": "dev",
@@ -83,8 +82,8 @@
         "analyse:phpstan": "phpstan analyse --memory-limit=512M",
         "analyse:psalm": "psalm --show-info=true",
         "test": "pest",
-        "test:coverage": "@php -r \"echo 'Note: Coverage generation with Pest v1 is not reliable locally.\\nUse GitHub Actions CI for coverage reports, or upgrade to Pest v2 (requires PHP 8.1+).\\n';\" && mkdir -p build/coverage && pest --coverage-text --coverage-clover build/coverage/clover.xml",
-        "test:coverage:html": "@php -r \"echo 'Note: Coverage generation with Pest v1 is not reliable locally.\\nUse GitHub Actions CI for coverage reports, or upgrade to Pest v2 (requires PHP 8.1+).\\n';\" && pest --coverage-html build/coverage",
+        "test:coverage": "pest --coverage-text --coverage-clover build/coverage/clover.xml",
+        "test:coverage:html": "pest --coverage-html build/coverage",
         "rector": "rector process --dry-run",
         "rector:fix": "rector process",
         "check": [
