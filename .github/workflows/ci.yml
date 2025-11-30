@@ -88,6 +88,9 @@ jobs:
         with:
           dependency-versions: ${{ matrix.dependencies }}
 
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
+
       - name: Check syntax
         run: composer lint
 
