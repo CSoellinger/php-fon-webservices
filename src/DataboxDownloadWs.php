@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace CSoellinger\FonWebservices;
 
 use function array_map;
-use function array_merge;
 
 use CSoellinger\FonWebservices\Enum\DataboxType;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
@@ -121,9 +120,10 @@ class DataboxDownloadWs extends SoapClient
         }
 
         // Let's make the soap call
-        $soapParams = array_merge([
+        $soapParams = [
             'erltyp' => $typeValue,
-        ], $this->getCredentialSoapParams());
+            ...$this->getCredentialSoapParams(),
+        ];
 
         if ($from && $to) {
             $soapParams['ts_zust_von'] = $from->format(DateTime::ATOM);
@@ -162,9 +162,10 @@ class DataboxDownloadWs extends SoapClient
         }
 
         // Let's make the soap call
-        $soapParams = array_merge([
+        $soapParams = [
             'applkey' => $applkey,
-        ], $this->getCredentialSoapParams());
+            ...$this->getCredentialSoapParams(),
+        ];
 
         /** @var EntryResponse|ErrorResponse $response */
         $response = $this->__soapCall('getDataboxEntry', [$soapParams]);
