@@ -15,15 +15,40 @@ declare(strict_types=1);
 use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne;
 use CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo;
+use CSoellinger\FonWebservices\Tests\Helpers\VatIdRotator;
 use CSoellinger\FonWebservices\VatIdCheckWs;
 
-test('check valid vat at level one', function (string $uid): void {
+use const PHP_EOL;
+
+test('check valid vat at level one', function (): void {
     $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
     expect($vatIdCheckWebservice)->toBeInstanceOf(VatIdCheckWs::class);
 
-    usleep(500);
-    /** @var VatIdCheckInvalid|VatIdCheckValidLevelOne $result */
-    $result = $vatIdCheckWebservice->check($uid);
+    $result = null;
+    $lastError = null;
+
+    // Try all VAT IDs in the pool until one succeeds
+    foreach (VatIdRotator::getAllVatIds() as $uid) {
+        usleep(500);
+        /** @var VatIdCheckInvalid|VatIdCheckValidLevelOne $result */
+        $result = $vatIdCheckWebservice->check($uid);
+
+        // If rate limited (error 1513), try next VAT ID
+        if (VatIdRotator::isRateLimited($result)) {
+            $lastError = $result;
+            continue;
+        }
+
+        // Found a working VAT ID, break the loop
+        break;
+    }
+
+    // If all VAT IDs were rate limited, fail with the last error
+    if (VatIdRotator::isRateLimited($result)) {
+        echo PHP_EOL . 'All VAT IDs in pool are rate limited. Last error:' . PHP_EOL;
+        print_r($lastError);
+        expect(false)->toBeTrue('All VAT IDs exhausted - add more to the pool');
+    }
 
     if ($result instanceof VatIdCheckInvalid) {
         print_r($result);
@@ -31,16 +56,36 @@ test('check valid vat at level one', function (string $uid): void {
 
     expect($result)->toBeInstanceOf(VatIdCheckValidLevelOne::class);
     expect($result->valid)->toBeTrue();
-})->with([
-    ['ATU72312179'],
-]);
+});
 
-test('check valid vat at level two', function (string $uid): void {
+test('check valid vat at level two', function (): void {
     $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);
 
-    usleep(500);
-    /** @var VatIdCheckInvalid|VatIdCheckValidLevelTwo $result */
-    $result = $vatIdCheckWebservice->check($uid, VatIdCheckWs::LEVEL_FULL_CHECK);
+    $result = null;
+    $lastError = null;
+
+    // Try all VAT IDs in the pool until one succeeds
+    foreach (VatIdRotator::getAllVatIds() as $uid) {
+        usleep(500);
+        /** @var VatIdCheckInvalid|VatIdCheckValidLevelTwo $result */
+        $result = $vatIdCheckWebservice->check($uid, VatIdCheckWs::LEVEL_FULL_CHECK);
+
+        // If rate limited (error 1513), try next VAT ID
+        if (VatIdRotator::isRateLimited($result)) {
+            $lastError = $result;
+            continue;
+        }
+
+        // Found a working VAT ID, break the loop
+        break;
+    }
+
+    // If all VAT IDs were rate limited, fail with the last error
+    if (VatIdRotator::isRateLimited($result)) {
+        echo PHP_EOL . 'All VAT IDs in pool are rate limited. Last error:' . PHP_EOL;
+        print_r($lastError);
+        expect(false)->toBeTrue('All VAT IDs exhausted - add more to the pool');
+    }
 
     if ($result instanceof VatIdCheckInvalid) {
         print_r($result);
@@ -49,9 +94,7 @@ test('check valid vat at level two', function (string $uid): void {
     expect($result)->toBeInstanceOf(VatIdCheckValidLevelTwo::class);
     expect($result->valid)->toBeTrue();
     expect($result->name)->not->toBeEmpty();
-})->with([
-    ['ATU72312179'],
-]);
+});
 
 test('check invalid vat', function (string $uid): void {
     $vatIdCheckWebservice = new VatIdCheckWs($this->sessionWs);

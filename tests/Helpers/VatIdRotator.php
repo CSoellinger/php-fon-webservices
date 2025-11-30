@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * This file is part of csoellinger/php-fon-webservices.
+ *
+ * csoellinger/php-fon-webservices is free and unencumbered software released
+ * into the public domain. For more information, please view the
+ * UNLICENSE file that was distributed with this source code.
+ *
+ * @license https://unlicense.org The Unlicense
+ */
+
+declare(strict_types=1);
+
+namespace CSoellinger\FonWebservices\Tests\Helpers;
+
+use CSoellinger\FonWebservices\Model\VatIdCheckInvalid;
+
+/**
+ * Helper class to rotate through VAT IDs to avoid API rate limits.
+ *
+ * Each VAT ID can only be queried twice per day (error code 1513).
+ * This class provides a pool of VAT IDs to rotate through when one is exhausted.
+ */
+class VatIdRotator
+{
+    /**
+     * Pool of valid Austrian VAT IDs that can be used for testing.
+     * Each UID can be queried twice per day via the API.
+     *
+     * @var array<string>
+     */
+    private const VAT_ID_POOL = [
+        'ATU19434404',
+        'ATU64722615',
+        'ATU33803701',
+        'ATU15255907',
+        'ATU72312179',
+    ];
+
+    /**
+     * Error code indicating the VAT ID has been used too many times today.
+     */
+    public const ERROR_CODE_RATE_LIMIT = 1513;
+
+    /**
+     * Get all available VAT IDs in the pool.
+     *
+     * @return array<string>
+     */
+    public static function getAllVatIds(): array
+    {
+        return self::VAT_ID_POOL;
+    }
+
+    /**
+     * Check if a result indicates rate limiting.
+     *
+     * @param mixed $result The check result
+     * @return bool True if the result indicates rate limiting
+     */
+    public static function isRateLimited($result): bool
+    {
+        return $result instanceof VatIdCheckInvalid &&
+               $result->code === self::ERROR_CODE_RATE_LIMIT;
+    }
+}
