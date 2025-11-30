@@ -18,8 +18,6 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
-use stdClass;
-
 class QueryDataTransmissionL16LzData
 {
     public ?float $kz210 = null;
@@ -114,7 +112,10 @@ class QueryDataTransmissionL16LzData
 
     public ?QueryDataTransmissionL16LzDataChild $faboL16Kind = null;
 
-    public static function createFromResponse(stdClass $response): self
+    /**
+     * @param \stdClass $response
+     */
+    public static function createFromResponse(object $response): self
     {
         $new = Serializer::deserialize($response, self::class);
 

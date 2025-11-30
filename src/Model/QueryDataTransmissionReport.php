@@ -18,8 +18,6 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
-use stdClass;
-
 class QueryDataTransmissionReport
 {
     public QueryDataTransmissionReportBasicDataLz $grunddatenLz;
@@ -36,7 +34,10 @@ class QueryDataTransmissionReport
         $this->grunddatenArbeitnehmer = new QueryDataTransmissionReportBasicDataAn();
     }
 
-    public static function createFromResponse(stdClass $response): self
+    /**
+     * @param \stdClass $response
+     */
+    public static function createFromResponse(object $response): self
     {
         $new = new self();
 

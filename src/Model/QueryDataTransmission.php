@@ -14,10 +14,13 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
+use function array_map;
+
 use CSoellinger\FonWebservices\Response\QueryDataTransmission\QueryResponse;
 use CSoellinger\FonWebservices\Util\Serializer;
-use function array_map;
+
 use function property_exists;
+
 use stdClass;
 
 class QueryDataTransmission
@@ -47,26 +50,39 @@ class QueryDataTransmission
         $new = new self();
 
         if (property_exists($result, 'l16') === true) {
-            $new->l16 = QueryDataTransmissionL16::createFromResponse((object) $result->l16);
+            /** @var stdClass $l16Data */
+            $l16Data = (object) $result->l16;
+            $new->l16 = QueryDataTransmissionL16::createFromResponse($l16Data);
         }
 
         if (property_exists($result, 'l17') === true) {
-            $new->l17 = QueryDataTransmissionL17::createFromResponse((object) $result->l17);
+            /** @var stdClass $l17Data */
+            $l17Data = (object) $result->l17;
+            $new->l17 = QueryDataTransmissionL17::createFromResponse($l17Data);
         }
 
         if (property_exists($result, 'meldung') === true) {
-            $new->meldung = QueryDataTransmissionReport::createFromResponse((object) $result->meldung);
+            /** @var stdClass $meldungData */
+            $meldungData = (object) $result->meldung;
+            $new->meldung = QueryDataTransmissionReport::createFromResponse($meldungData);
         }
 
         if (property_exists($result, 'mitteilung109a') === true) {
-            $new->mitteilung109a = QueryDataTransmissionMsg109a::createFromResponse((object) $result->mitteilung109a);
+            /** @var stdClass $mitteilung109aData */
+            $mitteilung109aData = (object) $result->mitteilung109a;
+            $new->mitteilung109a = QueryDataTransmissionMsg109a::createFromResponse($mitteilung109aData);
         }
 
         if (property_exists($result, 'sonderausgaben') === true) {
             // Management right
 
             $new->sonderausgaben = array_map(
-                fn ($val) => QueryDataTransmissionExtraExpenses::createFromResponse((object) $val),
+                function ($val) {
+                    /** @var stdClass $valData */
+                    $valData = (object) $val;
+
+                    return QueryDataTransmissionExtraExpenses::createFromResponse($valData);
+                },
                 (array) $result->sonderausgaben,
             );
         }

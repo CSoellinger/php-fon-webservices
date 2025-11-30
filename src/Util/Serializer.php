@@ -26,19 +26,23 @@ use stdClass;
 class Serializer
 {
     /**
-     * Deserialize stdClass to a typed model object.
+     * Deserialize stdClass or object to a typed model object.
      *
      * @template T of object
-     * @param stdClass $data
+     * @param stdClass|object $data
      * @param class-string<T> $className
      * @return T
      */
-    public static function deserialize(stdClass $data, string $className): object
+    public static function deserialize(object $data, string $className): object
     {
         $reflection = new ReflectionClass($className);
         $instance = $reflection->newInstance();
 
-        foreach (get_object_vars($data) as $propertyName => $value) {
+        /** @var array<string, mixed> $properties */
+        $properties = get_object_vars($data);
+
+        /** @psalm-suppress MixedAssignment */
+        foreach ($properties as $propertyName => $value) {
             if (!$reflection->hasProperty($propertyName)) {
                 continue;
             }
@@ -46,7 +50,6 @@ class Serializer
             $property = $reflection->getProperty($propertyName);
             $property->setAccessible(true);
 
-            /** @var mixed $convertedValue */
             $convertedValue = self::convertValue($value, $property);
             $property->setValue($instance, $convertedValue);
         }
@@ -96,12 +99,9 @@ class Serializer
         }
 
         // Handle nested object conversion
-        if (class_exists($typeName) && ($value instanceof stdClass || is_array($value))) {
+        if (class_exists($typeName) && ($value instanceof stdClass || is_object($value) || is_array($value))) {
             if (is_array($value)) {
-                /** @var stdClass $stdClassValue */
-                $stdClassValue = (object) $value;
-
-                return self::deserialize($stdClassValue, $typeName);
+                $value = (object) $value;
             }
 
             return self::deserialize($value, $typeName);

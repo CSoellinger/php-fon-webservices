@@ -20,8 +20,6 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
-use stdClass;
-
 class QueryDataTransmissionExtraExpenses
 {
     /** @var string ... */
@@ -36,7 +34,10 @@ class QueryDataTransmissionExtraExpenses
     /** @var array<QueryDataTransmissionExtraExpensesDetail>|null ... */
     public ?array $sonderausgabenDetail = null;
 
-    public static function createFromResponse(stdClass $response): self
+    /**
+     * @param \stdClass $response
+     */
+    public static function createFromResponse(object $response): self
     {
         $new = Serializer::deserialize($response, self::class);
 
