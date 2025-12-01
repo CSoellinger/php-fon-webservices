@@ -37,7 +37,7 @@
         "ext-soap": "*"
     },
     "require-dev": {
-        "code-lts/doctum": "^5.5",
+        "code-lts/doctum": "dev-main",
         "friendsofphp/php-cs-fixer": "^3.91",
         "pestphp/pest": "^2 || ^3 || ^4",
         "php-parallel-lint/php-parallel-lint": "^1.4",
@@ -49,7 +49,7 @@
         "symfony/finder": "^6.4 || ^7.0",
         "symfony/process": "^6.4 || ^7.0",
         "symfony/var-dumper": "^6.4 || ^7.0",
-        "vimeo/psalm": "^5.26"
+        "vimeo/psalm": "^6.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
