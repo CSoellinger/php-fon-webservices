@@ -9,9 +9,6 @@
     <ClassMustBeFinal>
       <code><![CDATA[BankDataTransmissionWs]]></code>
     </ClassMustBeFinal>
-    <ReferenceConstraintViolation>
-      <code><![CDATA[$xml]]></code>
-    </ReferenceConstraintViolation>
   </file>
   <file src="src/DataboxDownloadWs.php">
     <ClassMustBeFinal>
@@ -22,134 +19,6 @@
     <ClassMustBeFinal>
       <code><![CDATA[FileUploadWs]]></code>
     </ClassMustBeFinal>
-    <ReferenceConstraintViolation>
-      <code><![CDATA[$xml]]></code>
-    </ReferenceConstraintViolation>
-  </file>
-  <file src="src/Model/DataboxDownloadListItem.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[DataboxDownloadListItem]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmission.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmission]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionBasicDataAg.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionBasicDataAg]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionExtraExpenses.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionExtraExpenses]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionExtraExpensesDetail.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionExtraExpensesDetail]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL16.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL16]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL16BasicDataAn.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL16BasicDataAn]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL16BasicDataLz.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL16BasicDataLz]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL16LzData.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL16LzData]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL16LzDataChild.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL16LzDataChild]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL17.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL17]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL17BasicDataAn.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL17BasicDataAn]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL17BasicDataLz.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL17BasicDataLz]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionL17LzData.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionL17LzData]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionManagementRight.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionManagementRight]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionMsg109a.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionMsg109a]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionMsg109aBasicDataAn.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionMsg109aBasicDataAn]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionMsg109aBasicDataLz.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionMsg109aBasicDataLz]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionMsg109aLzData.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionMsg109aLzData]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionReport.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionReport]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionReportBasicDataAn.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionReportBasicDataAn]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionReportBasicDataLz.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionReportBasicDataLz]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/QueryDataTransmissionReportLzData.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[QueryDataTransmissionReportLzData]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/VatIdCheckInvalid.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[VatIdCheckInvalid]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Model/VatIdCheckValidLevelTwo.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[VatIdCheckValidLevelTwo]]></code>
-    </ClassMustBeFinal>
   </file>
   <file src="src/QueryDataTransmissionWs.php">
     <ClassMustBeFinal>
@@ -159,11 +28,6 @@
   <file src="src/SessionWs.php">
     <ClassMustBeFinal>
       <code><![CDATA[SessionWs]]></code>
-    </ClassMustBeFinal>
-  </file>
-  <file src="src/Util/Serializer.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[Serializer]]></code>
     </ClassMustBeFinal>
   </file>
   <file src="src/VatIdCheckWs.php">

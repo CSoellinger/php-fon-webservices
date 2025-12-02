@@ -16,7 +16,7 @@ namespace CSoellinger\FonWebservices\Model;
 
 use DateTime;
 
-class DataboxDownloadListItem
+final class DataboxDownloadListItem
 {
     /**
      * @var string Tax number (Steuernummer)

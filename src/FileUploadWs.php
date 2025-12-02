@@ -156,11 +156,15 @@ class FileUploadWs extends SoapClient
      * Validate XML parameter and load from file if path is provided.
      *
      * @param string $xml XML content or path to XML file
+     * @param-out string $xml
      */
     private function validateXml(string &$xml): void
     {
         if (file_exists($xml) === true) {
-            $xml = file_get_contents($xml);
+            $content = file_get_contents($xml);
+            if ($content !== false) {
+                $xml = $content;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class QueryDataTransmissionL17LzData
+final class QueryDataTransmissionL17LzData
 {
     public ?float $kz350 = null;
 

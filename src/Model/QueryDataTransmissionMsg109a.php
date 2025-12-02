@@ -21,7 +21,7 @@ use function property_exists;
 /**
  * Message 109a (Mitteilung 109a) contractor payment data model.
  */
-class QueryDataTransmissionMsg109a
+final class QueryDataTransmissionMsg109a
 {
     /**
      * @var QueryDataTransmissionMsg109aBasicDataLz Message basic data

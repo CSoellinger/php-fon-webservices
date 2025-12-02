@@ -23,7 +23,7 @@ use function property_exists;
 /**
  * Special expenses (Sonderausgaben) data model.
  */
-class QueryDataTransmissionExtraExpenses
+final class QueryDataTransmissionExtraExpenses
 {
     /**
      * @var string Category code

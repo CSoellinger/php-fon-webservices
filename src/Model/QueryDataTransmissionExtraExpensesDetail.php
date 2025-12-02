@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class QueryDataTransmissionExtraExpensesDetail
+final class QueryDataTransmissionExtraExpensesDetail
 {
     /** @var string ... */
     public string $organisation = '';

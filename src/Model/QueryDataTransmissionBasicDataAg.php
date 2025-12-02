@@ -17,7 +17,7 @@ namespace CSoellinger\FonWebservices\Model;
 /**
  * Employer (Arbeitgeber) basic data model.
  */
-class QueryDataTransmissionBasicDataAg
+final class QueryDataTransmissionBasicDataAg
 {
     /**
      * @var string|null Employer name

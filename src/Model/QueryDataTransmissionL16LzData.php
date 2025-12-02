@@ -18,7 +18,7 @@ use CSoellinger\FonWebservices\Util\Serializer;
 
 use function property_exists;
 
-class QueryDataTransmissionL16LzData
+final class QueryDataTransmissionL16LzData
 {
     public ?float $kz210 = null;
 

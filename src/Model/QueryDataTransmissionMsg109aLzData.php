@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class QueryDataTransmissionMsg109aLzData
+final class QueryDataTransmissionMsg109aLzData
 {
     public ?string $artleiswert = null;
     // ENUM: + Leistungen als Mitglied des Aufsichtsrates, Verwaltungsrates und andere Leistungen

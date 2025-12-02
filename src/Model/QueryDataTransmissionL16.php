@@ -21,7 +21,7 @@ use function property_exists;
 /**
  * L16 wage statement (Lohnzettel) data model.
  */
-class QueryDataTransmissionL16
+final class QueryDataTransmissionL16
 {
     /**
      * @var QueryDataTransmissionL16BasicDataLz Wage statement basic data

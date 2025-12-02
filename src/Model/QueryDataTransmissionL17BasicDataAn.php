@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class QueryDataTransmissionL17BasicDataAn
+final class QueryDataTransmissionL17BasicDataAn
 {
     /** @var string|null ... */
     public ?string $vnrArbeitnehmer = null;

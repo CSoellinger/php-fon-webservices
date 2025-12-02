@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class QueryDataTransmissionMsg109aBasicDataLz
+final class QueryDataTransmissionMsg109aBasicDataLz
 {
     public string $jahr = '';
 

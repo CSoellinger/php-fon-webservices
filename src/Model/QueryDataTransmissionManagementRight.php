@@ -17,7 +17,7 @@ namespace CSoellinger\FonWebservices\Model;
 /**
  * Management right (Leitungsrecht) data model.
  */
-class QueryDataTransmissionManagementRight
+final class QueryDataTransmissionManagementRight
 {
     /**
      * @var string Infrastructure operator name

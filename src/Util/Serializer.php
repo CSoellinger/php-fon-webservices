@@ -23,7 +23,7 @@ use stdClass;
 /**
  * Helper to deserialize stdClass to model classes.
  */
-class Serializer
+final class Serializer
 {
     /**
      * Deserialize stdClass or object to a typed model object.

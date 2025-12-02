@@ -21,7 +21,7 @@ use function property_exists;
 /**
  * Report/message (Meldung) data model.
  */
-class QueryDataTransmissionReport
+final class QueryDataTransmissionReport
 {
     /**
      * @var QueryDataTransmissionReportBasicDataLz Report basic data

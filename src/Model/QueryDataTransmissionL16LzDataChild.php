@@ -16,7 +16,7 @@ namespace CSoellinger\FonWebservices\Model;
 
 use DateTime;
 
-class QueryDataTransmissionL16LzDataChild
+final class QueryDataTransmissionL16LzDataChild
 {
     public ?string $nachnameKind = null;
 

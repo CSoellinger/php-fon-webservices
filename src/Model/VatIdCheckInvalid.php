@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class VatIdCheckInvalid
+final class VatIdCheckInvalid
 {
     /**
      * @var int Error code

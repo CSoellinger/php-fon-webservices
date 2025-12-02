@@ -26,7 +26,7 @@ use stdClass;
 /**
  * Query data transmission model containing various tax data types.
  */
-class QueryDataTransmission
+final class QueryDataTransmission
 {
     /**
      * @var QueryDataTransmissionL16|null L16 wage statement data

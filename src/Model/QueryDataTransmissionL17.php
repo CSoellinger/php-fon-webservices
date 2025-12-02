@@ -21,7 +21,7 @@ use function property_exists;
 /**
  * L17 pension statement (Pensionszettel) data model.
  */
-class QueryDataTransmissionL17
+final class QueryDataTransmissionL17
 {
     /**
      * @var QueryDataTransmissionL17BasicDataLz Pension statement basic data

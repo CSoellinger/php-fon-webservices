@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace CSoellinger\FonWebservices\Model;
 
-class VatIdCheckValidLevelTwo extends VatIdCheckValidLevelOne
+final class VatIdCheckValidLevelTwo extends VatIdCheckValidLevelOne
 {
     /**
      * @var string Organisation name
