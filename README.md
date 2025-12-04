@@ -179,7 +179,7 @@ Now open your browser and go to http://localhost:8005
 
 ### Requirements
 
-- PHP 7.4+ with SOAP extension
+- PHP 8.1+ with SOAP extension
 - Composer 2.x
 - Optional: Podman & Podman Compose for multi-version testing
 
@@ -201,7 +201,7 @@ This project uses modern PHP tooling for code quality:
   ```
 
 #### Code Style & Formatting
-- **[PHP-CS-Fixer](https://cs.symfony.com/)** - Automatic code style fixer (PSR-12 + PHP 7.4 migration rules)
+- **[PHP-CS-Fixer](https://cs.symfony.com/)** - Automatic code style fixer (PSR-12)
   ```bash
   composer format            # Auto-fix code style
   composer format:check      # Check code style (for CI)
@@ -241,15 +241,16 @@ podman-compose build
 podman-compose run --rm php82 composer update
 
 # Run tests on a specific PHP version
-podman-compose run --rm php74 composer test
-podman-compose run --rm php80 composer test
+podman-compose run --rm php81 composer test
 podman-compose run --rm php82 composer test
+podman-compose run --rm php83 composer test
+podman-compose run --rm php84 composer test
 
 # Test all versions at once
 bash bin/test-all-versions.sh
 ```
 
-**Supported PHP versions:** 7.4, 8.0, 8.1, 8.2, 8.3, 8.4
+**Supported PHP versions:** 8.1, 8.2, 8.3, 8.4
 
 **Note:** After modifying `composer.json`, you need to run `composer update` inside a container to update dependencies before running tests.
 
