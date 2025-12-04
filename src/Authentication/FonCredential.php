@@ -24,6 +24,8 @@ use function preg_match;
  * ```php
  * $credential = new FonCredential($tId, $tUid, $benId, $benPin);
  * ```
+ *
+ * @api
  */
 class FonCredential
 {

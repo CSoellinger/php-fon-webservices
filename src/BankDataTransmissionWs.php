@@ -46,6 +46,8 @@ use function strtoupper;
  * - -4 = Various errors from the XML parser
  * - -5 = You are not allowed to send content like this.
  *
+ * @api
+ *
  * @see https://www.bmf.gv.at/dam/jcr:e9e0dab8-13ac-4073-b6fb-38f3f52b5e56/BMF_Bankendatenuebermittlung_Webservice.pdf
  */
 class BankDataTransmissionWs extends SoapClient

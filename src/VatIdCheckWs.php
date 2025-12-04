@@ -60,6 +60,8 @@ use function trim;
  * - 105 = Die UID-Nummer ist über FinanzOnline einzeln abzufragen.
  * - 1511 = Der angegebene Mitgliedstaat ist derzeit nicht erreichbar.
  *
+ * @api
+ *
  * @see https://www.bmf.gv.at/dam/jcr:e6acfe5b-f4a5-44f6-8a57-28256efdb850/BMF_UID_Abfrage_Webservice_2.pdf
  */
 class VatIdCheckWs extends SoapClient

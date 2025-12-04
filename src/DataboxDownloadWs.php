@@ -59,6 +59,8 @@ use function strtoupper;
  * - -5 = "ts_zust_von" can not be before 31 days
  * - -6 = "ts_zust_bis" can not be after 7 days
  *
+ * @api
+ *
  * @see https://www.bmf.gv.at/dam/jcr:02d9e9ec-a4f6-4c58-aa3d-aadb8946aed2/BMF_DataBox_Download_Webservice_2.pdf
  */
 class DataboxDownloadWs extends SoapClient

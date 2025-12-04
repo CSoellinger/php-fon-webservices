@@ -55,6 +55,8 @@ use function strtoupper;
  * - -6 = The period have to be between the (current year - 7) and the current year
  * - -7 = Not allowed to query this FastNr
  *
+ * @api
+ *
  * @see https://www.bmf.gv.at/dam/jcr:37d7c48b-d4f3-4c14-ab0c-684c93627089/BMF_Abfrage_Datenuebermittlungen_Webservice.pdf
  */
 class QueryDataTransmissionWs extends SoapClient

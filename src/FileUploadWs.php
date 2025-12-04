@@ -46,6 +46,8 @@ use function strtoupper;
  * - -4 = Various errors from the XML parser
  * - -5 = You are not allowed to send content like this.
  *
+ * @api
+ *
  * @see https://www.bmf.gv.at/dam/jcr:7f3258d4-5d58-455d-9bfe-a352a4effd73/BMF_File_Upload_Webservice_2.pdf
  */
 class FileUploadWs extends SoapClient

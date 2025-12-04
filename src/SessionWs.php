@@ -47,6 +47,8 @@ use SoapClient;
  * - -7 = The user is not a web service user.
  * - -8 = The participant is locked for FinanzOnline or not authorized to use the web service
  *
+ * @api
+ *
  * @see https://www.bmf.gv.at/dam/jcr:570753b2-d511-4194-a03e-33f0ac7371ec/BMF_Session_Webservice_2.pdf
  * @see https://www.bmf.gv.at/dam/jcr:95d0e370-4efb-4ac9-9132-165189ac30ba/BMF_Session_Webservice_Englisch.pdf
  *
