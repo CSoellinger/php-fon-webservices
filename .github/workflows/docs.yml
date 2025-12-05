@@ -4,28 +4,28 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**'
+      - 'src/**/*.php'
       - 'doctum.php'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: documentation
   cancel-in-progress: true
 
 jobs:
-  build:
+  generate:
     name: Generate API Documentation
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -43,20 +43,15 @@ jobs:
       - name: Generate documentation
         run: composer docs
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Commit documentation
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          path: docs/api
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          commit_message: "docs: update API documentation [skip ci]"
+          file_pattern: 'docs/api/**'
+          commit_user_name: 'github-actions[bot]'
+          commit_user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+          skip_dirty_check: false
+          skip_fetch: false
+          skip_checkout: false
+          disable_globbing: false

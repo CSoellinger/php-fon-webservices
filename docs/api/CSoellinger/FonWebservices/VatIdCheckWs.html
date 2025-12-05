@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>CSoellinger\FonWebservices\VatIdCheckWs | PHP FinanzOnline Webservices API Documentation</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../fonts/doctum-font.css">
+        <script src="../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../doctum.js"></script>
+        <script async defer src="../../js/bootstrap.min.js"></script>
+        <script async defer src="../../js/autocomplete.min.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:CSoellinger_FonWebservices_VatIdCheckWs" data-root-path="../../" data-search-index-url="../../doctum-search.json">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <div class="search-bar hidden" id="search-progress-bar-container">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" id="search-progress-bar"
+                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+        </div>
+        <form id="search-form" action="../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   id="doctum-search-auto-complete"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search"
+                   spellcheck="false"
+                   autocorrect="off"
+                   autocomplete="off"
+                   autocapitalize="off">
+            <div class="auto-complete-results" id="auto-complete-results"></div>
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">PHP FinanzOnline Webservices API Documentation</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                    <li><a href="../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../CSoellinger.html">CSoellinger</a></li><li class="backslash">\</li><li><a href="../../CSoellinger/FonWebservices.html">FonWebservices</a></li><li class="backslash">\</li><li>VatIdCheckWs</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>VatIdCheckWs    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>VatIdCheckWs</strong>        extends SoapClient        (<a href="https://github.com/CSoellinger/php-fon-webservices/blob/main/src/VatIdCheckWs.php">View source</a>)
+</p>
+
+        
+        
+    
+        
+
+            <div class="description">
+            <p><p>Check a vat id by the finanzonline UidAbfrage webservice.</p>
+</p>            <p><p>Requirements for this service:</p>
+<ul>
+<li>A registration for FinanzOnline</li>
+<li>A user for the web service, which can be created in the user administration of FinanzOnline</li>
+</ul>
+<p>Return codes</p>
+<ul>
+<li>0 = Die UID des Erwerbers ist gültig.</li>
+<li>-1 = Die Session ID ist ungültig oder abgelaufen.</li>
+<li>-2 = Der Aufruf des Webservices ist derzeit wegen Wartungsarbeiten nicht möglich.</li>
+<li>-3 = Es ist ein technischer Fehler aufgetreten.</li>
+<li>-4 = Dieser Teilnehmer ist für diese Funktion nicht berechtigt.</li>
+<li>1 = Die UID des Erwerbers ist nicht gültig.</li>
+<li>4 = Die UID-Nummer des Erwerbers ist falsch.</li>
+<li>5 = Die UID-Nummer des Antragstellers ist ungültig.</li>
+<li>10 = Der angegebene Mitgliedstaat verbietet diese Abfrage.</li>
+<li>101 = UID beginnt nicht mit ATU.</li>
+<li>103 = Die angefragte UID-Nummer kann im FinanzOnline nur in Stufe 1 bestätigt werden,
+da diese UID-Nummer zu einer Unternehmensgruppe (Umsatzsteuergruppe) gehört.</li>
+<li>104 = Die angefragte UID-Nummer kann im FinanzOnline nur in Stufe 1 bestätigt werden,
+da diese UID-Nummer zu einer Unternehmensgruppe (Umsatzsteuergruppe) gehört.</li>
+<li>105 = Die UID-Nummer ist über FinanzOnline einzeln abzufragen.</li>
+<li>1511 = Der angegebene Mitgliedstaat ist derzeit nicht erreichbar.</li>
+</ul>
+</p>        </div>
+            
+        
+            <h2>Constants</h2>    <table class="table table-condensed">
+                    <tr>
+                <td>
+                                                                                                                        WSDL
+                                    </td>
+                <td class="last">
+                    <p><em><p>Online WSDL url.</p>
+</em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        WSDL_LOCAL
+                                    </td>
+                <td class="last">
+                    <p><em><p>Local WSDL file.</p>
+</em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                    <span class="label label-danger">deprecated</span>                    LEVEL_SIMPLE_CHECK
+                                    </td>
+                <td class="last">
+                    <p><em><p>Check at level one.</p>
+</em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                    <span class="label label-danger">deprecated</span>                    LEVEL_FULL_CHECK
+                                    </td>
+                <td class="last">
+                    <p><em><p>Check at level two.</p>
+</em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        VALID_RETURN_CODES
+                                    </td>
+                <td class="last">
+                    <p><em><p>All return code numbers for valid vat id's.</p>
+</em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>
+                                                                                                                        NOT_VALID_RETURN_CODES
+                                    </td>
+                <td class="last">
+                    <p><em><p>All return code numbers for invalid vat id's.</p>
+</em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../../CSoellinger/FonWebservices/SessionWs.html"><abbr title="CSoellinger\FonWebservices\SessionWs">SessionWs</abbr></a> $sessionWs, array $soapOptions = [])
+        
+                                            <p>Constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../CSoellinger/FonWebservices/Model/VatIdCheckInvalid.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckInvalid">VatIdCheckInvalid</abbr></a>|<a href="../../CSoellinger/FonWebservices/Model/VatIdCheckValidLevelOne.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne">VatIdCheckValidLevelOne</abbr></a>|<a href="../../CSoellinger/FonWebservices/Model/VatIdCheckValidLevelTwo.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo">VatIdCheckValidLevelTwo</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_check">check</a>(string $uid, <abbr title="CSoellinger\FonWebservices\Enum\VatIdCheckLevel">VatIdCheckLevel</abbr>|int $level = VatIdCheckLevel::SimpleCheck)
+        
+                                            <p><p>Check an uid (vat id).</p>
+</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location"><a href="https://github.com/CSoellinger/php-fon-webservices/blob/main/src/VatIdCheckWs.php#L112">at line 112</a></div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../CSoellinger/FonWebservices/SessionWs.html"><abbr title="CSoellinger\FonWebservices\SessionWs">SessionWs</abbr></a> $sessionWs, array $soapOptions = [])
+        </code>
+    </h3>
+    <div class="details">    
+            
+    
+            
+
+        <div class="method-description">
+                            <p>Constructor.</p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../CSoellinger/FonWebservices/SessionWs.html"><abbr title="CSoellinger\FonWebservices\SessionWs">SessionWs</abbr></a></td>
+                <td>$sessionWs</td>
+                <td><p>Session web service</p>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$soapOptions</td>
+                <td><p>PHP SOAP client options</p>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_check">
+        <div class="location"><a href="https://github.com/CSoellinger/php-fon-webservices/blob/main/src/VatIdCheckWs.php#L129">at line 129</a></div>
+        <code>                    <a href="../../CSoellinger/FonWebservices/Model/VatIdCheckInvalid.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckInvalid">VatIdCheckInvalid</abbr></a>|<a href="../../CSoellinger/FonWebservices/Model/VatIdCheckValidLevelOne.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne">VatIdCheckValidLevelOne</abbr></a>|<a href="../../CSoellinger/FonWebservices/Model/VatIdCheckValidLevelTwo.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo">VatIdCheckValidLevelTwo</abbr></a>
+    <strong>check</strong>(string $uid, <abbr title="CSoellinger\FonWebservices\Enum\VatIdCheckLevel">VatIdCheckLevel</abbr>|int $level = VatIdCheckLevel::SimpleCheck)
+        </code>
+    </h3>
+    <div class="details">    
+            
+    
+            
+
+        <div class="method-description">
+                            <p><p>Check an uid (vat id).</p>
+</p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$uid</td>
+                <td><p>Vat id to check</p>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="CSoellinger\FonWebservices\Enum\VatIdCheckLevel">VatIdCheckLevel</abbr>|int</td>
+                <td>$level</td>
+                <td><p>Check level (use VatIdCheckLevel enum, int support deprecated)</p>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../CSoellinger/FonWebservices/Model/VatIdCheckInvalid.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckInvalid">VatIdCheckInvalid</abbr></a>|<a href="../../CSoellinger/FonWebservices/Model/VatIdCheckValidLevelOne.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckValidLevelOne">VatIdCheckValidLevelOne</abbr></a>|<a href="../../CSoellinger/FonWebservices/Model/VatIdCheckValidLevelTwo.html"><abbr title="CSoellinger\FonWebservices\Model\VatIdCheckValidLevelTwo">VatIdCheckValidLevelTwo</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>
