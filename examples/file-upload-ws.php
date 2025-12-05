@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+use CSoellinger\FonWebservices\Enum\FileUploadType;
 use CSoellinger\FonWebservices\FileUploadWs;
 
 $fileUploadWs = new FileUploadWs($sessionWs);
 
-var_dump($fileUploadWs->upload($xmlFileUpload, 'RZ', true));
+var_dump($fileUploadWs->upload($xmlFileUpload, FileUploadType::RZ, true));
 // (bool) true

@@ -11,7 +11,7 @@ $databoxList = $databoxDownloadWs->get();
 var_dump($databoxList);
 // array
 //   0 =>
-//     CSoellinger\FonWebservices\Result\DataboxDownload\ListItem
+//     CSoellinger\FonWebservices\Model\DataboxDownloadListItem
 //       stnr => (string) '99 999/9999'
 //       name => (string) 'Mustermann Max'
 //       anbringen => (string) 'STB-ZUSI'

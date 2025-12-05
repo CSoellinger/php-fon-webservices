@@ -170,7 +170,7 @@ var_dump($entry);
 The easiest way to start the examples is to start a PHP server:
 
 ```bash
-php -S localhost:8005 --docroot ./public
+php -S localhost:8005 --docroot ./examples
 ```
 
 Now open your browser and go to http://localhost:8005

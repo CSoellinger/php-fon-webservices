@@ -28,6 +28,7 @@ $credential = new FonCredential((string) getenv('FON_TEST_DB_T_ID'), (string) ge
 $sessionWsTest = new SessionWs($credential);
 
 $xmlKontoRegPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'Kontenregister.xml']);
+$xmlKontoReg = file_get_contents($xmlKontoRegPath);
 
 $xmlFileUploadPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 $xmlFileUpload = file_get_contents($xmlFileUploadPath);
