@@ -12,6 +12,7 @@
 
 declare(strict_types=1);
 
+use CSoellinger\FonWebservices\Enum\QueryDataType;
 use CSoellinger\FonWebservices\Model\QueryDataTransmission;
 use CSoellinger\FonWebservices\QueryDataTransmissionWs;
 
@@ -39,3 +40,11 @@ test('error response', function (): void {
 
     $queryDataTransmissionWs->query('123456789');
 })->throws(\Exception::class);
+
+test('query with enum type', function (): void {
+    $queryDataTransmissionWs = new QueryDataTransmissionWs($this->sessionWsDbTest);
+    expect($queryDataTransmissionWs)->toBeInstanceOf(QueryDataTransmissionWs::class);
+
+    $result = $queryDataTransmissionWs->query('382572311', '', QueryDataType::WageSlip);
+    expect($result)->toBeInstanceOf(QueryDataTransmission::class);
+});

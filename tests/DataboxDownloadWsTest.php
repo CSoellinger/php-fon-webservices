@@ -13,6 +13,7 @@
 declare(strict_types=1);
 
 use CSoellinger\FonWebservices\DataboxDownloadWs;
+use CSoellinger\FonWebservices\Enum\DataboxType;
 use CSoellinger\FonWebservices\Model\DataboxDownloadListItem;
 
 test('databox download', function (string $type, ?string $from, ?string $to): void {
@@ -75,3 +76,13 @@ test('error response', function (string $type, ?string $from, ?string $to): void
     ['', 'NOW-40days', null],
     ['', 'NOW-30days', 'NOW-10days'],
 ])->throws(\Exception::class);
+
+test('databox download with enum type', function (): void {
+    $databoxDownloadWs = new DataboxDownloadWs($this->sessionWsDbTest);
+    expect($databoxDownloadWs)->toBeInstanceOf(DataboxDownloadWs::class);
+
+    /** @var array<DataboxDownloadListItem> $result */
+    $result = $databoxDownloadWs->get(DataboxType::B);
+
+    expect($result)->toBeArray();
+});

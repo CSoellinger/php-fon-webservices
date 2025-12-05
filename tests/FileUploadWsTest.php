@@ -13,6 +13,7 @@
 declare(strict_types=1);
 
 use CSoellinger\FonWebservices\FileUploadWs;
+use CSoellinger\FonWebservices\Enum\FileUploadType;
 
 test('upload simple test xml', function (): void {
     $fileUploadWs = new FileUploadWs($this->sessionWs);
@@ -36,3 +37,12 @@ test('upload invalid type', function (): void {
     $fileUploadWs = new FileUploadWs($this->sessionWs);
     $fileUploadWs->upload('', 'XY', true);
 })->throws(InvalidArgumentException::class);
+
+test('upload with enum type', function (): void {
+    $fileUploadWs = new FileUploadWs($this->sessionWs);
+    expect($fileUploadWs)->toBeInstanceOf(FileUploadWs::class);
+
+    $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
+
+    expect($fileUploadWs->upload((string) $xmlPath, FileUploadType::RZ, true))->toBeTrue();
+});

@@ -73,6 +73,11 @@ class VatIdRotator
     public const ERROR_CODE_RATE_LIMIT = 1513;
 
     /**
+     * Error code indicating a technical error on the API side.
+     */
+    public const ERROR_CODE_TECHNICAL_ERROR = -3;
+
+    /**
      * Get all available VAT IDs in the pool.
      *
      * @return array<string>
@@ -83,14 +88,15 @@ class VatIdRotator
     }
 
     /**
-     * Check if a result indicates rate limiting.
+     * Check if a result indicates rate limiting or temporary API errors.
      *
      * @param mixed $result The check result
-     * @return bool True if the result indicates rate limiting
+     * @return bool True if the result indicates rate limiting or temporary API error
      */
     public static function isRateLimited($result): bool
     {
         return $result instanceof VatIdCheckInvalid &&
-               $result->code === self::ERROR_CODE_RATE_LIMIT;
+               ($result->code === self::ERROR_CODE_RATE_LIMIT ||
+                $result->code === self::ERROR_CODE_TECHNICAL_ERROR);
     }
 }

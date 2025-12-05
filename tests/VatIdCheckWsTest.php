@@ -41,11 +41,16 @@ test('check valid vat at level one', function (): void {
         break;
     }
 
-    // If all VAT IDs were rate limited, fail with the last error
+    // If all VAT IDs were rate limited or API has temporary issues, skip the test
     if (VatIdRotator::isRateLimited($result)) {
-        echo PHP_EOL . 'All VAT IDs in pool are rate limited. Last error:' . PHP_EOL;
-        print_r($lastError);
-        expect(false)->toBeTrue('All VAT IDs exhausted - add more to the pool');
+        $errorCode = $lastError->code ?? $result->code;
+        $message = $lastError->msg ?? $result->msg ?? 'Unknown error';
+
+        if ($errorCode === VatIdRotator::ERROR_CODE_TECHNICAL_ERROR) {
+            test()->markTestSkipped('FinanzOnline API temporary technical error (code -3): ' . $message);
+        } else {
+            test()->markTestSkipped('All VAT IDs in pool are rate limited (code 1513) - add more to the pool');
+        }
     }
 
     if ($result instanceof VatIdCheckInvalid) {
@@ -78,11 +83,16 @@ test('check valid vat at level two', function (): void {
         break;
     }
 
-    // If all VAT IDs were rate limited, fail with the last error
+    // If all VAT IDs were rate limited or API has temporary issues, skip the test
     if (VatIdRotator::isRateLimited($result)) {
-        echo PHP_EOL . 'All VAT IDs in pool are rate limited. Last error:' . PHP_EOL;
-        print_r($lastError);
-        expect(false)->toBeTrue('All VAT IDs exhausted - add more to the pool');
+        $errorCode = $lastError->code ?? $result->code;
+        $message = $lastError->msg ?? $result->msg ?? 'Unknown error';
+
+        if ($errorCode === VatIdRotator::ERROR_CODE_TECHNICAL_ERROR) {
+            test()->markTestSkipped('FinanzOnline API temporary technical error (code -3): ' . $message);
+        } else {
+            test()->markTestSkipped('All VAT IDs in pool are rate limited (code 1513) - add more to the pool');
+        }
     }
 
     if ($result instanceof VatIdCheckInvalid) {
