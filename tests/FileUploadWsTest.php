@@ -12,8 +12,8 @@
 
 declare(strict_types=1);
 
-use CSoellinger\FonWebservices\FileUploadWs;
 use CSoellinger\FonWebservices\Enum\FileUploadType;
+use CSoellinger\FonWebservices\FileUploadWs;
 
 test('upload simple test xml', function (): void {
     $fileUploadWs = new FileUploadWs($this->sessionWs);
