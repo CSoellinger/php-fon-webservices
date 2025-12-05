@@ -8,8 +8,6 @@
 [![Read License][license-badge]][license]
 [![Package downloads on Packagist][downloads-badge]][downloads]
 [![Build status][build-badge]][build]
-[![Psalm Type Coverage][psalm-badge]][psalm]
-<!-- [![Chat with the maintainers][chat-badge]][chat] -->
 
 [source]: https://github.com/csoellinger/php-fon-webservices
 [source-badge]: https://img.shields.io/badge/source-csoellinger/php--fon--webservices-blue.svg?style=flat-square
@@ -23,10 +21,6 @@
 [downloads-badge]: https://img.shields.io/packagist/dt/csoellinger/php-fon-webservices.svg?style=flat-square&colorB=darkmagenta
 [build]: https://github.com/csoellinger/php-fon-webservices/actions/workflows/ci.yml
 [build-badge]: https://img.shields.io/github/actions/workflow/status/csoellinger/php-fon-webservices/ci.yml?label=CI&logo=github&style=flat-square
-[psalm]: https://shepherd.dev/github/csoellinger/php-fon-webservices
-[psalm-badge]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Fcsoellinger%2Fphp-fon-webservices%2Fcoverage
-[chat]: https://phpc.chat/channel/csoellinger
-[chat-badge]: https://img.shields.io/badge/phpc.chat-%23csoellinger-darkslateblue?style=flat-square
 
 - [About](#about)
 - [Installation](#installation)
