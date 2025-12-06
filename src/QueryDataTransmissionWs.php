@@ -129,14 +129,10 @@ class QueryDataTransmissionWs extends SoapClient
 
         if ($returnCode !== 0) {
             /** @var ErrorResponse $response */
-            $response = $response;
-
             throw new Exception($response->msg, $returnCode);
         }
 
         /** @var QueryResponse $response */
-        $response = $response;
-
         return QueryDataTransmission::createFromResponse($response);
     }
 

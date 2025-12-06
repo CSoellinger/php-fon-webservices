@@ -163,8 +163,6 @@ class VatIdCheckWs extends SoapClient
             }
 
             /** @var LevelTwoSuccessResponse $response */
-            $response = $response;
-
             $result = new VatIdCheckValidLevelTwo();
             $result->name = $response->name;
             $result->address = str_replace('  ', ' ', trim(implode(PHP_EOL, [
@@ -195,8 +193,6 @@ class VatIdCheckWs extends SoapClient
 
         // Invalid / Error
         /** @var ErrorResponse $response */
-        $response = $response;
-
         $result = new VatIdCheckInvalid();
         $result->code = $returnCode;
         $result->msg = $response->msg;

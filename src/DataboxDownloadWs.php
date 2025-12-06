@@ -138,8 +138,6 @@ class DataboxDownloadWs extends SoapClient
         $this->handleResponse($response);
 
         /** @var ListResponse $response */
-        $response = $response;
-
         if (property_exists($response, 'result') === false) {
             $response->result = [];
         }
@@ -175,8 +173,6 @@ class DataboxDownloadWs extends SoapClient
         $this->handleResponse($response);
 
         /** @var EntryResponse $response */
-        $response = $response;
-
         return $response->result;
     }
 
@@ -254,8 +250,6 @@ class DataboxDownloadWs extends SoapClient
 
         if ($returnCode !== 0) {
             /** @var ErrorResponse $response */
-            $response = $response;
-
             throw new Exception($response->msg, $returnCode);
         }
     }

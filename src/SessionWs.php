@@ -128,13 +128,10 @@ class SessionWs extends SoapClient
 
         if ($response->rc !== 0) {
             /** @var ErrorResponse $response */
-            $response = $response;
-
             throw new Exception($response->msg, $response->rc);
         }
 
         /** @var LoginSuccessResponse $response */
-        $response = $response;
         $this->id = $response->id;
 
         return $this;
@@ -160,8 +157,6 @@ class SessionWs extends SoapClient
 
         if ($response->rc !== 0) {
             /** @var ErrorResponse $response */
-            $response = $response;
-
             throw new Exception($response->msg, $response->rc);
         }
 
