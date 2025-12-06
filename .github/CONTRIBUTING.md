@@ -87,7 +87,7 @@ When you do begin working on your feature, here are some guidelines to consider:
 
 ## Developing
 
-To develop this project, you will need [PHP](https://www.php.net) 7.4 or greater
+To develop this project, you will need [PHP](https://www.php.net) 8.1 or greater
 and [Composer](https://getcomposer.org).
 
 After cloning this repository locally, execute the following commands:
@@ -197,10 +197,10 @@ Test across all supported PHP versions using Podman Compose:
 
 ```bash
 # Test specific PHP version
-podman-compose run --rm php74
+podman-compose run --rm php81
 podman-compose run --rm php82
 
-# Test all versions (7.4, 8.0, 8.1, 8.2, 8.3, 8.4)
+# Test all versions (8.1, 8.2, 8.3, 8.4)
 bash bin/test-all-versions.sh
 ```
 

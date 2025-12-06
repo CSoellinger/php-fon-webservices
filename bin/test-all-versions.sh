@@ -7,7 +7,7 @@ echo "across multiple PHP versions"
 echo "========================================="
 echo ""
 
-for version in php74 php80 php81 php82 php83 php84; do
+for version in php81 php82 php83 php84; do
     echo "----------------------------------------"
     echo "Testing $version..."
     echo "----------------------------------------"
