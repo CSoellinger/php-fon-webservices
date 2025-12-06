@@ -59,8 +59,6 @@ composer require csoellinger/php-fon-webservices
 
 ## Usage
 
----
-
 ### Session Webservice
 
 This webservice is needed for all other webservices but can also be used standalone (e.g. for using it with a service which is not supported by this library at the moment). Before you can use it you need to set up a credential class with all necessary informations.
@@ -168,14 +166,6 @@ php -S localhost:8005 --docroot ./examples
 ```
 
 Now open your browser and go to http://localhost:8005
-
-## Development
-
-### Requirements
-
-- PHP 8.1+ with SOAP extension
-- Composer 2.x
-- Optional: Podman & Podman Compose for multi-version testing
 
 ### Setup
 
