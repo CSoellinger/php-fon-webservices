@@ -38,7 +38,7 @@ test('upload simple test xml', function (): void {
 
     file_put_contents($xmlPath, $xmlContent);
 
-    expect($bankDataTransmissionWs->upload((string) $xmlPath, 'KTOREG', true))->toBeTrue();
+    expect($bankDataTransmissionWs->upload($xmlPath, 'KTOREG', true))->toBeTrue();
 
     unlink($xmlPath);
 });
@@ -82,7 +82,7 @@ test('upload with enum type', function (): void {
 
     file_put_contents($xmlPath, $xmlContent);
 
-    expect($bankDataTransmissionWs->upload((string) $xmlPath, BankDataType::AccountRegistration, true))->toBeTrue();
+    expect($bankDataTransmissionWs->upload($xmlPath, BankDataType::AccountRegistration, true))->toBeTrue();
 
     unlink($xmlPath);
 });

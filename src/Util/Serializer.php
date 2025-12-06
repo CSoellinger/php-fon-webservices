@@ -29,7 +29,6 @@ final class Serializer
      * Deserialize stdClass or object to a typed model object.
      *
      * @template T of object
-     * @param stdClass|object $data
      * @param class-string<T> $className
      * @return T
      */
@@ -54,7 +53,6 @@ final class Serializer
             $property->setValue($instance, $convertedValue);
         }
 
-        /** @var T */
         return $instance;
     }
 
@@ -66,7 +64,7 @@ final class Serializer
      *
      * @return mixed The converted value
      */
-    private static function convertValue($value, ReflectionProperty $property)
+    private static function convertValue(mixed $value, ReflectionProperty $property)
     {
         $type = $property->getType();
 

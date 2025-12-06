@@ -49,12 +49,12 @@ class FonWebservicesTestCase extends TestCase
     /**
      * @var MockObject&SessionWs Session webservice class
      */
-    protected $sessionWs;
+    protected ?\PHPUnit\Framework\MockObject\MockObject $sessionWs = null;
 
     /**
      * @var MockObject&SessionWs Session webservice class
      */
-    protected $sessionWsDbTest;
+    protected ?\PHPUnit\Framework\MockObject\MockObject $sessionWsDbTest = null;
 
     /**
      * @var FonCredential&MockObject Finanzonline credential class
@@ -103,7 +103,7 @@ class FonWebservicesTestCase extends TestCase
      *
      * @return FonCredential&MockObject
      */
-    private function setUpCredential()
+    private function setUpCredential(): \PHPUnit\Framework\MockObject\MockObject
     {
         $fonCredential = $this
             ->getMockBuilder(FonCredential::class)
@@ -123,7 +123,7 @@ class FonWebservicesTestCase extends TestCase
      *
      * @return FonCredential&MockObject
      */
-    private function setUpDbTestCredential()
+    private function setUpDbTestCredential(): \PHPUnit\Framework\MockObject\MockObject
     {
         $fonCredential = $this
             ->getMockBuilder(FonCredential::class)
@@ -185,7 +185,7 @@ class FonWebservicesTestCase extends TestCase
 
         $this->sessionWs
             ->method('getID')
-            ->willReturnCallback(fn () => $reflector->getValue($this->sessionWs));
+            ->willReturnCallback(fn (): mixed => $reflector->getValue($this->sessionWs));
     }
 
     private function setUpSessionWsDbTest(): void
@@ -236,6 +236,6 @@ class FonWebservicesTestCase extends TestCase
 
         $this->sessionWsDbTest
             ->method('getID')
-            ->willReturnCallback(fn () => $reflector->getValue($this->sessionWsDbTest));
+            ->willReturnCallback(fn (): mixed => $reflector->getValue($this->sessionWsDbTest));
     }
 }

@@ -21,7 +21,7 @@ test('upload simple test xml', function (): void {
 
     $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 
-    expect($fileUploadWs->upload((string) $xmlPath, 'RZ', true))->toBeTrue();
+    expect($fileUploadWs->upload($xmlPath, 'RZ', true))->toBeTrue();
 });
 
 test('upload invalid xml', function (): void {
@@ -30,7 +30,7 @@ test('upload invalid xml', function (): void {
 
     $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 
-    expect($fileUploadWs->upload((string) $xmlPath, 'NOVA', true))->toBeTrue();
+    expect($fileUploadWs->upload($xmlPath, 'NOVA', true))->toBeTrue();
 })->throws(\Exception::class);
 
 test('upload invalid type', function (): void {
@@ -44,5 +44,5 @@ test('upload with enum type', function (): void {
 
     $xmlPath = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'resources', 'test-data', 'FileUpload.xml']);
 
-    expect($fileUploadWs->upload((string) $xmlPath, FileUploadType::RZ, true))->toBeTrue();
+    expect($fileUploadWs->upload($xmlPath, FileUploadType::RZ, true))->toBeTrue();
 });

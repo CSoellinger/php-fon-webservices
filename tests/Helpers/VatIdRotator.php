@@ -93,7 +93,7 @@ class VatIdRotator
      * @param mixed $result The check result
      * @return bool True if the result indicates rate limiting or temporary API error
      */
-    public static function isRateLimited($result): bool
+    public static function isRateLimited(mixed $result): bool
     {
         return $result instanceof VatIdCheckInvalid &&
                ($result->code === self::ERROR_CODE_RATE_LIMIT ||

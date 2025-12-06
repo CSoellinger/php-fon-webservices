@@ -111,7 +111,7 @@ class DataboxDownloadWs extends SoapClient
      *
      * @throws Exception
      */
-    public function get(DataboxType|string $type = '', ?DateTime $from = null, ?DateTime $to = null)
+    public function get(DataboxType|string $type = '', ?DateTime $from = null, ?DateTime $to = null): array
     {
         $typeValue = $this->validateTypeParam($type);
         $this->validateDateParam($from, $to);
@@ -142,7 +142,7 @@ class DataboxDownloadWs extends SoapClient
             $response->result = [];
         }
 
-        return array_map(fn (stdClass $entry) => Serializer::deserialize($entry, DataboxDownloadListItem::class), $response->result);
+        return array_map(fn (stdClass $entry): object => Serializer::deserialize($entry, DataboxDownloadListItem::class), $response->result);
     }
 
     /**
@@ -181,7 +181,7 @@ class DataboxDownloadWs extends SoapClient
      *
      * @return array<string,string> Array with tid, benid, and id parameters
      */
-    private function getCredentialSoapParams()
+    private function getCredentialSoapParams(): array
     {
         return [
             'tid' => $this->sessionWs->getCredential()->teId,

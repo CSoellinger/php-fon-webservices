@@ -58,7 +58,7 @@ final class QueryDataTransmissionExtraExpenses
 
         if (property_exists($response, 'sonderausgabenDetail')) {
             $new->sonderausgabenDetail = array_map(
-                fn ($val) => Serializer::deserialize((object) $val, QueryDataTransmissionExtraExpensesDetail::class),
+                fn ($val): object => Serializer::deserialize((object) $val, QueryDataTransmissionExtraExpensesDetail::class),
                 (array) $response->sonderausgabenDetail,
             );
         }

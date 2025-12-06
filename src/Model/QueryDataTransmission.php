@@ -98,7 +98,7 @@ final class QueryDataTransmission
             // Management right
 
             $new->sonderausgaben = array_map(
-                function ($val) {
+                function ($val): \CSoellinger\FonWebservices\Model\QueryDataTransmissionExtraExpenses {
                     /** @var stdClass $valData */
                     $valData = (object) $val;
 
@@ -110,7 +110,7 @@ final class QueryDataTransmission
 
         if (property_exists($result, 'leitungsrechte') === true) {
             $new->leitungsrechte = array_map(
-                fn ($val) => Serializer::deserialize((object) $val, QueryDataTransmissionManagementRight::class),
+                fn ($val): object => Serializer::deserialize((object) $val, QueryDataTransmissionManagementRight::class),
                 (array) $result->leitungsrechte,
             );
         }
