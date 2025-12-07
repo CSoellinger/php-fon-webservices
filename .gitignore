@@ -11,3 +11,4 @@ phpunit.xml.dist.bak
 .docker/.env
 CLAUDE.md
 /.doctum/
+.vscode
