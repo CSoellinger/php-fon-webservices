@@ -60,6 +60,7 @@ use function trim;
  *          da diese UID-Nummer zu einer Unternehmensgruppe (Umsatzsteuergruppe) gehört.
  * - 105 = Die UID-Nummer ist über FinanzOnline einzeln abzufragen.
  * - 1511 = Der angegebene Mitgliedstaat ist derzeit nicht erreichbar.
+ * - 1514 = Kommunikationsfehler (infrastructure/communication error).
  *
  * @api
  *
