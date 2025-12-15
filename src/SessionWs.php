@@ -26,6 +26,7 @@ use Exception;
 use function file_exists;
 
 use SoapClient;
+use SoapFault;
 
 /**
  * FinanzOnline session webservice.
@@ -114,17 +115,28 @@ class SessionWs extends SoapClient
      *
      * @throws Exception if soap call fails
      * @throws Exception if return code from soap call is greater or less than zero
+     * @throws SoapFault if SOAP-level validation or network error occurs
      */
     public function login(): static
     {
-        /** @var ErrorResponse|LoginSuccessResponse $response */
-        $response = $this->__soapCall('login', [[
-            'tid' => $this->credential->teId,
-            'benid' => $this->credential->benId,
-            'pin' => $this->credential->benPin,
-            'herstellerid' => $this->credential->teUid,
-        ],
-        ]);
+        try {
+            /** @var ErrorResponse|LoginSuccessResponse $response */
+            $response = $this->__soapCall('login', [[
+                'tid' => $this->credential->teId,
+                'benid' => $this->credential->benId,
+                'pin' => $this->credential->benPin,
+                'herstellerid' => $this->credential->teUid,
+            ],
+            ]);
+        } catch (SoapFault $e) {
+            // Re-throw SoapFault with more context
+            throw new SoapFault(
+                $e->faultcode,
+                "SOAP error during login: {$e->getMessage()}",
+                $e->faultactor,
+                $e->detail,
+            );
+        }
 
         if ($response->rc !== 0) {
             /** @var ErrorResponse $response */
@@ -144,16 +156,27 @@ class SessionWs extends SoapClient
      *
      * @throws Exception if soap call fails
      * @throws Exception if return code from soap call is greater or less than zero
+     * @throws SoapFault if SOAP-level validation or network error occurs
      */
     public function logout(): static
     {
-        /** @var ErrorResponse|LogoutSuccessResponse $response */
-        $response = $this->__soapCall('logout', [[
-            'tid' => $this->credential->teId,
-            'benid' => $this->credential->benId,
-            'id' => $this->getID(),
-        ],
-        ]);
+        try {
+            /** @var ErrorResponse|LogoutSuccessResponse $response */
+            $response = $this->__soapCall('logout', [[
+                'tid' => $this->credential->teId,
+                'benid' => $this->credential->benId,
+                'id' => $this->getID(),
+            ],
+            ]);
+        } catch (SoapFault $e) {
+            // Re-throw SoapFault with more context
+            throw new SoapFault(
+                $e->faultcode,
+                "SOAP error during logout: {$e->getMessage()}",
+                $e->faultactor,
+                $e->detail,
+            );
+        }
 
         if ($response->rc !== 0) {
             /** @var ErrorResponse $response */

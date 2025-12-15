@@ -31,6 +31,7 @@ use function in_array;
 use const PHP_EOL;
 
 use SoapClient;
+use SoapFault;
 
 use function str_replace;
 use function trim;
@@ -143,16 +144,25 @@ class VatIdCheckWs extends SoapClient
         }
 
         // Let's make the soap call
-        /** @var ErrorResponse|LevelOneSuccessResponse|LevelTwoSuccessResponse $response */
-        $response = $this->__soapCall('uidAbfrage', [[
-            'tid' => $this->sessionWs->getCredential()->teId,
-            'benid' => $this->sessionWs->getCredential()->benId,
-            'uid_tn' => $this->sessionWs->getCredential()->teUid,
-            'id' => $this->sessionWs->getID(),
-            'uid' => $uid,
-            'stufe' => $level->value,
-        ],
-        ]);
+        try {
+            /** @var ErrorResponse|LevelOneSuccessResponse|LevelTwoSuccessResponse $response */
+            $response = $this->__soapCall('uidAbfrage', [[
+                'tid' => $this->sessionWs->getCredential()->teId,
+                'benid' => $this->sessionWs->getCredential()->benId,
+                'uid_tn' => $this->sessionWs->getCredential()->teUid,
+                'id' => $this->sessionWs->getID(),
+                'uid' => $uid,
+                'stufe' => $level->value,
+            ],
+            ]);
+        } catch (SoapFault $e) {
+            // Handle SOAP-level errors (validation, network, etc.)
+            $result = new VatIdCheckInvalid();
+            $result->code = $e->getCode();
+            $result->msg = $e->getMessage();
+
+            return $result;
+        }
 
         $returnCode = $response->rc;
 
