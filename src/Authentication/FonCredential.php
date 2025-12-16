@@ -51,19 +51,19 @@ class FonCredential
             );
         }
 
-        if (!preg_match('/[0-9A-Za-z]{8,12}/', $teId)) {
+        if (!preg_match('/^[0-9A-Za-z]{8,12}$/', $teId)) {
             throw new InvalidArgumentException('Invalid param: fonTeId');
         }
 
-        if ($teUid && !preg_match('/[0-9A-Za-z]{10,24}/', $teUid)) {
+        if ($teUid && !preg_match('/^[0-9A-Za-z]{10,24}$/', $teUid)) {
             throw new InvalidArgumentException('Invalid param: fonTeUid');
         }
 
-        if (!preg_match('/.{5,12}/', $benId)) {
+        if (!preg_match('/^.{5,12}$/', $benId)) {
             throw new InvalidArgumentException('Invalid param: fonBenId');
         }
 
-        if (!preg_match('/.{5,128}/', $benPin)) {
+        if (!preg_match('/^.{5,128}$/', $benPin)) {
             throw new InvalidArgumentException('Invalid param: fonBenPin');
         }
     }
