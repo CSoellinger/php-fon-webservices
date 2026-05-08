@@ -234,7 +234,7 @@ podman-compose run --rm php84 composer test
 bash bin/test-all-versions.sh
 ```
 
-**Supported PHP versions:** 8.1, 8.2, 8.3, 8.4
+**Supported PHP versions:** 8.3, 8.4
 
 **Note:** After modifying `composer.json`, you need to run `composer update` inside a container to update dependencies before running tests.
 

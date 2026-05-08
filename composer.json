@@ -1,7 +1,6 @@
 {
     "name": "csoellinger/php-fon-webservices",
     "homepage": "https://github.com/CSoellinger/php-fon-webservices",
-    "version": "2.0.4",
     "description": "PHP library to handle FinanzOnline web services.",
     "license": "Unlicense",
     "type": "library",
@@ -33,23 +32,24 @@
         }
     ],
     "require": {
-        "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
+        "php": "^8.3 || ^8.4",
         "ext-soap": "*"
     },
     "require-dev": {
-        "code-lts/doctum": "dev-main",
+        "code-lts/doctum": "^5.6",
         "friendsofphp/php-cs-fixer": "^3.91",
-        "pestphp/pest": "^2 || ^3 || ^4",
+        "pestphp/pest": "^4",
+        "php-parallel-lint/php-console-highlighter": "^1.0",
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpstan/phpstan": "^1.12",
         "rector/rector": "^1.2",
-        "symfony/console": "^6.4 || ^7.0",
-        "symfony/dotenv": "^6.4 || ^7.0",
-        "symfony/filesystem": "^6.4 || ^7.0",
-        "symfony/finder": "^6.4 || ^7.0",
-        "symfony/process": "^6.4 || ^7.0",
-        "symfony/var-dumper": "^6.4 || ^7.0",
-        "vimeo/psalm": "^6.5"
+        "symfony/console": "^8.0",
+        "symfony/dotenv": "^8.0",
+        "symfony/filesystem": "^8.0",
+        "symfony/finder": "^8.0",
+        "symfony/process": "^8.0",
+        "symfony/var-dumper": "^8.0",
+        "vimeo/psalm": "^6.13"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
