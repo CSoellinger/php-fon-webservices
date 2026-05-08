@@ -85,7 +85,6 @@ class FileUploadWs extends SoapClient
         array $soapOptions = [],
     ) {
 
-        /** @var string $wsdl */
         $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
 
         parent::__construct($wsdl, $soapOptions);

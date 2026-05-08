@@ -94,7 +94,6 @@ class DataboxDownloadWs extends SoapClient
         array $soapOptions = [],
     ) {
 
-        /** @var string $wsdl */
         $wsdl = file_exists(self::WSDL_LOCAL) ? self::WSDL_LOCAL : self::WSDL;
 
         parent::__construct($wsdl, $soapOptions);
@@ -138,6 +137,8 @@ class DataboxDownloadWs extends SoapClient
         $this->handleResponse($response);
 
         /** @var ListResponse $response */
+        // SoapClient classmap may omit `result` from the deserialized object when BMF returns an empty list.
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (property_exists($response, 'result') === false) {
             $response->result = [];
         }
