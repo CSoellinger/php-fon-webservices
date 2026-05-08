@@ -83,9 +83,6 @@ class SessionWs extends SoapClient
      *
      * @param FonCredential $credential credential class used to set some soap params for login/logout
      * @param array<string,mixed> $soapOptions {@link https://www.php.net/manual/en/soapclient.soapclient.php} options
-     *
-     * @return void
-     *              array
      */
     public function __construct(
         private readonly FonCredential $credential,
