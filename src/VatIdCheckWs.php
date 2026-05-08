@@ -27,6 +27,7 @@ use const DIRECTORY_SEPARATOR;
 use function file_exists;
 use function implode;
 use function in_array;
+use function is_int;
 
 use const PHP_EOL;
 

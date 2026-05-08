@@ -153,7 +153,6 @@ class BankDataTransmissionWs extends SoapClient
      * Validate XML parameter and load from file if path is provided.
      *
      * @param string $xml XML content or path to XML file
-     * @param-out string $xml
      */
     private function validateXml(string &$xml): void
     {
